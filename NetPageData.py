@@ -4,23 +4,11 @@ from bs4 import BeautifulSoup
 import csv
 import json
 
-class Student(object):
-    def __init__(self, name, age, score):
-        self.name = name
-        self.age = age
-        self.score = score
-def student2dict(std):
-    return {
-        'name': std.name,
-        'age': std.age,
-        'score': std.score
-    }
-
 class Room(object):
-    def __init__(self, number, in_square, out_square):
-        self.number = number
-        self.in_square = in_square
-        self.out_square = out_square
+	def __init__(self, number, in_square, out_square):
+		self.number = number
+		self.in_square = in_square
+		self.out_square = out_square
 
 def obj_2_json(obj):
 	return {
@@ -28,21 +16,6 @@ def obj_2_json(obj):
 		'in_square':obj.in_square,
 		'out_square':obj.out_square
 	}
-
-def delTag(x):
-	arr = []
-	for i in range(0, x.__len__()):
-		b = str(x[i]).replace('<td align="center" id="desc" width="50%">', '')
-		c = b.replace('</td>', '')
-		c = c.replace('\r\n\t\t', '')
-		c = c.replace(',', '')
-		arr.append(c)
-	return arr
-
-def writeCsv(x):
-	with open('NetPageData.csv', 'ab+') as csvfile:
-		writer = csv.writer(csvfile, dialect='excel')
-	writer.writerow(x)
 
 def writeJson(data):
 
@@ -75,38 +48,6 @@ def getItem(x):
 		writeJson(roomJson)
 	else:
 		print("length error:" + str(len(desc)))
-
-
-
-	# data =  delTag(findResult)
-
-	# print ("------------------")
-
-	# if len(data)>13: 
-	# 	room = [None]*(12)
-	# 	a1 = float(data[7].split(' ')[0])
-	# 	b1 = float(data[9].split(' ')[0])
-	# 	a2 = float(data[11].split(' ')[0])
-	# 	b2 = float(data[13].split(' ')[0])
-
-	# 	room[0] = data[0]
-	# 	room[1] = data[1]
-	# 	room[2] = data[6]
-	# 	room[3] = data[7].split(' ')[0]
-	# 	room[4] = data[8]
-	# 	room[5] = data[9].split(' ')[0]
-	# 	room[6] = data[10]
-	# 	room[7] = data[11].split(' ')[0]
-	# 	room[8] = data[12]
-	# 	room[9] = data[13].split(' ')[0]
-	# 	room[10] = 'total'
-	# 	room[11] = round(a1*a2/10000.0, 3)
-	# 	print (room)
-
-	# 	writeJson(room)
-	# 	# writeCsv(room)
-	# else:
-	# 	print ("length error:"+str(len(data)))
 
 def getAllRoom(url):
 
