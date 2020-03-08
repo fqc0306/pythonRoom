@@ -87,7 +87,7 @@ def getProjectInfo(url):
 	soup = getSoupByUrl(url)
 	rowInfo = []
 	# soup.find(attrs={"class":"cont_titlebg"})
-	projectName = soup.find_all(id="newslist")[0].find_all("td")[1].text.#TODO 存在空格
+	projectName = soup.find_all(id="newslist")[0].find_all("td")[1].text #TODO 存在空格
 	print(projectName)
 	infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
 	for info in infos:
@@ -102,13 +102,30 @@ def getProjectInfo(url):
 			rowInfo = []
 	print(rowInfo)
 
+for page in range(10):
 
-projectUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=320801&projectID=6366659&systemID=2&srcId=1"
-getProjectInfo(projectUrl)
+	beijingUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307678&isTrue=&currentPage=" + str(page) + "&pageSize=15"
+	soup = getSoupByUrl(beijingUrl)
+
+	infos = soup.find_all("form")[1].find_all("table")[6].find_all("td")
+	for index in range(infos.__len__()):
+		print(index)
+		tag = infos[index].find("a")
+		if tag != None:
+			rowInfo = []
+			url = "http://bjjs.zjw.beijing.gov.cn" + tag.get("href")
+			print(url)
+			# getProjectInfo(url)
+			fileName = tag.text
+			print(fileName)
+			rowInfo.append(fileName)
+			rowInfo.append(url)
+			writeJson(rowInfo, "beijing.json") #多了一条0数据
 
 
-#for i in range(12406512, 12406599):
-# for i in range(13567564,13567573):
-# 	room = str(i)
-# 	url = 'http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=393549&houseId=' + room + '&categoryId=1&salePermitId=6529681&systemId=2'
-# 	getItem(url)
+
+
+
+
+
+
