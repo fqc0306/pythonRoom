@@ -5,6 +5,7 @@ import urllib2
 from bs4 import BeautifulSoup
 import csv
 import json
+import codecs
 
 class Room(object):
 	def __init__(self, number, in_square, out_square):
@@ -32,6 +33,7 @@ def getSoupByUrl(url):
 
 	return soup
 
+
 #写入乱码问题
 def writeCsv(x):
 	with open('data.csv', 'ab+') as csvfile:
@@ -40,12 +42,16 @@ def writeCsv(x):
 
 def writeJson(data, fileName):
 
+	str = "\n".join(data)
+	str = str + "\n"
+	f = codecs.open(fileName,'ab+','utf-8')
+	f.write(str)
 	# str = json.dumps(data)
 	# result = str.decode("unicode-escape").decode("unicode-escape")
 
-	with open(fileName, 'ab+') as f:
-		json.dump(data, f)
-		f.write('\n')
+	# with open(fileName, 'ab+') as f:
+	# 	json.dump(data, f)
+	# 	f.write('\n')
 
     # with open("data.txt", "w") as f:
     # 	f.write(json.dumps(data, ensure_ascii=False))
@@ -57,9 +63,11 @@ def getItem(name, url):
 	desc = soup.find_all(id='desc')
 
 	if desc.__len__() > 13:
-		room = Room(desc[1].text.split(' ')[0], desc[7].text.split(' ')[0], desc[9].text.split(' ')[0])
-		roomJson = json.dumps(room, default = obj_2_json, ensure_ascii=False)
-		writeJson(roomJson, name + ".json")
+		# room = Room(desc[1].text.split(' ')[0], desc[7].text.split(' ')[0], desc[9].text.split(' ')[0])
+		# roomJson = json.dumps(room, default = obj_2_json, ensure_ascii=False)
+		rowInfo = []
+		rowInfo.append(desc[1].text.split(' ')[0] + "," + desc[5].text.split(' ')[0] + "," + desc[7].text.split(' ')[0] + "," + desc[9].text.split(' ')[0] + "," + desc[11].text.split(' ')[0] + "," + desc[13].text.split(' ')[0])
+		writeJson(rowInfo, name + ".json")
 	else:
 		print("length error:" + str(len(desc)))
 
@@ -83,44 +91,49 @@ def getAllRoom(name, url):
 
 	print(alldivs.__len__())
 
-def getProjectInfo(url):
+#楼盘中所有楼栋
+def getProjectInfo(name, url):
 	soup = getSoupByUrl(url)
 	rowInfo = []
 	# soup.find(attrs={"class":"cont_titlebg"})
 	projectName = soup.find_all(id="newslist")[0].find_all("td")[1].text #TODO 存在空格
+	print(type(projectName))
 	print(projectName)
 	infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
 	for info in infos:
 		if info.find("a") != None:
 			url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
 			print(url)
-			# getAllRoom(rowInfo[0], url)
+			getAllRoom(name + "_" + rowInfo[0], url)
 		print(info.text)
 		rowInfo.append(info.text)
 		if rowInfo.__len__() == 6:#每6项是一行
-			writeJson(rowInfo, projectName + ".json")
+			# writeJson(rowInfo, name + "_" + rowInfo[0] + ".json")
 			rowInfo = []
 	print(rowInfo)
 
-for page in range(10):
+#地区内所有楼盘内容
+for page in range(1):
 
-	beijingUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307678&isTrue=&currentPage=" + str(page) + "&pageSize=15"
+	beijingUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307678&isTrue=&currentPage=" + str(page+1) + "&pageSize=15"
+	print(beijingUrl)
 	soup = getSoupByUrl(beijingUrl)
 
 	infos = soup.find_all("form")[1].find_all("table")[6].find_all("td")
+	lastUrl = ""
 	for index in range(infos.__len__()):
-		print(index)
 		tag = infos[index].find("a")
 		if tag != None:
 			rowInfo = []
 			url = "http://bjjs.zjw.beijing.gov.cn" + tag.get("href")
-			print(url)
-			# getProjectInfo(url)
-			fileName = tag.text
-			print(fileName)
-			rowInfo.append(fileName)
-			rowInfo.append(url)
-			writeJson(rowInfo, "beijing.json") #多了一条0数据
+
+			if(lastUrl != url):
+				text = tag.text
+				line = text + "," + url
+				rowInfo.append(line)
+				writeJson(rowInfo, "beijing.json") #多了一条0数据
+				lastUrl = url
+				getProjectInfo(text, url)
 
 
 
