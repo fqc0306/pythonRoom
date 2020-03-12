@@ -7,18 +7,6 @@ import csv
 import json
 import codecs
 
-class Room(object):
-	def __init__(self, number, in_square, out_square):
-		self.number = number
-		self.in_square = in_square
-		self.out_square = out_square
-
-def obj_2_json(obj):
-	return {
-		'number':obj.number,
-		'in_square':obj.in_square,
-		'out_square':obj.out_square
-	}
 def getSoupByUrl(url):
 
 	opener = urllib2.build_opener()
@@ -34,27 +22,12 @@ def getSoupByUrl(url):
 	return soup
 
 
-#写入乱码问题
-def writeCsv(x):
-	with open('data.csv', 'ab+') as csvfile:
-		writer = csv.writer(csvfile, dialect='excel')
-		writer.writerow(x)
-
 def writeJson(data, fileName):
 
 	str = "\n".join(data)
 	str = str + "\n"
 	f = codecs.open(fileName,'ab+','utf-8')
 	f.write(str)
-	# str = json.dumps(data)
-	# result = str.decode("unicode-escape").decode("unicode-escape")
-
-	# with open(fileName, 'ab+') as f:
-	# 	json.dump(data, f)
-	# 	f.write('\n')
-
-    # with open("data.txt", "w") as f:
-    # 	f.write(json.dumps(data, ensure_ascii=False))
 
 def getItem(name, whichBuild, url):
 	print (url)
@@ -63,11 +36,9 @@ def getItem(name, whichBuild, url):
 	desc = soup.find_all(id='desc')
 
 	if desc.__len__() > 13:
-		# room = Room(desc[1].text.split(' ')[0], desc[7].text.split(' ')[0], desc[9].text.split(' ')[0])
-		# roomJson = json.dumps(room, default = obj_2_json, ensure_ascii=False)
 		rowInfo = []
 		rowInfo.append(whichBuild + "," + desc[1].text.split(' ')[0] + "," + desc[5].text.split(' ')[0] + "," + desc[7].text.split(' ')[0] + "," + desc[9].text.split(' ')[0] + "," + desc[11].text.split(' ')[0] + "," + desc[13].text.split(' ')[0])
-		writeJson(rowInfo, name + ".json")
+		writeJson(rowInfo, name + ".txt")
 	else:
 		print("length error:" + str(len(desc)))
 
@@ -108,7 +79,6 @@ def getProjectInfo(name, url):
 		print(info.text)
 		rowInfo.append(info.text)
 		if rowInfo.__len__() == 6:#每6项是一行
-			# writeJson(rowInfo, name + "_" + rowInfo[0] + ".json")
 			rowInfo = []
 	print(rowInfo)
 
@@ -131,10 +101,9 @@ for page in range(1):
 				text = tag.text
 				line = text + "," + url
 				rowInfo.append(line)
-				writeJson(rowInfo, "beijing.json") #多了一条0数据
+				writeJson(rowInfo, "beijing.txt") #多了一条0数据
 				lastUrl = url
 				getProjectInfo(text, url)
-
 
 
 
