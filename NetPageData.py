@@ -7,6 +7,8 @@ import csv
 import json
 import codecs
 
+dict = {'住宅楼': '', 'Age': 7, 'Class': 'First'}
+
 def getSoupByUrl(url):
 
 	opener = urllib2.build_opener()
@@ -29,37 +31,41 @@ def writeJson(data, fileName):
 	f = codecs.open(fileName,'ab+','utf-8')
 	f.write(str)
 
-def getItem(name, whichBuild, url):
-	print (url)
-
-	soup = getSoupByUrl(url)
-	desc = soup.find_all(id='desc')
-
-	if desc.__len__() > 13:
-		rowInfo = []
-		rowInfo.append(whichBuild + "," + desc[1].text.split(' ')[0] + "," + desc[5].text.split(' ')[0] + "," + desc[7].text.split(' ')[0] + "," + desc[9].text.split(' ')[0] + "," + desc[11].text.split(' ')[0] + "," + desc[13].text.split(' ')[0])
-		writeJson(rowInfo, name + ".txt")
-	else:
-		print("length error:" + str(len(desc)))
-
+#whichBuild+房间号 为id
 def getAllRoom(name, whichBuild, url):
 	soup = getSoupByUrl(url)
 
 	tables = soup.find_all(id="table_Buileing")
 	alldivs = tables[0].find_all("div")
+	background = []
 
 	for i in alldivs:
 		print ("------------------")
-		style = i.get("style")
+		style = i.get("style").split(";")[1]
 
-		print(style.split(";")[1])
+		print(style)
 		link = i.find("a")
 		print(link.text)
 		print(link.get("href"))
 		href = "http://bjjs.zjw.beijing.gov.cn" + link.get("href")
-		getItem(name, whichBuild, href)
+
+		soup = getSoupByUrl(href)
+		desc = soup.find_all(id='desc')
+
+		id = whichBuild + "," + link.text
+		background.append(id + "," + style)
+
+		if desc.__len__() > 13:
+			rowInfo = []
+			rowInfo.append(id + "," + desc[5].text.split(' ')[0] + "," + desc[7].text.split(' ')[0] + "," + desc[9].text.split(' ')[0] + "," + desc[11].text.split(' ')[0] + "," + desc[13].text.split(' ')[0])
+			
+			writeJson(rowInfo, name + ".txt")
+		else:
+			print("length error:" + str(len(desc)) + ",url:" + url)
+
 		print ("------------------")
 
+	writeJson(background, name + "_dynamic.txt")
 	print(alldivs.__len__())
 
 #楼盘中所有楼栋
