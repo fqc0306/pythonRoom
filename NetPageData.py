@@ -56,7 +56,7 @@ def writeJson(data, fileName):
     # with open("data.txt", "w") as f:
     # 	f.write(json.dumps(data, ensure_ascii=False))
 
-def getItem(name, url):
+def getItem(name, whichBuild, url):
 	print (url)
 
 	soup = getSoupByUrl(url)
@@ -66,12 +66,12 @@ def getItem(name, url):
 		# room = Room(desc[1].text.split(' ')[0], desc[7].text.split(' ')[0], desc[9].text.split(' ')[0])
 		# roomJson = json.dumps(room, default = obj_2_json, ensure_ascii=False)
 		rowInfo = []
-		rowInfo.append(desc[1].text.split(' ')[0] + "," + desc[5].text.split(' ')[0] + "," + desc[7].text.split(' ')[0] + "," + desc[9].text.split(' ')[0] + "," + desc[11].text.split(' ')[0] + "," + desc[13].text.split(' ')[0])
+		rowInfo.append(whichBuild + "," + desc[1].text.split(' ')[0] + "," + desc[5].text.split(' ')[0] + "," + desc[7].text.split(' ')[0] + "," + desc[9].text.split(' ')[0] + "," + desc[11].text.split(' ')[0] + "," + desc[13].text.split(' ')[0])
 		writeJson(rowInfo, name + ".json")
 	else:
 		print("length error:" + str(len(desc)))
 
-def getAllRoom(name, url):
+def getAllRoom(name, whichBuild, url):
 	soup = getSoupByUrl(url)
 
 	tables = soup.find_all(id="table_Buileing")
@@ -86,7 +86,7 @@ def getAllRoom(name, url):
 		print(link.text)
 		print(link.get("href"))
 		href = "http://bjjs.zjw.beijing.gov.cn" + link.get("href")
-		getItem(name, href)
+		getItem(name, whichBuild, href)
 		print ("------------------")
 
 	print(alldivs.__len__())
@@ -104,7 +104,7 @@ def getProjectInfo(name, url):
 		if info.find("a") != None:
 			url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
 			print(url)
-			getAllRoom(name + "_" + rowInfo[0], url)
+			getAllRoom(name, rowInfo[0], url)
 		print(info.text)
 		rowInfo.append(info.text)
 		if rowInfo.__len__() == 6:#每6项是一行
