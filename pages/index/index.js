@@ -48,7 +48,6 @@ Page({
       }
       console.log('jsonArry:', jsonArry)
       that.setData({
-        console.log('listData:', listData),
         listData: jsonArry
       })
       console.log('[downloadFile] success result：', res)
