@@ -10,13 +10,9 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     fileData: [],
     listData: [
-      { "code": "01", "text": "text1", "type": "type1" },
-      { "code": "02", "text": "text2", "type": "type2" },
-      { "code": "03", "text": "text3", "type": "type3" },
-      { "code": "04", "text": "text4", "type": "type4" },
-      { "code": "05", "text": "text5", "type": "type5" },
-      { "code": "06", "text": "text6", "type": "type6" },
-      { "code": "07", "text": "text7", "type": "type7" }
+      { code: "01", text: "text1", type: "type1" },
+      { code: "02", text: "text2", "type": "type2" },
+      { "code": "03", "text": "text3", "type": "type3" }
     ]
   },
   //事件处理函数
@@ -33,10 +29,27 @@ Page({
       name: 'downloadFile',
       data: {}
     }).then(res => {
+      var infos = res.result.split('\n')[1]
+      var jsonArry = {}
+      var i = 0
+      
+      for (i = 0; i < infos.split(',').length; i++) {
+        var codeKey = "code"
+        var code = infos.split(',')[0]
+        var textKey = "text"
+        var text = infos.split(',')[1]
+        var typeKey = "type"
+        var type = infos.split(',')[2]
+        var json = {
+        }
+        jsonArry[codeKey] = code
+        jsonArry[textKey] = text
+        jsonArry[typeKey] = type
+      }
+      console.log('jsonArry:', jsonArry)
       that.setData({
-        
-        
-        fileData: res.result.split('\n')[1]
+        console.log('listData:', listData),
+        listData: jsonArry
       })
       console.log('[downloadFile] success result：', res)
     }).catch(err => {
