@@ -8,7 +8,6 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    fileData: [],
     listData: [
       { code: "01", text: "text1", type: "type1" },
       { code: "02", text: "text2", "type": "type2" },
@@ -46,9 +45,10 @@ Page({
         jsonArry[textKey] = text
         jsonArry[typeKey] = type
       }
+      that.data.listData.push(jsonArry)
       console.log('jsonArry:', jsonArry)
       that.setData({
-        listData: jsonArry
+        listData: that.data.listData
       })
       console.log('[downloadFile] success result：', res)
     }).catch(err => {
