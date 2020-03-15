@@ -9,6 +9,10 @@
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
+
+  </view>
+  <view class="chart">
+    <canvas class="canvas" style="width:{{chartWidth}}px;height: 300px;" canvas-id="yueEle" binderror="canvasIdErrorCallback"></canvas>
   </view>
   <view class="userinfo-nickname-wrapper">
     <button class="userinfo-nickname" bindtap="getFileData">获取file info</button>
