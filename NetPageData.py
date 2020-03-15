@@ -6,8 +6,7 @@ from bs4 import BeautifulSoup
 import csv
 import json
 import codecs
-
-dict = {'住宅楼': '', 'Age': 7, 'Class': 'First'}
+import collections
 
 def getSoupByUrl(url):
 
@@ -24,12 +23,13 @@ def getSoupByUrl(url):
 	return soup
 
 
-def writeJson(data, fileName):
+def writeFile(dictObj, fileName):
 
-	str = "\n".join(data)
-	str = str + "\n"
+	jsStr = json.dumps(dictObj, ensure_ascii=False, sort_keys=False)##ensure_ascii=False 保证中文不乱码
+	jsStr = jsStr + '\n'
+
 	f = codecs.open(fileName,'ab+','utf-8')
-	f.write(str)
+	f.write(jsStr)
 
 #whichBuild+房间号 为id
 def getAllRoom(name, whichBuild, url):
@@ -37,35 +37,50 @@ def getAllRoom(name, whichBuild, url):
 
 	tables = soup.find_all(id="table_Buileing")
 	alldivs = tables[0].find_all("div")
-	background = []
+	index = 0
 
 	for i in alldivs:
 		print ("------------------")
-		style = i.get("style").split(";")[1]
+		style = i.get("style").split(";")[1]##房间的售卖状态
 
 		print(style)
 		link = i.find("a")
-		print(link.text)
-		print(link.get("href"))
+		print(link.text + ":" + link.get("href"))
 		href = "http://bjjs.zjw.beijing.gov.cn" + link.get("href")
 
 		soup = getSoupByUrl(href)
 		desc = soup.find_all(id='desc')
+		
+		roomDict = collections.OrderedDict()
+		statusDict = collections.OrderedDict()
+		index = index + 1
+		roomDict.update({'id' : index})
+		roomDict.update({'build' :  whichBuild.split("#")[0]})
+		roomDict.update({'unit' : link.text.split("-")[0]})
+		roomDict.update({'room' : link.text.split("-")[1]})
 
-		id = whichBuild + "," + link.text
-		background.append(id + "," + style)
+		statusDict.update({'id' : index})
+		statusDict.update({'build' :  whichBuild.split("#")[0]})
+		statusDict.update({'unit' : link.text.split("-")[0]})
+		statusDict.update({'room' : link.text.split("-")[1]})
+		statusDict.update({'status' : style.split("#")[1]})
+
+		writeFile(statusDict, name + "_dynamic.json")
 
 		if desc.__len__() > 13:
-			rowInfo = []
-			rowInfo.append(id + "," + desc[5].text.split(' ')[0] + "," + desc[7].text.split(' ')[0] + "," + desc[9].text.split(' ')[0] + "," + desc[11].text.split(' ')[0] + "," + desc[13].text.split(' ')[0])
 			
-			writeJson(rowInfo, name + ".txt")
+			roomDict.update({'square_all' : desc[7].text.split(' ')[0]})
+			roomDict.update({'square_in' : desc[9].text.split(' ')[0]})
+			roomDict.update({'price_all' : desc[11].text.split(' ')[0]})
+			roomDict.update({'price_in' : desc[13].text.split(' ')[0]})
+			roomDict.update({'type' : desc[5].text.split(' ')[0]})
+
+			writeFile(roomDict, name + ".json")
 		else:
 			print("length error:" + str(len(desc)) + ",url:" + url)
 
 		print ("------------------")
 
-	writeJson(background, name + "_dynamic.txt")
 	print(alldivs.__len__())
 
 #楼盘中所有楼栋
@@ -100,14 +115,12 @@ for page in range(1):
 	for index in range(infos.__len__()):
 		tag = infos[index].find("a")
 		if tag != None:
-			rowInfo = []
 			url = "http://bjjs.zjw.beijing.gov.cn" + tag.get("href")
 
 			if(lastUrl != url):
 				text = tag.text
 				line = text + "," + url
-				rowInfo.append(line)
-				writeJson(rowInfo, "beijing.txt") #多了一条0数据
+				print(line)
 				lastUrl = url
 				getProjectInfo(text, url)
 
