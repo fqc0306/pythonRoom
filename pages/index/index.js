@@ -35,19 +35,17 @@ Page({
         var infos = rooms[j]
         var jsonArry = {}
         var i = 0
+        
+        try {
+          var jsonObj = JSON.parse(infos)
 
-        for (i = 0; i < infos.split(',').length; i++) {
-          var codeKey = "code"
-          var code = infos.split(',')[0]
-          var textKey = "text"
-          var text = infos.split(',')[1]
-          var typeKey = "type"
-          var type = infos.split(',')[2]
-          var json = {}
-          jsonArry[codeKey] = code
-          jsonArry[textKey] = text
-          jsonArry[typeKey] = type
-          horizonData.push(code)
+          jsonArry["code"] = jsonObj.build
+          jsonArry["text"] = jsonObj.unit
+          jsonArry["type"] = jsonObj.room
+          horizonData.push(jsonObj.build)
+        } catch (err) {
+          console.error("info:", infos)
+          console.error(err)
         }
 
         that.data.listData.push(jsonArry)
