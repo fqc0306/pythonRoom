@@ -17,7 +17,7 @@
 }
 
 .usermotto {
-  margin-top: 200px;
+  margin-top: 5px;
 }
 
 .table {
@@ -42,7 +42,7 @@
   background: #E6F3F9;
 }
 .th {
-  width: 40%;
+  width: 80%;
   justify-content: center;
   background: #3366FF;
   color: #fff;

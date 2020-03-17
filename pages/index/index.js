@@ -6,7 +6,6 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -35,14 +34,16 @@ Page({
         var infos = rooms[j]
         var jsonArry = {}
         var i = 0
-        
-        try {
-          var jsonObj = JSON.parse(infos)
 
-          jsonArry["code"] = jsonObj.build
-          jsonArry["text"] = jsonObj.unit
-          jsonArry["type"] = jsonObj.room
-          horizonData.push(jsonObj.build)
+        try {
+          if (infos != '') {
+            var jsonObj = JSON.parse(infos)
+
+            jsonArry["code"] = jsonObj.build
+            jsonArry["text"] = jsonObj.unit
+            jsonArry["type"] = jsonObj.room
+            horizonData.push(jsonObj.build)
+          }
         } catch (err) {
           console.error("info:", infos)
           console.error(err)

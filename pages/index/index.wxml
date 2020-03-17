@@ -7,17 +7,13 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-
-  </view>
   <view class="chart">
-    <canvas class="canvas" style="width:{{chartWidth}}px;height: 300px;" canvas-id="yueEle" binderror="canvasIdErrorCallback"></canvas>
+    <canvas class="canvas" canvas-id="yueEle" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
   </view>
-  <view class="userinfo-nickname-wrapper">
-    <button class="userinfo-nickname" bindtap="getFileData">获取file info</button>
+  <view class="usermotto">
+    <button class="user-motto" bindtap="getFileData">获取file info</button>
   </view>
-  <view class="table">
+  <view class="table" wx:if="{{listData.length != 0}}" >
     <view class="tr bg-w">
       <view class="th">head1</view>
       <view class="th">head2</view>
