@@ -7,9 +7,6 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="usermotto">
-    <button class="user-motto" bindtap="getFileData">获取file info</button>
-  </view>
   <view class="chart">
     <canvas class="canvas" canvas-id="yueEle" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
   </view>
@@ -22,8 +19,8 @@
       <view class="th">套内面积</view>
       <view class="th">建面单价</view>
       <view class="th">套内单价</view>
-      <view class="th">户型</view>
       <view class="th">总价</view>
+      <view class="th">户型</view>
     </view>
     <block wx:for="{{listData}}" wx:key="index">
       <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
