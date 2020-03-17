@@ -34,18 +34,25 @@ Page({
         var infos = rooms[j]
         var jsonArry = {}
         var i = 0
-
+        
         try {
           if (infos != '') {
             var jsonObj = JSON.parse(infos)
 
-            jsonArry["code"] = jsonObj.build
-            jsonArry["text"] = jsonObj.unit
-            jsonArry["type"] = jsonObj.room
+            jsonArry["build"] = jsonObj.build
+            jsonArry["unit"] = jsonObj.unit
+            jsonArry["room"] = jsonObj.room
+            jsonArry["square_all"] = parseFloat(jsonObj.square_all).toFixed(2)
+            jsonArry["square_in"] = parseFloat(jsonObj.square_in).toFixed(2)
+            jsonArry["price_all"] = parseFloat(jsonObj.price_all).toFixed(2)
+            jsonArry["price_in"] = parseFloat(jsonObj.price_in).toFixed(2)
+            jsonArry["type"] = jsonObj.type
+            var totalPrice = parseFloat(jsonObj.square_all) * parseFloat(jsonObj.price_all)
+            jsonArry["price_total"] = "" + (totalPrice / 10000).toFixed(2)
+
             horizonData.push(jsonObj.build)
           }
         } catch (err) {
-          console.error("info:", infos)
           console.error(err)
         }
 
