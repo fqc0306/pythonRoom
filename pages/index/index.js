@@ -27,40 +27,49 @@ Page({
     }).then(res => {
       var j = 0
       var rooms = res.result.split('\n')
+      var mapData = new Map()
       var horizonData = []
+      var jsonList = []
+      var buildList = [] //['A-1','A-2']
+      var lastBuild
       console.log("rooms number:", rooms.length)
       for (j = 0; j < rooms.length; j++) {
 
         var infos = rooms[j]
-        var jsonArry = {}
+        var json = {}
         var i = 0
-        
+
         try {
           if (infos != '') {
             var jsonObj = JSON.parse(infos)
 
-            jsonArry["build"] = jsonObj.build
-            jsonArry["unit"] = jsonObj.unit
-            jsonArry["room"] = jsonObj.room
-            jsonArry["square_all"] = parseFloat(jsonObj.square_all).toFixed(2)
-            jsonArry["square_in"] = parseFloat(jsonObj.square_in).toFixed(2)
-            jsonArry["price_all"] = parseInt(jsonObj.price_all)
-            jsonArry["price_in"] = parseInt(jsonObj.price_in)
-            jsonArry["type"] = jsonObj.type
+            json["build"] = jsonObj.build
+            json["unit"] = jsonObj.unit
+            json["room"] = jsonObj.room
+            json["square_all"] = parseFloat(jsonObj.square_all).toFixed(2)
+            json["square_in"] = parseFloat(jsonObj.square_in).toFixed(2)
+            json["price_all"] = parseInt(jsonObj.price_all)
+            json["price_in"] = parseInt(jsonObj.price_in)
+            json["type"] = jsonObj.type
             var totalPrice = parseFloat(jsonObj.square_all) * parseFloat(jsonObj.price_all)
-            jsonArry["price_total"] = "" + (totalPrice / 10000).toFixed(2)
+            json["price_total"] = "" + (totalPrice / 10000).toFixed(2)
 
-            horizonData.push(jsonObj.build)
+            horizonData.push(json)
+            jsonList.push(json)
           }
         } catch (err) {
           console.error(err)
         }
 
-        that.data.listData.push(jsonArry)
-        console.log('jsonArry:', jsonArry)
+        if (j == rooms.length - 1 || (lastBuild != "" && lastBuild != jsonObj.build)) {
+          mapData.set(jsonObj.build, jsonList)
+          buildList.push(jsonObj.build)
+          lastBuild = jsonObj.build
+        }
       }
+      
       that.setData({
-        listData: that.data.listData
+        listData: mapData.get(buildList[0])
       })
 
       that.getMothElectro(horizonData)
