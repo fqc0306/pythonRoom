@@ -78,22 +78,47 @@ Page({
       console.log('[downloadFile] 失败：', err)
     })
   },
+
   showGraph: function(data) {
-    var dataYMap = new Map()
+    var dataMap = new Map()
+    var xCoordMap = new Map() //横坐标-房间号
+    var yTotalMap = new Map() //纵坐标-总价
+    var yAvrMap = new Map() //纵坐标-均价
+
     for (var i = 0; i < data.length; i++) {
-      var key = data[i].build + "_" + data[i].unit + "_" + parseInt(data[i].room) % 100 //如:1_2单元_1
-      var value = dataYMap.get(key)
+      var key = data[i].build + "_" + data[i].unit + "_" + parseInt(data[i].room) % 100 //如:1_2单元_1 
+      var value = dataMap.get(key)
       if (value == null) {
         var yListValue = []
         yListValue.push(data[i])
-        dataYMap.set(key, yListValue)
+        dataMap.set(key, yListValue)
+
+        var xCoordValue = []
+        xCoordValue.push(data[i].room)
+        xCoordMap.set(key, xCoordValue)
+
+        var yTotalValue = []
+        yTotalValue.push(data[i].price_total)
+        yTotalMap.set(key, yTotalValue)
 
       } else {
+        value = dataMap.get(key)
         value.push(data[i])
-        dataYMap.set(key, value)
+        dataMap.set(key, value)
+
+        var xValue = xCoordMap.get(key)
+        xValue.push(data[i].room)
+        xCoordMap.set(key, xValue)
+
+        var yTotalValue = yTotalMap.get(key)
+        yTotalValue.push(data[i].price_total)
+        yTotalMap.set(key, yTotalValue)
       }
     }
-    console.log("catogrey:", dataYMap.values().next().value)
+
+    console.log("datamap:", dataMap)
+    console.log("total:", yTotalMap.values().next().value)
+    console.log("catogrey:", xCoordMap.values().next().value)
 
     var windowWidth = 320;
     try {
@@ -105,19 +130,19 @@ Page({
     new wxCharts({ //当月用电折线图配置
       canvasId: 'yueEle',
       type: 'line',
-      categories: dataYMap.values().next().value, //categories X轴
+      categories: xCoordMap.values().next().value, //categories X轴
       animation: true,
       background: '#f5f5f5',
       series: [{
         name: '总用电量',
         //data: yuesimulationData.data,
-        data: [1, 6, 9, 1, 0],
+        data: yTotalMap.values().next().value,
         format: function(val, name) {
           return val.toFixed(2) + 'kWh';
         }
       }, {
         name: '电池供电量',
-        data: [0, 6, 2, 2, 7],
+        data: yTotalMap.values().next().values().next().value,
         format: function(val, name) {
           return val.toFixed(2) + 'kWh';
         }
