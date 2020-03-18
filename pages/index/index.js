@@ -44,8 +44,8 @@ Page({
             jsonArry["room"] = jsonObj.room
             jsonArry["square_all"] = parseFloat(jsonObj.square_all).toFixed(2)
             jsonArry["square_in"] = parseFloat(jsonObj.square_in).toFixed(2)
-            jsonArry["price_all"] = parseFloat(jsonObj.price_all).toFixed(2)
-            jsonArry["price_in"] = parseFloat(jsonObj.price_in).toFixed(2)
+            jsonArry["price_all"] = parseInt(jsonObj.price_all)
+            jsonArry["price_in"] = parseInt(jsonObj.price_in)
             jsonArry["type"] = jsonObj.type
             var totalPrice = parseFloat(jsonObj.square_all) * parseFloat(jsonObj.price_all)
             jsonArry["price_total"] = "" + (totalPrice / 10000).toFixed(2)

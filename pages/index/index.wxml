@@ -20,7 +20,6 @@
       <view class="th">建面单价</view>
       <view class="th">套内单价</view>
       <view class="th">总价</view>
-      <view class="th">户型</view>
     </view>
     <block wx:for="{{listData}}" wx:key="index">
       <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
@@ -32,7 +31,6 @@
         <view class="td">{{item.price_all}}</view>
         <view class="td">{{item.price_in}}</view>
         <view class="td">{{item.price_total}}</view>
-        <view class="td">{{item.type}}</view>
       </view>
       <view class="tr" wx:else>
         <view class="td">{{item.build}}</view>
@@ -43,7 +41,6 @@
         <view class="td">{{item.price_all}}</view>
         <view class="td">{{item.price_in}}</view>
         <view class="td">{{item.price_total}}</view>
-        <view class="td">{{item.type}}</view>
       </view>
     </block>
   </view>
