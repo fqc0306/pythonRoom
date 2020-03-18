@@ -67,18 +67,33 @@ Page({
           lastBuild = jsonObj.build
         }
       }
-      
+
       that.setData({
         listData: mapData.get(buildList[0])
       })
 
-      that.getMothElectro(horizonData)
+      that.showGraph(mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
     }).catch(err => {
       console.log('[downloadFile] 失败：', err)
     })
   },
-  getMothElectro: function(data) {
+  showGraph: function(data) {
+    var dataYMap = new Map()
+    for (var i = 0; i < data.length; i++) {
+      var key = data[i].build + "_" + data[i].unit + "_" + parseInt(data[i].room) % 100 //如:1_2单元_1
+      var value = dataYMap.get(key)
+      if (value == null) {
+        var yListValue = []
+        yListValue.push(data[i])
+        dataYMap.set(key, yListValue)
+
+      } else {
+        value.push(data[i])
+        dataYMap.set(key, value)
+      }
+    }
+    console.log("catogrey:", dataYMap.values().next().value)
 
     var windowWidth = 320;
     try {
@@ -90,7 +105,7 @@ Page({
     new wxCharts({ //当月用电折线图配置
       canvasId: 'yueEle',
       type: 'line',
-      categories: data, //categories X轴
+      categories: dataYMap.values().next().value, //categories X轴
       animation: true,
       background: '#f5f5f5',
       series: [{
