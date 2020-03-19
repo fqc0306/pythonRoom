@@ -127,31 +127,29 @@ Page({
     } catch (e) {
       console.error('getSystemInfoSync failed!');
     }
+
+    var seriesList = []
+    for (let [key, value] of yTotalMap.entries()) {
+      var item = {}
+      item.name = "test" + key
+      item.data = value
+      item.format = "metre"
+      console.log(key, value)
+      seriesList.push(item)
+    }
+
     new wxCharts({ //当月用电折线图配置
       canvasId: 'yueEle',
       type: 'line',
       categories: xCoordMap.values().next().value, //categories X轴
       animation: true,
       background: '#f5f5f5',
-      series: [{
-        name: '总用电量',
-        //data: yuesimulationData.data,
-        data: yTotalMap.values().next().value,
-        format: function(val, name) {
-          return val.toFixed(2) + 'kWh';
-        }
-      }, {
-        name: '电池供电量',
-        data: yTotalMap.values().next().values().next().value,
-        format: function(val, name) {
-          return val.toFixed(2) + 'kWh';
-        }
-      }],
+      series: seriesList,
       xAxis: {
         disableGrid: true
       },
       yAxis: {
-        title: '当月用电(kWh)',
+        title: '总价(万)',
         format: function(val) {
           return val.toFixed(2);
         },
