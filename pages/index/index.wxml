@@ -7,10 +7,14 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
+
   <view class="chart">
-    <canvas class="canvas" canvas-id="yueEle" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
+    <canvas class="canvas" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
   </view>
-  <view class="table" wx:if="{{listData.length != 0}}" >
+  <view class="chart">
+    <canvas class="canvas" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
+  </view>
+  <view class="table" wx:if="{{listData.length != 0}}">
     <view class="tr bg-w">
       <view class="th">楼栋</view>
       <view class="th">单元</view>

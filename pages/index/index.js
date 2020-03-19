@@ -2,7 +2,8 @@
 //获取应用实例
 
 var wxCharts = require("../../utils/wxcharts.js");
-var utils = require("../../utils/dataUtils.js")
+var dataUtils = require("../../utils/dataUtils.js")
+var viewUtils = require("../../utils/viewUtils.js")
 const app = getApp()
 
 Page({
@@ -26,77 +27,20 @@ Page({
       name: 'downloadFile',
       data: {}
     }).then(res => {
-      var value = utils.processFileData(res)
+      var value = dataUtils.processFileData(res)
       var mapData = value[0]
       var buildList = value[1]
 
       that.setData({
         listData: mapData.get(buildList[0])
       })
-
-      that.showGraph(mapData.get(buildList[0]))
+      
+      viewUtils.showGraph(mapData.get(buildList[0]))
+      viewUtils.showRingChart('pie_graph', mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
     }).catch(err => {
       console.log('[downloadFile] 失败：', err)
     })
-  },
-
-  showGraph: function(data) {
-    var dataMap = new Map()
-    var xCoordMap = new Map() //横坐标-房间号
-    var yTotalMap = new Map() //纵坐标-总价
-    var yAvrMap = new Map() //纵坐标-均价
-
-    utils.updateGraphData(data, dataMap, xCoordMap, yTotalMap, yAvrMap)
-
-    console.log("datamap:", dataMap)
-    console.log("total:", yTotalMap.values().next().value)
-    console.log("catogrey:", xCoordMap.values().next().value)
-
-    var windowWidth = 320;
-    try {
-      var res = wx.getSystemInfoSync();
-      windowWidth = res.windowWidth;
-    } catch (e) {
-      console.error('getSystemInfoSync failed!');
-    }
-
-    var seriesList = []
-    for (let [key, value] of yTotalMap.entries()) {
-      var item = {}
-      item.name = "test" + key
-      item.data = value
-      item.format = "metre"
-      console.log(key, value)
-      seriesList.push(item)
-    }
-
-    new wxCharts({ //当月用电折线图配置
-      canvasId: 'yueEle',
-      type: 'line',
-      categories: xCoordMap.values().next().value, //categories X轴
-      animation: true,
-      background: '#f5f5f5',
-      series: seriesList,
-      xAxis: {
-        disableGrid: true
-      },
-      yAxis: {
-        title: '总价(万)',
-        format: function(val) {
-          return val.toFixed(2);
-        },
-        max: 20,
-        min: 0
-      },
-      width: windowWidth,
-      height: 200,
-      dataLabel: false,
-      dataPointShape: true,
-      extra: {
-        lineStyle: 'curve'
-      }
-    });
   },
 
   onLoad: function() {
