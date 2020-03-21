@@ -59,7 +59,7 @@ function showGraph(data) {
   });
 }
 
-function showRingChart(id, data) {
+function showPieChart(id, data) {
   var map = new Map()
   for (var i = 0; i < data.length; i++) {
     var num = map.get(data[i].type)
@@ -86,11 +86,11 @@ function showRingChart(id, data) {
     series: seriesList,
     width: 320,
     height: 150,
-    dataLabel: false
+    dataLabel: true
   });
 }
 
 module.exports = {
   showGraph: showGraph,
-  showRingChart: showRingChart
+  showPieChart: showPieChart
 }

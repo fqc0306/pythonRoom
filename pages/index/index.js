@@ -36,7 +36,7 @@ Page({
       })
       
       viewUtils.showGraph(mapData.get(buildList[0]))
-      viewUtils.showRingChart('pie_graph', mapData.get(buildList[0]))
+      viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
     }).catch(err => {
       console.log('[downloadFile] 失败：', err)
