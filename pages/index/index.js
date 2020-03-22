@@ -14,33 +14,10 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
 
-    ecBar: {
-      onInit: function(canvas, width, height, dpr) {
-        const barChart = echarts.init(canvas, null, {
-          width: width,
-          height: height,
-          devicePixelRatio: dpr // new
-        });
-        canvas.setChart(barChart);
-        barChart.setOption(viewUtils.getBarOption());
-
-        return barChart;
-      }
+    ec: {
+      // 将 lazyLoad 设为 true 后，需要手动初始化图表
+      lazyLoad: true
     },
-
-    ecScatter: {
-      onInit: function(canvas, width, height, dpr) {
-        const scatterChart = echarts.init(canvas, null, {
-          width: width,
-          height: height,
-          devicePixelRatio: dpr // new
-        });
-        canvas.setChart(scatterChart);
-        scatterChart.setOption(viewUtils.getScatterOption());
-
-        return scatterChart;
-      }
-    }
 
   },
   //事件处理函数
@@ -64,6 +41,36 @@ Page({
       that.setData({
         listData: mapData.get(buildList[0])
       })
+
+
+      that.ecLineComponent.init((canvas, width, height, dpr) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        chart.setOption(viewUtils.getBarOption())
+
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
+      });
+
+      that.ecPieComponent.init((canvas, width, height, dpr) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        chart.setOption(viewUtils.getScatterOption())
+
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
+      });
+
 
       viewUtils.showGraph(mapData.get(buildList[0]))
       viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
@@ -105,8 +112,10 @@ Page({
 
   onReady: function () {
     // 获取组件
-    this.ecComponent = this.selectComponent('#mychart-dom-bar');
+    this.ecLineComponent = this.selectComponent('#mychart-dom-multi-bar');
+    this.ecPieComponent = this.selectComponent('#mychart-dom-multi-scatter');
   },
+
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
