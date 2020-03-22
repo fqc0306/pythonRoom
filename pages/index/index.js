@@ -51,7 +51,7 @@ Page({
           height: height,
           devicePixelRatio: dpr // new
         });
-        chart.setOption(viewUtils.getBarOption())
+        chart.setOption(viewUtils.getBarOption(mapData.get(buildList[0])))
 
         // 注意这里一定要返回 chart 实例，否则会影响事件处理等
         return chart;
@@ -65,7 +65,7 @@ Page({
           height: height,
           devicePixelRatio: dpr // new
         });
-        chart.setOption(viewUtils.getScatterOption())
+        chart.setOption(viewUtils.getScatterOption(mapData.get(buildList[0])))
 
         // 注意这里一定要返回 chart 实例，否则会影响事件处理等
         return chart;
