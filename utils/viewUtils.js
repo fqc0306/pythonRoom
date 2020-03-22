@@ -26,12 +26,14 @@ function showGraph(data) {
     var item = {}
     item.name = "test" + key
     item.data = value
-    item.format = "metre"
+    item.format = function (val, name) {
+      return val + '百万';
+    }
     console.log(key, value)
     seriesList.push(item)
   }
 
-  new wxCharts({ //当月用电折线图配置
+  var charts = new wxCharts({ //当月用电折线图配置
     canvasId: 'line_graph',
     type: 'line',
     categories: xCoordMap.values().next().value, //categories X轴
@@ -57,6 +59,7 @@ function showGraph(data) {
       lineStyle: 'curve'
     }
   });
+  return charts
 }
 
 function showPieChart(id, data) {
@@ -74,10 +77,13 @@ function showPieChart(id, data) {
     var item = {}
     item.name = key
     item.data = value
+    item.format = function (val, name) {
+      return val + '个';
+    }
     seriesList.push(item)
   }
   console.log("map:", map)
-  new wxCharts({
+  var charts = new wxCharts({
 
     canvasId: id,
 
@@ -88,6 +94,7 @@ function showPieChart(id, data) {
     height: 150,
     dataLabel: true
   });
+  return charts
 }
 
 function getBarOption(data) {

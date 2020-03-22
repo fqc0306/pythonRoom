@@ -72,8 +72,8 @@ Page({
       });
 
 
-      viewUtils.showGraph(mapData.get(buildList[0]))
-      viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
+      this.lineChart = viewUtils.showGraph(mapData.get(buildList[0]))
+      this.pieChart =  viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
     }).catch(err => {
       console.log('[downloadFile] 失败：', err)
@@ -123,5 +123,28 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  touchHandler: function (e) {
+    
+    this.lineChart.showToolTip(e, {
+      // background: '#7cb5ec',
+      format: function (item, category) {
+        console.log("item:", item)
+        console.log("category", category)
+        return category + ' ' + item.name + ':' + item.data
+      }
+    });
+  },
+
+  touchPieHandler: function (e) {
+
+    this.pieChart.showToolTip(e, {
+      // background: '#7cb5ec',
+      format: function (item, category) {
+        console.log("item:", item)
+        console.log("category", category)
+        return category + ' ' + item.name + ':' + item.data
+      }
+    });
   },
 });

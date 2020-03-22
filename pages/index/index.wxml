@@ -15,10 +15,10 @@
   </view>
 
   <view class="chart">
-    <canvas class="canvas" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
+    <canvas class="canvas" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"disable-scroll="true" bindtouchstart="touchPieHandler"></canvas>
   </view>
   <view class="chart">
-    <canvas class="canvas" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
+    <canvas class="canvas" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" disable-scroll="true" bindtouchstart="touchHandler"></canvas>
   </view>
   <view class="table" wx:if="{{listData.length != 0}}">
     <view class="tr bg-w">
