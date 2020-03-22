@@ -7,6 +7,12 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
+  <view style="height:650rpx">
+    <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+  </view>
+  <view style="height:450rpx">
+    <ec-canvas id="mychart-dom-multi-scatter" canvas-id="mychart-multi-scatter" ec="{{ ecScatter }}"></ec-canvas>
+  </view>
 
   <view class="chart">
     <canvas class="canvas" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"></canvas>
@@ -48,4 +54,5 @@
       </view>
     </block>
   </view>
+
 </view>

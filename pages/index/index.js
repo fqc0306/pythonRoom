@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+import * as echarts from '../../utils/ec-canvas/echarts';
 
 var wxCharts = require("../../utils/wxcharts.js");
 var dataUtils = require("../../utils/dataUtils.js")
@@ -11,7 +12,36 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    listData: []
+    listData: [],
+
+    ecBar: {
+      onInit: function(canvas, width, height, dpr) {
+        const barChart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        canvas.setChart(barChart);
+        barChart.setOption(viewUtils.getBarOption());
+
+        return barChart;
+      }
+    },
+
+    ecScatter: {
+      onInit: function(canvas, width, height, dpr) {
+        const scatterChart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        canvas.setChart(scatterChart);
+        scatterChart.setOption(viewUtils.getScatterOption());
+
+        return scatterChart;
+      }
+    }
+
   },
   //事件处理函数
   bindViewTap: function() {
@@ -34,7 +64,7 @@ Page({
       that.setData({
         listData: mapData.get(buildList[0])
       })
-      
+
       viewUtils.showGraph(mapData.get(buildList[0]))
       viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
@@ -72,6 +102,11 @@ Page({
     }
     this.getFileData()
   },
+
+  onReady: function () {
+    // 获取组件
+    this.ecComponent = this.selectComponent('#mychart-dom-bar');
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -79,5 +114,5 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
-})
+  },
+});

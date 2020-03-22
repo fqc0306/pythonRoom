@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/multiCharts/index",
+    "pages/lazyLoad/index",
+    "pages/line/index",
     "pages/logs/logs"
   ],
   "window": {
