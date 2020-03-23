@@ -32,7 +32,7 @@ Page({
     let that = this
     wx.cloud.callFunction({
       name: 'downloadFile',
-      data: {}
+      data: { file_id:'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/青年金色佳苑.json'}
     }).then(res => {
       var value = dataUtils.processFileData(res)
       var mapData = value[0]

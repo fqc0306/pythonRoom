@@ -8,7 +8,7 @@ cloud.init({
 exports.main = async(event, context) => {
 
   const res = await cloud.downloadFile({
-    fileID: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/qingnian1.json',
+    fileID: event.file_id,
   })
   const buffer = res.fileContent
 
