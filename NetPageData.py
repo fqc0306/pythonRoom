@@ -7,6 +7,7 @@ import csv
 import json
 import codecs
 import collections
+import time
 
 def getSoupByUrl(url):
 
@@ -103,6 +104,7 @@ def getProjectInfo(name, url):
 			rowInfo = []
 	print(rowInfo)
 
+timeStr = str(long(time.time()))
 #地区内所有楼盘内容
 for page in range(1):
 
@@ -112,6 +114,8 @@ for page in range(1):
 
 	infos = soup.find_all("form")[1].find_all("table")[6].find_all("td")
 	lastUrl = ""
+	id = 0
+
 	for index in range(infos.__len__()):
 		tag = infos[index].find("a")
 		if tag != None:
@@ -123,6 +127,13 @@ for page in range(1):
 				print(line)
 				lastUrl = url
 				getProjectInfo(text, url)
+
+				buileDict = collections.OrderedDict()
+				id = id + 1
+				buileDict.update({'id' : id})
+				buileDict.update({'name' :  text})
+				buileDict.update({'url' : url})
+				writeFile(buileDict, "beijing_" + timeStr + ".json")
 
 
 
