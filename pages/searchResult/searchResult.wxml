@@ -1,0 +1,44 @@
+<view class="search">
+  <view class="search-container">
+    <view class="search-left">
+      <image class="search-image" src="/images/search.webp" />
+      <input class="search-input" placeholder="请输入你喜欢的商品" value="{{keywords}}" bindinput='watchSearch' />
+    </view>
+    <view class="search-btn" data-keywords="{{keywords}}" bindtap="go_to_search_result">搜索</view>
+  </view>
+</view>
+<block wx:if="{{noData == 1}}">
+  <view class="no-data">
+    <view class="img">
+      <image class="search-image" src="/images/search_empty.webp" />
+    </view>
+    <view class="msg">什么也没搜到哦</view>
+  </view>
+</block>
+<block wx:else>
+  <view class="data-list">
+    <block wx:for="{{searchResult}}" wx:key="id">
+      <view class="data-item">
+        <view class="item-img">
+          <image src="{{item.title_img}}" />
+        </view>
+        <view class="item-content">
+          <view class="item-content-title">{{item.title}}</view>
+          <view class="item-content-property">
+            <view class="property-item">销量:{{item.sales_count}}</view>
+            <!-- <view class="property-item">库存:1970</view> -->
+          </view>
+          <view class="item-content-price">￥{{item.price}}</view>
+          <view class="item-content-add">
+            <image src="/images/common/buy_more.png" catch:tap="openTypeSelect" data-id="{{item.id}}" lazy-load="{{true}}" />
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{noMore==1}}">
+      <view class="no-more">无更多结果</view>
+    </block>
+  </view>
+</block>
+
+<goodsType id="goodsType" />

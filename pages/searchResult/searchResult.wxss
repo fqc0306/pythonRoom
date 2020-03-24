@@ -1,0 +1,155 @@
+.search {
+  height: 124rpx;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container {
+  margin-top: 30rpx;
+  height: 64rpx;
+  /* //: 1px solid red; */
+  margin-left: 22rpx;
+  margin-right: 33rpx;
+  width: 695rpx;
+  display: flex;
+}
+
+.search-left {
+  display: flex;
+  background-color: #fff;
+  border-radius: 32rpx;
+}
+
+.search-input {
+  /* //: 1px solid blue; */
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 28rpx;
+  width: 500rpx;
+}
+
+.search-image {
+  width: 34rpx;
+  height: 34rpx;
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+  margin-right: 15rpx;
+}
+
+.search-btn {
+  font-size: 32rpx;
+  line-height: 64rpx;
+  font-weight: bold;
+  color: #313131;
+  text-align: center;
+  margin-left: 30rpx;
+}
+
+.data-list {
+  margin-top: 16rpx;
+  overflow: hidden;
+}
+
+.data-item {
+  height: 240rpx;
+  border-bottom: 1rpx solid #e2e2e2;
+  padding: 30rpx 20rpx;
+  display: flex;
+}
+
+.item-img {
+  width: 180rpx;
+  height: 180rpx;
+  /* //: 1rpx solid red; */
+}
+
+image {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.item-content {
+  margin-left: 20rpx;
+  width: 510rpx;
+  height: 180rpx;
+  /* //: 1rpx solid blue; */
+  position: relative;
+}
+
+.item-content-title {
+  font-size: 26rpx;
+  color: #313131;
+}
+
+.item-content-property {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  height: 24rpx; /* 防止上下空隙 */
+  line-height: 24rpx;
+  color: #aaa;
+  display: flex;
+}
+
+.property-item:nth-child(n+2) {
+  margin-left: 20rpx;
+}
+
+.item-content-price {
+  margin-top: 46rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #f6001f;
+  height: 32rpx;
+  line-height: 32rpx;
+}
+
+.item-content-add {
+  position: absolute;
+  right: 0rpx;
+  bottom: 0rpx;
+  line-height: 46rpx;
+  font-size: 46rpx;
+  height: 46rpx;
+  color: #f6001f;
+}
+
+image {
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.no-more {
+  text-align: center;
+  color: #e2e2e2;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 30rpx;
+}
+
+.no-data {
+  /* //: none; 暂时先隐藏 */
+  margin: 0 auto;
+  margin-top: 163rpx;
+  height: 420rpx;
+  /* //: 1px solid red; */
+}
+
+.img {
+  width: 350rpx;
+  height: 313rpx;
+  /* //: 1px solid blue; */
+  margin: 0 auto;
+}
+
+image {
+  width: 350rpx;
+  height: 313rpx;
+}
+
+.msg {
+  text-align: center;
+  font-size: 32rpx;
+  color: #bfbfbf;
+  margin-top: 69rpx;
+}

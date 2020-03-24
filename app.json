@@ -4,7 +4,10 @@
     "pages/multiCharts/index",
     "pages/lazyLoad/index",
     "pages/line/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/search",
+    "pages/search/search",
+    "pages/searchResult/searchResult"
   ],
   "window": {
     "backgroundTextStyle": "light",

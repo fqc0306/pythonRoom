@@ -26,6 +26,11 @@ Page({
       url: '../logs/logs'
     })
   },
+  bindSearchTap: function () {
+    wx.navigateTo({
+      url: '../search/search'
+    })
+  },
   //调用云函数
   getFileData: function() {
 
