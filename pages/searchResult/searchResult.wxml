@@ -10,7 +10,7 @@
 <block wx:if="{{noData == 1}}">
   <view class="no-data">
     <view class="img">
-      <image class="search-image" src="/images/search_empty.webp" />
+      <image class="image_no_data" src="/images/search_empty.webp" />
     </view>
     <view class="msg">什么也没搜到哦</view>
   </view>

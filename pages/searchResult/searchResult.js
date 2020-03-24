@@ -6,7 +6,8 @@ Page({
    */
   data: {
     index_data: [],
-    keywords: ''
+    keywords: '',
+    noData: 1
   },
 
   openTypeSelect({
@@ -42,19 +43,6 @@ Page({
 
     const uid = app.globalData.uid;
     console.log(uid);
-    // 初始化
-    initInPage(
-      this,
-      "searchData", {
-        'uid': uid,
-        'keywords': keywords,
-        page: 1,
-        page_size: 5
-      }, {
-        inDataName: "inData",
-        outDataName: "searchResult"
-      }
-    );
   },
 
 
@@ -78,19 +66,7 @@ Page({
     let keywords = this.data.keywords;
     const uid = app.globalData.uid;
     console.log(uid);
-    // 初始化
-    initInPage(
-      this,
-      "searchData", {
-        'uid': uid,
-        'keywords': keywords,
-        page: 1,
-        page_size: 5
-      }, {
-        inDataName: "inData",
-        outDataName: "searchResult"
-      }
-    );
+  
   },
 
   /**

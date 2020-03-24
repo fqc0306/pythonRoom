@@ -36,6 +36,11 @@
   margin-top: 15rpx;
   margin-right: 15rpx;
 }
+.image_no_data {
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+  margin-right: 15rpx;
+}
 
 .search-btn {
   font-size: 32rpx;
