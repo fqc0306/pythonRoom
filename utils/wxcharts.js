@@ -323,22 +323,13 @@ function dataCombine(series) {
 
 function getSeriesDataItem(series, index) {
     var data = [];
-    console.log("wx serises:", series)
     series.forEach(function (item) {
-      console.log("wx serises item:", item, "index:" + item.data[index], "type:" + typeof item.data)
-
-        if (item.data[index] !== null && typeof item.data[index] !== 'undefined') {
+        if (item.data[index] !== null && typeof item.data[index] !== 'undefinded') {
             var seriesItem = {};
             seriesItem.color = item.color;
             seriesItem.name = item.name;
             seriesItem.data = item.format ? item.format(item.data[index]) : item.data[index];
             data.push(seriesItem);
-        } else if (typeof item.data === 'number') {
-          var seriesItem = {};
-          seriesItem.color = item.color;
-          seriesItem.name = item.name;
-          seriesItem.data = item.format ? item.format(item.data) : item.data;
-          data.push(seriesItem);
         }
     });
 
@@ -370,32 +361,27 @@ function getToolTipData(seriesData, calPoints, index, categories) {
     var option = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
 
     var textList = seriesData.map(function (item) {
-      console.log("option:", option, "categories:", categories, item)
-      return {
-
-        text: option.format && typeof categories !== 'undefined' ? option.format(item, categories[index]) : item.name + ': ' + item.data,
-        color: item.color
-      };
+        return {
+            text: option.format ? option.format(item, categories[index]) : item.name + ': ' + item.data,
+            color: item.color
+        };
     });
     var validCalPoints = [];
     var offset = {
         x: 0,
         y: 0
     };
-    if (typeof categories !== 'undefined') {
-
-      calPoints.forEach(function (points) {
-        if (typeof points[index] !== 'undefined' && points[index] !== null) {
-          validCalPoints.push(points[index]);
+    calPoints.forEach(function (points) {
+        if (typeof points[index] !== 'undefinded' && points[index] !== null) {
+            validCalPoints.push(points[index]);
         }
-      });
-      validCalPoints.forEach(function (item) {
+    });
+    validCalPoints.forEach(function (item) {
         offset.x = Math.round(item.x);
         offset.y += item.y;
-      });
+    });
 
-      offset.y /= validCalPoints.length;
-    }
+    offset.y /= validCalPoints.length;
     return { textList: textList, offset: offset };
 }
 
@@ -514,7 +500,7 @@ function calLegendData(series, opts, config) {
     var widthCount = 0;
     var currentRow = [];
     series.forEach(function (item) {
-        var itemWidth = 3 * padding + shapeWidth + measureText(item.name || 'undefined');
+        var itemWidth = 3 * padding + shapeWidth + measureText(item.name || 'undefinded');
         if (widthCount + itemWidth > opts.width) {
             legendList.push(currentRow);
             widthCount = itemWidth;
@@ -1781,7 +1767,6 @@ function drawCharts(type, opts, config, context) {
         config.xAxisHeight = xAxisHeight;
         config._xAxisTextAngle_ = angle;
     }
-
     if (type === 'pie' || type === 'ring') {
         config._pieTextMaxLength_ = opts.dataLabel === false ? 0 : getPieTextMaxLength(series);
     }
@@ -1873,7 +1858,6 @@ function drawCharts(type, opts, config, context) {
                     _this.chartData.pieData = drawPieDataPoints(series, opts, config, context, process);
                     drawLegend(opts.series, opts, config, context);
                     drawCanvas(opts, context);
-                    drawToolTipBridge(opts, config, context, process);
                 },
                 onAnimationFinish: function onAnimationFinish() {
                     _this.event.trigger('renderComplete');
@@ -1996,21 +1980,19 @@ Charts.prototype.getCurrentDataIndex = function (e) {
 Charts.prototype.showToolTip = function (e) {
     var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    console.log("wx showToolTip:", this.opts.type)
-    if (this.opts.type === 'line' || this.opts.type === 'area' || this.opts.type === 'pie') {
+    if (this.opts.type === 'line' || this.opts.type === 'area') {
         var index = this.getCurrentDataIndex(e);
         var currentOffset = this.scrollOption.currentOffset;
 
         var opts = assign({}, this.opts, {
             _scrollDistance_: currentOffset,
             animation: false
-      });
-      console.log("wx index:", index)
+        });
         if (index > -1) {
-          var seriesData = getSeriesDataItem(this.opts.series, index);
-          console.log("wx seriesData:", seriesData)
-          console.log("wx this.chartData:", this.chartData)
-            if (seriesData.length !== 0) {
+            var seriesData = getSeriesDataItem(this.opts.series, index);
+            if (seriesData.length === 0) {
+                drawCharts.call(this, opts.type, opts, this.config, this.context);
+            } else {
                 var _getToolTipData = getToolTipData(seriesData, this.chartData.calPoints, index, this.opts.categories, option),
                     textList = _getToolTipData.textList,
                     offset = _getToolTipData.offset;
@@ -2020,10 +2002,11 @@ Charts.prototype.showToolTip = function (e) {
                     offset: offset,
                     option: option
                 };
-              console.log("wx opts:", opts)
+                drawCharts.call(this, opts.type, opts, this.config, this.context);
             }
+        } else {
+            drawCharts.call(this, opts.type, opts, this.config, this.context);
         }
-        drawCharts.call(this, opts.type, opts, this.config, this.context);
     }
 };
 
