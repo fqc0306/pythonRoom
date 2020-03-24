@@ -9,22 +9,16 @@
   </view>
   <view class="search" bindtap="bindSearchTap">
     <view class="search-container">
-        <view class="search-left">
-            <image class="search-image" src="/images/search.webp" />
-            <input class="search-input"  placeholder="请输入你想要查询的楼盘" />
-        </view>
-        <view class="search-btn" >搜索</view>
+      <view class="search-left">
+        <image class="search-image" src="/images/search.webp" />
+        <input class="search-input" placeholder="请输入你想要查询的楼盘" />
+      </view>
+      <view class="search-btn">搜索</view>
     </view>
-</view>
-  <view style="height:650rpx">
-    <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
-  </view>
-  <view style="height:450rpx">
-    <ec-canvas id="mychart-dom-multi-scatter" canvas-id="mychart-multi-scatter" ec="{{ ecScatter }}"></ec-canvas>
   </view>
 
   <view class="chart">
-    <canvas class="canvas" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"disable-scroll="true" bindtouchstart="touchPieHandler"></canvas>
+    <canvas class="canvas" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" disable-scroll="true" bindtouchstart="touchPieHandler"></canvas>
   </view>
   <view class="chart">
     <canvas class="canvas" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" disable-scroll="true" bindtouchstart="touchHandler"></canvas>
