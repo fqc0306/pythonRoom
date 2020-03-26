@@ -1,15 +1,15 @@
 function processFileData(res) {
   var j = 0
-  var rooms = res.result.split('\n')
+  var lines = res.result.split('\n')
   var mapData = new Map()
   var horizonData = []
   var jsonList = []
   var buildList = [] //['A-1','A-2']
   var lastBuild
-  console.log("rooms number:", rooms.length)
-  for (j = 0; j < rooms.length; j++) {
+  console.log("lines number:", lines.length)
+  for (j = 0; j < lines.length; j++) {
 
-    var infos = rooms[j]
+    var infos = lines[j]
     var json = {}
     var i = 0
 
@@ -36,7 +36,7 @@ function processFileData(res) {
       return null
     }
 
-    if (j == rooms.length - 1 || (lastBuild != "" && lastBuild != jsonObj.build)) {
+    if (j == lines.length - 1 || (lastBuild != "" && lastBuild != jsonObj.build)) {
       mapData.set(jsonObj.build, jsonList)
       buildList.push(jsonObj.build)
       lastBuild = jsonObj.build
@@ -44,6 +44,36 @@ function processFileData(res) {
   }
   return [mapData, buildList]
 }
+
+function processFileProjectData(res) {
+  var j = 0
+  var lines = res.result.split('\n')
+  var mapData = new Map()
+  var jsonList = []
+
+  for (j = 0; j < lines.length; j++) {
+    var infos = lines[j]
+    var json = {}
+    var i = 0
+
+    try {
+      if (infos != '') {
+        var jsonObj = JSON.parse(infos)
+
+        json["id"] = jsonObj.id
+        json["name"] = jsonObj.name
+        json["url"] = jsonObj.url
+
+        jsonList.push(json)
+      }
+    } catch (err) {
+      console.error(err)
+      return null
+    }
+  }
+  return jsonList
+}
+
 
 function updateGraphData(data, dataMap, xCoordMap, yTotalMap, yAvrMap) {
 
@@ -81,5 +111,6 @@ function updateGraphData(data, dataMap, xCoordMap, yTotalMap, yAvrMap) {
 
 module.exports = {
   processFileData: processFileData,
-  updateGraphData: updateGraphData
+  updateGraphData: updateGraphData,
+  processFileProjectData: processFileProjectData
 }
