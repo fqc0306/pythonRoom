@@ -26,10 +26,10 @@ Page({
   },
   //调用云函数
   getFileData: function() {
-
     let that = this
     var fileName = ''
-    if (this.data.searchKey != '') {
+
+    if (this.data.searchKey != '' && typeof this.data.searchKey != 'undefined') {
       fileName = this.data.searchKey
     } else {
       fileName = '青年金色佳苑'
@@ -100,14 +100,16 @@ Page({
         }
       })
     }
-    this.getFileData()
 
     this.setData({
       searchKey: options.keywords
     });
   },
 
-  onReady: function() {},
+  onReady: function () { },
+  onShow: function (options) {
+    this.getFileData()
+  },
 
   getUserInfo: function(e) {
     console.log(e)
