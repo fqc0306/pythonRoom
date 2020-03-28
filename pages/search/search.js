@@ -9,19 +9,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    index_data: {
-    },
+    index_data: {},
     keywords: '',
   },
   // 清理
-  clearSearchHistory: function () {
+  clearSearchHistory: function() {
     wx.showModal({
       title: '清理历史',
       content: '确定要清理历史？',
       showCancel: true,
       cancelColor: 'skyblue',
       confirmColor: 'skyblue',
-      success: function (res) {
+      success: function(res) {
 
         wx.showToast({
           title: '清理成功',
@@ -30,16 +29,16 @@ Page({
           "index_data.history": []
         });
       },
-      fail: function (res) {
+      fail: function(res) {
         wx.showToast({
           title: '清理失败',
         })
       }, //接口调用失败的回调函数
-      complete: function (res) { }, //接口调用结束的回调函数（调用成功、失败都会执行）
+      complete: function(res) {}, //接口调用结束的回调函数（调用成功、失败都会执行）
     })
   },
   // 监听输入
-  watchSearch: function (event) {
+  watchSearch: function(event) {
     console.log(event.detail.value);
     let keywords = event.detail.value;
     // 设置值
@@ -55,9 +54,13 @@ Page({
       }
     }
   }) {
-    console.log(keywords);
     if (keywords == '') {
-      return tips.showMsg("请输入要搜索的内容");
+      return wx.showToast({
+        title: "搜索内容不能为空～",
+        icon: 'none',
+        duration: 2000,
+      });
+
     }
     this.updateHistory(keywords)
 
@@ -80,28 +83,35 @@ Page({
     }
   },
 
-  updateHistory: function (keywords) {
+  updateHistory: function(keywords) {
 
-    var info = wx.getStorageSync(HISTORY_KEY)
-    if (info == null || info == '') {
-      info = []
+    var list = wx.getStorageSync(HISTORY_KEY)
+    if (list == null || list == '') {
+      list = []
     }
-    info.push(keywords)
+    var newList = []
+    newList.push(keywords)
 
-    wx.setStorageSync(HISTORY_KEY, info)
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] != keywords) {
+        newList.push(list[i])
+      }
+    }
+
+    wx.setStorageSync(HISTORY_KEY, newList)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 展示
    */
-  onShow: function (options) {
+  onShow: function(options) {
     const uid = app.globalData.uid;
     console.log(uid);
     setTimeout(() => {
@@ -115,7 +125,7 @@ Page({
 
     wx.getStorage({
       key: 'search_data',
-      success: function (res) {
+      success: function(res) {
         searchData = res.data
         console.log("get storage:", res)
       },
@@ -125,10 +135,10 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () { },
+  onReady: function() {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() { },
+  onShareAppMessage() {},
 });
