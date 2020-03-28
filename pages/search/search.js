@@ -1,6 +1,6 @@
 // https://www.cnblogs.com/jiqing9006/p/12191158.html
 const app = getApp();
-var searchData = null;//[{id:1,name:"project_name",url:"**"}]
+var searchData = null; //[{id:1,name:"project_name",url:"**"}]
 Page({
   /**
    * 页面的初始数据
@@ -58,9 +58,23 @@ Page({
     if (keywords == '') {
       return tips.showMsg("请输入要搜索的内容");
     }
-    wx.navigateTo({
-      url: "../searchResult/searchResult?keywords=" + keywords
-    });
+    var isValidKeyword = false
+    for (var i = 0; i < searchData.length; i++) {
+      var item = searchData[i]
+      if (item['name'] == keywords) {
+        isValidKeyword = true
+      }
+    }
+
+    if (isValidKeyword) {
+      wx.navigateTo({
+        url: "../index/index?keywords=" + keywords
+      });
+    } else {
+      wx.navigateTo({
+        url: "../searchResult/searchResult?keywords=" + keywords
+      });
+    }
   },
 
 
@@ -85,7 +99,7 @@ Page({
 
     wx.getStorage({
       key: 'search_data',
-      success: function (res) {
+      success: function(res) {
         searchData = res.data
         console.log("get storage:", res)
       },

@@ -19,7 +19,7 @@ Page({
       url: '../logs/logs'
     })
   },
-  bindSearchTap: function () {
+  bindSearchTap: function() {
     wx.navigateTo({
       url: '../search/search'
     })
@@ -28,9 +28,17 @@ Page({
   getFileData: function() {
 
     let that = this
+    var fileName = ''
+    if (this.data.searchKey != '') {
+      fileName = this.data.searchKey
+    } else {
+      fileName = '青年金色佳苑'
+    }
     wx.cloud.callFunction({
       name: 'downloadFile',
-      data: { file_id:'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/青年金色佳苑.json'}
+      data: {
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/' + fileName + '.json'
+      }
     }).then(res => {
       var value = dataUtils.processFileData(res)
       var mapData = value[0]
@@ -41,7 +49,7 @@ Page({
       })
 
       this.lineChart = viewUtils.showGraph(mapData.get(buildList[0]))
-      this.pieChart =  viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
+      this.pieChart = viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
     }).catch(err => {
       console.log('[downloadFile] 失败：', err)
@@ -49,7 +57,9 @@ Page({
 
     wx.cloud.callFunction({
       name: 'downloadFile',
-      data: { file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/beijing_1584974166.json' }
+      data: {
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/beijing_1584974166.json'
+      }
     }).then(res => {
       var value = dataUtils.processFileProjectData(res)
 
@@ -63,7 +73,7 @@ Page({
     })
   },
 
-  onLoad: function() {
+  onLoad: function(options) {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -91,10 +101,13 @@ Page({
       })
     }
     this.getFileData()
+
+    this.setData({
+      searchKey: options.keywords
+    });
   },
 
-  onReady: function () {
-  },
+  onReady: function() {},
 
   getUserInfo: function(e) {
     console.log(e)
@@ -104,11 +117,11 @@ Page({
       hasUserInfo: true
     })
   },
-  touchHandler: function (e) {
-    
+  touchHandler: function(e) {
+
     this.lineChart.showToolTip(e, {
       // background: '#7cb5ec',
-      format: function (item, category) {
+      format: function(item, category) {
         console.log("item:", item)
         console.log("category", category)
         return category + ' ' + item.name + ':' + item.data
@@ -116,11 +129,11 @@ Page({
     });
   },
 
-  touchPieHandler: function (e) {
+  touchPieHandler: function(e) {
 
     this.pieChart.showToolTip(e, {
       // background: '#7cb5ec',
-      format: function (item, category) {
+      format: function(item, category) {
         console.log("item:", item)
         console.log("category", category)
         return category + ' ' + item.name + ':' + item.data
