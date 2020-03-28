@@ -10,7 +10,7 @@
   <view class="search" bindtap="bindSearchTap">
     <view class="search-container">
       <view class="search-left">
-        <image class="search-image" src="/images/search.webp" />
+        <image class="search-image" src="/images/search.png" />
         <input class="search-input" placeholder="请输入你想要查询的楼盘" />
       </view>
       <view class="search-btn">搜索</view>

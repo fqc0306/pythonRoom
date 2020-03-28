@@ -1,7 +1,7 @@
 <view class="search">
   <view class="search-container">
     <view class="search-left">
-      <image class="search-image" src="/images/search.webp" />
+      <image class="search-image" src="/images/search.png" />
       <input class="search-input" placeholder="请输入你喜欢的商品" value="{{keywords}}" bindinput='watchSearch' />
     </view>
     <view class="search-btn" data-keywords="{{keywords}}" bindtap="go_to_search_result">搜索</view>
@@ -10,7 +10,7 @@
 <block wx:if="{{noData == 1}}">
   <view class="no-data">
     <view class="img">
-      <image class="image_no_data" src="/images/search_empty.webp" />
+      <image class="image_no_data" src="/images/search_empty.png" />
     </view>
     <view class="msg">什么也没搜到哦</view>
   </view>
