@@ -11,7 +11,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
-    searchData: [],
+    searchKey: '',
   },
   //事件处理函数
   bindViewTap: function() {
@@ -53,12 +53,11 @@ Page({
     }).then(res => {
       var value = dataUtils.processFileProjectData(res)
 
-      that.setData({
-        searchData: value
+      wx.setStorage({
+        key: 'search_data',
+        data: value,
       })
-      console.log('[downloadFile] result：', res)
 
-      console.log('[downloadFile] value', value)
     }).catch(err => {
       console.log('[downloadFile] 失败：', err)
     })
