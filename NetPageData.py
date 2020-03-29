@@ -153,7 +153,7 @@ def getProjectInfo(name, url):
 timeStr = str(long(time.time())/(24*60*60))
 
 #地区内所有楼盘内容
-for page in range(0, 10):
+for page in range(1, 10):
 
 	beijingUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307678&isTrue=&currentPage=" + str(page+1) + "&pageSize=15"
 	print(beijingUrl)
@@ -164,7 +164,7 @@ for page in range(0, 10):
 	id = 0
 
 	for index in range(0, infos.__len__()):
-		print("index:" + page + "," + index)
+		print("index:" + str(page) + "," + str(index))
 		tag = infos[index].find("a")
 		if tag != None:
 			url = "http://bjjs.zjw.beijing.gov.cn" + tag.get("href")
