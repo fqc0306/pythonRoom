@@ -16,10 +16,19 @@ def getSoupByUrl(url):
 	  'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:10.0.1) Gecko/20100101 Firefox/10.0.1',
 	}
 	opener.addheaders = headers.items()
-	response = opener.open(url)
+	tryTimes = 0
+	maxTimes = 3
+	if (tryTimes < maxTimes):
+		try:
+			response = opener.open(url)
+			html = response.read().decode('utf-8')
+			soup = BeautifulSoup(html, "html.parser", from_encoding="utf-8")
+			tryTimes = maxTimes
+		except Exception as e:
+			print('open url:'+url)
+			print('open url error and try again:' + e)
+			tryTimes = tryTimes + 1
 
-	html = response.read().decode('utf-8')
-	soup = BeautifulSoup(html, "html.parser", from_encoding="utf-8")
 
 	return soup
 
@@ -155,7 +164,7 @@ for page in range(0, 10):
 	id = 0
 
 	for index in range(0, infos.__len__()):
-		print(index)
+		print("index:" + page + "," + index)
 		tag = infos[index].find("a")
 		if tag != None:
 			url = "http://bjjs.zjw.beijing.gov.cn" + tag.get("href")
