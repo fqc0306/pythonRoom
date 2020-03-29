@@ -57,24 +57,61 @@ def getAllRoom(name, whichBuild, url):
 		index = index + 1
 		roomDict.update({'id' : index})
 		roomDict.update({'build' :  whichBuild.split("#")[0]})
-		roomDict.update({'unit' : link.text.split("-")[0]})
-		roomDict.update({'room' : link.text.split("-")[1]})
+
+		number = None
+		try:
+			number = int (link.text) #case1:2单元-801 case2:-034
+		except UnicodeEncodeError as e:
+			print('int error:', e)
+
+		if number == None:
+			if link.text.split("-").__len__() >= 2:
+				roomDict.update({'unit' : link.text.split("-")[0]})
+				roomDict.update({'room' : link.text.split("-")[1]})
+			elif link.text.split("-") == 1:
+				roomDict.update({'unit' : ""})
+				roomDict.update({'room' : link.text.split("-")[0]})
+			else:
+				print("error length, link text:" + link.text)
+		else :
+			roomDict.update({'unit' : ""})
+			roomDict.update({'room' : link.text})
+
 
 		statusDict.update({'id' : index})
 		statusDict.update({'build' :  whichBuild.split("#")[0]})
-		statusDict.update({'unit' : link.text.split("-")[0]})
-		statusDict.update({'room' : link.text.split("-")[1]})
 		statusDict.update({'status' : style.split("#")[1]})
+		if number == None:
+			if link.text.split("-").__len__() >= 2:
+				statusDict.update({'unit' : link.text.split("-")[0]})
+				statusDict.update({'room' : link.text.split("-")[1]})
+			elif link.text.split("-") == 1:
+				statusDict.update({'unit' : ""})
+				statusDict.update({'room' : link.text.split("-")[0]})
+			else:
+				print("error length, link text:" + link.text)
+		else :
+			statusDict.update({'unit' : ""})
+			statusDict.update({'room' : link.text})
 
-		writeFile(statusDict, name + "_dynamic.json")
+		writeFile(statusDict, name + "_dy.json")
 
-		if desc.__len__() > 13:
-			
-			roomDict.update({'square_all' : desc[7].text.split(' ')[0]})
-			roomDict.update({'square_in' : desc[9].text.split(' ')[0]})
-			roomDict.update({'price_all' : desc[11].text.split(' ')[0]})
-			roomDict.update({'price_in' : desc[13].text.split(' ')[0]})
-			roomDict.update({'type' : desc[5].text.split(' ')[0]})
+		tempDict = collections.OrderedDict()
+		if desc.__len__()/2 > 0:
+			for k in range(desc.__len__()/2):
+				key = desc[k*2].text.encode('utf-8').replace(' ', '').replace('　', '')
+				if key.find('用途') >= 0:
+					key = '用途'
+				
+				value = desc[k*2+1].text.split(" ")[0].encode('utf-8').replace(' ', '').replace('　', '')
+				tempDict.update({key : unicode(value, "utf-8")})
+
+			roomDict.update({'square_all' : tempDict.get('建筑面积(m2)')})
+			roomDict.update({'square_in' : tempDict.get('套内面积(m2)')})
+			roomDict.update({'price_all' : tempDict.get('按建筑面积拟售单价')})
+			roomDict.update({'price_in' : tempDict.get('按套内面积拟售单价')})
+			roomDict.update({'type' : tempDict.get('户型')})
+			roomDict.update({'func' : tempDict.get('用途')})
 
 			writeFile(roomDict, name + ".json")
 		else:
@@ -90,23 +127,24 @@ def getProjectInfo(name, url):
 	rowInfo = []
 	# soup.find(attrs={"class":"cont_titlebg"})
 	projectName = soup.find_all(id="newslist")[0].find_all("td")[1].text #TODO 存在空格
-	print(type(projectName))
 	print(projectName)
-	infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
-	for info in infos:
-		if info.find("a") != None:
-			url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
-			print(url)
-			getAllRoom(name, rowInfo[0], url)
-		print(info.text)
-		rowInfo.append(info.text)
-		if rowInfo.__len__() == 6:#每6项是一行
-			rowInfo = []
-	print(rowInfo)
+	if (soup.find_all(id="Span1").__len__() > 0 and soup.find_all(id="Span1")[0].find_all("table").__len__() > 0):
+		infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
+		for info in infos:
+			if info.find("a") != None:
+				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
+				print(url)
+				getAllRoom(name, rowInfo[0], url)
+			print(info.text)
+			rowInfo.append(info.text)
+			if rowInfo.__len__() == 6:#每6项是一行
+				rowInfo = []
+		print(rowInfo)
 
-timeStr = str(long(time.time()))
+timeStr = str(long(time.time())/(24*60*60))
+
 #地区内所有楼盘内容
-for page in range(1):
+for page in range(0, 10):
 
 	beijingUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307678&isTrue=&currentPage=" + str(page+1) + "&pageSize=15"
 	print(beijingUrl)
@@ -116,7 +154,8 @@ for page in range(1):
 	lastUrl = ""
 	id = 0
 
-	for index in range(infos.__len__()):
+	for index in range(0, infos.__len__()):
+		print(index)
 		tag = infos[index].find("a")
 		if tag != None:
 			url = "http://bjjs.zjw.beijing.gov.cn" + tag.get("href")
@@ -132,7 +171,6 @@ for page in range(1):
 				id = id + 1
 				buileDict.update({'id' : id})
 				buileDict.update({'name' :  text})
-				buileDict.update({'url' : url})
 				writeFile(buileDict, "beijing_" + timeStr + ".json")
 
 
