@@ -88,7 +88,7 @@ function showPieChart(id, data) {
 
     series: seriesList,
     width: 320,
-    height: 150,
+    height: 190,
     dataLabel: true
   });
   return charts
