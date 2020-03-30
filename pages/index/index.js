@@ -12,6 +12,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
     searchKey: '',
+    isShow: false
   },
   //事件处理函数
   bindViewTap: function() {
@@ -37,7 +38,7 @@ Page({
     wx.cloud.callFunction({
       name: 'downloadFile',
       data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/' + fileName + '.json'
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/bj/' + fileName + '.json'
       }
     }).then(res => {
       var value = dataUtils.processFileData(res)
@@ -48,7 +49,7 @@ Page({
         listData: mapData.get(buildList[0])
       })
 
-      this.lineChart = viewUtils.showGraph(mapData.get(buildList[0]))
+      // this.lineChart = viewUtils.showGraph(mapData.get(buildList[0]))
       this.pieChart = viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
     }).catch(err => {

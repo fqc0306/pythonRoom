@@ -77,9 +77,6 @@ function showPieChart(id, data) {
     var item = {}
     item.name = key
     item.data = value
-    item.format = function (val, name) {
-      return val + '个';
-    }
     seriesList.push(item)
   }
   console.log("map:", map)
@@ -92,7 +89,7 @@ function showPieChart(id, data) {
     series: seriesList,
     width: 320,
     height: 150,
-    dataLabel: false
+    dataLabel: true
   });
   return charts
 }

@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
+  <view class="userinfo" wx:if="{{isShow}}">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
@@ -20,7 +20,7 @@
   <view class="chart">
     <canvas class="canvas" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" disable-scroll="true" bindtouchstart="touchPieHandler"></canvas>
   </view>
-  <view class="chart">
+  <view class="chart" wx:if="{{isShow}}">
     <canvas class="canvas" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" disable-scroll="true" bindtouchstart="touchHandler"></canvas>
   </view>
   <view class="table" wx:if="{{listData.length != 0}}">
