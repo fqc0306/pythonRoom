@@ -42,7 +42,7 @@ def writeFile(dictObj, fileName):
 	f.write(jsStr)
 
 #whichBuild+房间号 为id
-def getAllRoom(name, whichBuild, url):
+def getAllRoom(name, whichBuild, url, whichProject):
 	soup = getSoupByUrl(url)
 
 	tables = soup.find_all(id="table_Buileing")
@@ -66,6 +66,7 @@ def getAllRoom(name, whichBuild, url):
 		index = index + 1
 		roomDict.update({'id' : index})
 		roomDict.update({'build' :  whichBuild.split("#")[0]})
+		roomDict.update({'project' : whichProject})
 
 		number = None
 		try:
@@ -138,7 +139,7 @@ def getAllRoom(name, whichBuild, url):
 	print(alldivs.__len__())
 
 #楼盘中所有楼栋
-def getProjectInfo(name, url):
+def getProjectInfo(name, url, projectId):
 	soup = getSoupByUrl(url)
 	rowInfo = []
 	# soup.find(attrs={"class":"cont_titlebg"})
@@ -150,7 +151,7 @@ def getProjectInfo(name, url):
 			if info.find("a") != None:
 				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
 				print(url)
-				getAllRoom(name, rowInfo[0], url)
+				getAllRoom(name, rowInfo[0], url, projectId)
 			print(info.text)
 			rowInfo.append(info.text)
 			if rowInfo.__len__() == 6:#每6项是一行
@@ -172,22 +173,24 @@ for page in range(0, 10):
 
 	for index in range(0, infos.__len__()):
 		print("index:" + str(page) + "," + str(index))
+
 		tag = infos[index].find("a")
 		if tag != None:
 			url = "http://bjjs.zjw.beijing.gov.cn" + tag.get("href")
-
-			if(lastUrl != url):
-				text = tag.text
-				line = text + "," + url
+			if(lastUrl == url and text != tag.text):
+				projectId = tag.text
+				line = text + "," + url + ", " + projectId
 				print(line)
-				lastUrl = url
-				getProjectInfo(text, url)
+				getProjectInfo(text, url, projectId)
 
 				buileDict = collections.OrderedDict()
 				id = id + 1
 				buileDict.update({'id' : id})
 				buileDict.update({'name' :  text})
 				writeFile(buileDict, "beijing_" + timeStr + ".json")
+			else :
+				lastUrl = url
+				text = tag.text
 
 
 
