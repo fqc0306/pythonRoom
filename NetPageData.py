@@ -115,8 +115,15 @@ def getAllRoom(name, whichBuild, url):
 				value = desc[k*2+1].text.split(" ")[0].encode('utf-8').replace(' ', '').replace('　', '')
 				tempDict.update({key : unicode(value, "utf-8")})
 
-			roomDict.update({'square_all' : tempDict.get('建筑面积(m2)')})
-			roomDict.update({'square_in' : tempDict.get('套内面积(m2)')})
+			square_all = tempDict.get('建筑面积(m2)')
+			if (square_all == None or square_all.__len__() == 0):
+				square_all = tempDict.get('建筑面积')
+
+			square_in = tempDict.get('套内面积(m2)')
+			if (square_in == None or square_in.__len__() == 0):
+				square_in = tempDict.get('套内面积')
+			roomDict.update({'square_all' : square_all})
+			roomDict.update({'square_in' : square_in})
 			roomDict.update({'price_all' : tempDict.get('按建筑面积拟售单价')})
 			roomDict.update({'price_in' : tempDict.get('按套内面积拟售单价')})
 			roomDict.update({'type' : tempDict.get('户型')})
@@ -153,7 +160,7 @@ def getProjectInfo(name, url):
 timeStr = str(long(time.time())/(24*60*60))
 
 #地区内所有楼盘内容
-for page in range(1, 10):
+for page in range(0, 10):
 
 	beijingUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307678&isTrue=&currentPage=" + str(page+1) + "&pageSize=15"
 	print(beijingUrl)
