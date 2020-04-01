@@ -111,6 +111,9 @@ Page({
   onShow: function (options) {
     this.getFileData()
   },
+  
+  onShareAppMessage: function () {
+  },
 
   getUserInfo: function(e) {
     console.log(e)
