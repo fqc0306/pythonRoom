@@ -90,6 +90,7 @@ def getAllRoom(name, whichBuild, url, whichProject):
 
 		statusDict.update({'id' : index})
 		statusDict.update({'build' :  whichBuild.split("#")[0]})
+		statusDict.update({'project' : whichProject})
 		statusDict.update({'status' : style.split("#")[1]})
 		if number == None:
 			if link.text.split("-").__len__() >= 2:
