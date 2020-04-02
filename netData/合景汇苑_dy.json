@@ -23,7 +23,7 @@
 {"id": 23, "build": "1", "status": "d2691e", "unit": "3单元", "room": "701"}
 {"id": 24, "build": "1", "status": "FFCC99", "unit": "3单元", "room": "702"}
 {"id": 25, "build": "1", "status": "33CC00", "unit": "1单元", "room": "601"}
-{"id": 26, "build": "1", "status": "FFCC99", "unit": "1单元", "room": "602"}
+{"id": 26, "build": "1", "status": "d2691e", "unit": "1单元", "room": "602"}
 {"id": 27, "build": "1", "status": "d2691e", "unit": "2单元", "room": "601"}
 {"id": 28, "build": "1", "status": "FFCC99", "unit": "2单元", "room": "602"}
 {"id": 29, "build": "1", "status": "d2691e", "unit": "3单元", "room": "601"}
@@ -51,7 +51,7 @@
 {"id": 51, "build": "1", "status": "FFCC99", "unit": "2单元", "room": "201"}
 {"id": 52, "build": "1", "status": "33CC00", "unit": "2单元", "room": "202"}
 {"id": 53, "build": "1", "status": "33CC00", "unit": "3单元", "room": "201"}
-{"id": 54, "build": "1", "status": "00FFFF", "unit": "3单元", "room": "202"}
+{"id": 54, "build": "1", "status": "33CC00", "unit": "3单元", "room": "202"}
 {"id": 55, "build": "1", "status": "33CC00", "unit": "1单元", "room": "101"}
 {"id": 56, "build": "1", "status": "33CC00", "unit": "1单元", "room": "102"}
 {"id": 57, "build": "1", "status": "33CC00", "unit": "2单元", "room": "101"}
