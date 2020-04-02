@@ -18,7 +18,7 @@ def getSoupByUrl(url):
 	opener.addheaders = headers.items()
 	tryTimes = 0
 	maxTimes = 3
-	if (tryTimes < maxTimes):
+	while (tryTimes < maxTimes):
 		try:
 			response = opener.open(url)
 			html = response.read().decode('utf-8')
@@ -26,7 +26,7 @@ def getSoupByUrl(url):
 			tryTimes = maxTimes
 		except Exception as e:
 			print('open url:'+url)
-			print('open url error and try again:' + e)
+			print(e)
 			tryTimes = tryTimes + 1
 
 
