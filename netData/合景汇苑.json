@@ -14,6 +14,7 @@
 {"id": 50, "build": "1", "project": "京房售证字(2019)183号", "unit": "1单元", "room": "202", "square_all": "110.1500", "square_in": "88.2800", "price_all": "55045.2", "price_in": "68681.79", "type": "三室两厅", "func": "住宅"}
 {"id": 52, "build": "1", "project": "京房售证字(2019)183号", "unit": "2单元", "room": "202", "square_all": "88.2100", "square_in": "70.7000", "price_all": "55045.20", "price_in": "68678.04", "type": "三室两厅", "func": "住宅"}
 {"id": 53, "build": "1", "project": "京房售证字(2019)183号", "unit": "3单元", "room": "201", "square_all": "77.1000", "square_in": "61.7900", "price_all": "56551.46", "price_in": "70563.48", "type": "三室两厅", "func": "住宅"}
+{"id": 54, "build": "1", "project": "京房售证字(2019)183号", "unit": "3单元", "room": "202", "square_all": "77.5000", "square_in": "62.1100", "price_all": "56659.05", "price_in": "70698.38", "type": "三室两厅", "func": "住宅"}
 {"id": 55, "build": "1", "project": "京房售证字(2019)183号", "unit": "1单元", "room": "101", "square_all": "110.5500", "square_in": "88.6000", "price_all": "54830.02", "price_in": "68413.76", "type": "三室两厅", "func": "住宅"}
 {"id": 56, "build": "1", "project": "京房售证字(2019)183号", "unit": "1单元", "room": "102", "square_all": "93.2800", "square_in": "74.7600", "price_all": "54076.89", "price_in": "67473.14", "type": "两室两厅", "func": "住宅"}
 {"id": 57, "build": "1", "project": "京房售证字(2019)183号", "unit": "2单元", "room": "101", "square_all": "71.9200", "square_in": "57.6400", "price_all": "54076.89", "price_in": "67474.15", "type": "两室两厅", "func": "住宅"}

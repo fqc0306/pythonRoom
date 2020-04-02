@@ -1,155 +1,296 @@
-{"id": 1, "build": "1", "status": "33CC00", "unit": "", "room": "1701"}
-{"id": 2, "build": "1", "status": "33CC00", "unit": "", "room": "1601"}
-{"id": 3, "build": "1", "status": "33CC00", "unit": "", "room": "1602"}
-{"id": 4, "build": "1", "status": "33CC00", "unit": "", "room": "1501"}
-{"id": 5, "build": "1", "status": "33CC00", "unit": "", "room": "1502"}
-{"id": 6, "build": "1", "status": "33CC00", "unit": "", "room": "1401"}
-{"id": 7, "build": "1", "status": "33CC00", "unit": "", "room": "1402"}
-{"id": 8, "build": "1", "status": "33CC00", "unit": "", "room": "1301"}
-{"id": 9, "build": "1", "status": "33CC00", "unit": "", "room": "1302"}
-{"id": 10, "build": "1", "status": "33CC00", "unit": "", "room": "1201"}
-{"id": 11, "build": "1", "status": "33CC00", "unit": "", "room": "1202"}
-{"id": 12, "build": "1", "status": "33CC00", "unit": "", "room": "1101"}
-{"id": 13, "build": "1", "status": "33CC00", "unit": "", "room": "1102"}
-{"id": 14, "build": "1", "status": "33CC00", "unit": "", "room": "1001"}
-{"id": 15, "build": "1", "status": "33CC00", "unit": "", "room": "1002"}
-{"id": 16, "build": "1", "status": "33CC00", "unit": "", "room": "901"}
-{"id": 17, "build": "1", "status": "33CC00", "unit": "", "room": "902"}
-{"id": 18, "build": "1", "status": "33CC00", "unit": "", "room": "801"}
-{"id": 19, "build": "1", "status": "33CC00", "unit": "", "room": "802"}
-{"id": 20, "build": "1", "status": "33CC00", "unit": "", "room": "701"}
-{"id": 21, "build": "1", "status": "33CC00", "unit": "", "room": "702"}
-{"id": 22, "build": "1", "status": "33CC00", "unit": "", "room": "601"}
-{"id": 23, "build": "1", "status": "33CC00", "unit": "", "room": "602"}
-{"id": 24, "build": "1", "status": "33CC00", "unit": "", "room": "501"}
-{"id": 25, "build": "1", "status": "33CC00", "unit": "", "room": "502"}
-{"id": 26, "build": "1", "status": "33CC00", "unit": "", "room": "401"}
-{"id": 27, "build": "1", "status": "33CC00", "unit": "", "room": "402"}
-{"id": 28, "build": "1", "status": "33CC00", "unit": "", "room": "301"}
-{"id": 29, "build": "1", "status": "33CC00", "unit": "", "room": "302"}
-{"id": 30, "build": "1", "status": "33CC00", "unit": "", "room": "201"}
-{"id": 31, "build": "1", "status": "33CC00", "unit": "", "room": "202"}
-{"id": 1, "build": "4", "status": "33CC00", "unit": "1单元", "room": "2101"}
-{"id": 2, "build": "4", "status": "33CC00", "unit": "1单元", "room": "2103"}
-{"id": 3, "build": "4", "status": "33CC00", "unit": "2单元", "room": "2101"}
-{"id": 4, "build": "4", "status": "33CC00", "unit": "2单元", "room": "2103"}
-{"id": 5, "build": "4", "status": "d2691e", "unit": "1单元", "room": "2102"}
-{"id": 6, "build": "4", "status": "d2691e", "unit": "2单元", "room": "2102"}
-{"id": 7, "build": "4", "status": "d2691e", "unit": "1单元", "room": "2001"}
-{"id": 8, "build": "4", "status": "33CC00", "unit": "1单元", "room": "2002"}
-{"id": 9, "build": "4", "status": "d2691e", "unit": "1单元", "room": "2003"}
-{"id": 10, "build": "4", "status": "d2691e", "unit": "2单元", "room": "2001"}
-{"id": 11, "build": "4", "status": "d2691e", "unit": "2单元", "room": "2002"}
-{"id": 12, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "2003"}
-{"id": 13, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1901"}
-{"id": 14, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1902"}
-{"id": 15, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1903"}
-{"id": 16, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1901"}
-{"id": 17, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1902"}
-{"id": 18, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1903"}
-{"id": 19, "build": "4", "status": "33CC00", "unit": "1单元", "room": "1801"}
-{"id": 20, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1802"}
-{"id": 21, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1803"}
-{"id": 22, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1801"}
-{"id": 23, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1802"}
-{"id": 24, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1803"}
-{"id": 25, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1701"}
-{"id": 26, "build": "4", "status": "33CC00", "unit": "1单元", "room": "1702"}
-{"id": 27, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1703"}
-{"id": 28, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1701"}
-{"id": 29, "build": "4", "status": "33CC00", "unit": "2单元", "room": "1702"}
-{"id": 30, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1703"}
-{"id": 31, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1601"}
-{"id": 32, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1602"}
-{"id": 33, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1603"}
-{"id": 34, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1601"}
-{"id": 35, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1602"}
-{"id": 36, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1603"}
-{"id": 37, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1501"}
-{"id": 38, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1502"}
-{"id": 39, "build": "4", "status": "33CC00", "unit": "1单元", "room": "1503"}
-{"id": 40, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1501"}
-{"id": 41, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1502"}
-{"id": 42, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1503"}
-{"id": 43, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1401"}
-{"id": 44, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1402"}
-{"id": 45, "build": "4", "status": "33CC00", "unit": "1单元", "room": "1403"}
-{"id": 46, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1401"}
-{"id": 47, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1402"}
-{"id": 48, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1403"}
-{"id": 49, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1301"}
-{"id": 50, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1302"}
-{"id": 51, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1303"}
-{"id": 52, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1301"}
-{"id": 53, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1302"}
-{"id": 54, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1303"}
-{"id": 55, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1201"}
-{"id": 56, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1202"}
-{"id": 57, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1203"}
-{"id": 58, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1201"}
-{"id": 59, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1202"}
-{"id": 60, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1203"}
-{"id": 61, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1101"}
-{"id": 62, "build": "4", "status": "33CC00", "unit": "1单元", "room": "1102"}
-{"id": 63, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1103"}
-{"id": 64, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "1101"}
-{"id": 65, "build": "4", "status": "33CC00", "unit": "2单元", "room": "1102"}
-{"id": 66, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1103"}
-{"id": 67, "build": "4", "status": "d2691e", "unit": "1单元", "room": "1001"}
-{"id": 68, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1002"}
-{"id": 69, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "1003"}
-{"id": 70, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1001"}
-{"id": 71, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1002"}
-{"id": 72, "build": "4", "status": "d2691e", "unit": "2单元", "room": "1003"}
-{"id": 73, "build": "4", "status": "d2691e", "unit": "1单元", "room": "901"}
-{"id": 74, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "902"}
-{"id": 75, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "903"}
-{"id": 76, "build": "4", "status": "d2691e", "unit": "2单元", "room": "901"}
-{"id": 77, "build": "4", "status": "33CC00", "unit": "2单元", "room": "902"}
-{"id": 78, "build": "4", "status": "d2691e", "unit": "2单元", "room": "903"}
-{"id": 79, "build": "4", "status": "d2691e", "unit": "1单元", "room": "801"}
-{"id": 80, "build": "4", "status": "d2691e", "unit": "1单元", "room": "802"}
-{"id": 81, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "803"}
-{"id": 82, "build": "4", "status": "33CC00", "unit": "2单元", "room": "801"}
-{"id": 83, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "802"}
-{"id": 84, "build": "4", "status": "d2691e", "unit": "2单元", "room": "803"}
-{"id": 85, "build": "4", "status": "33CC00", "unit": "1单元", "room": "701"}
-{"id": 86, "build": "4", "status": "d2691e", "unit": "1单元", "room": "702"}
-{"id": 87, "build": "4", "status": "33CC00", "unit": "1单元", "room": "703"}
-{"id": 88, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "701"}
-{"id": 89, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "702"}
-{"id": 90, "build": "4", "status": "d2691e", "unit": "2单元", "room": "703"}
-{"id": 91, "build": "4", "status": "d2691e", "unit": "1单元", "room": "601"}
-{"id": 92, "build": "4", "status": "d2691e", "unit": "1单元", "room": "602"}
-{"id": 93, "build": "4", "status": "d2691e", "unit": "1单元", "room": "603"}
-{"id": 94, "build": "4", "status": "d2691e", "unit": "2单元", "room": "601"}
-{"id": 95, "build": "4", "status": "d2691e", "unit": "2单元", "room": "602"}
-{"id": 96, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "603"}
-{"id": 97, "build": "4", "status": "d2691e", "unit": "1单元", "room": "501"}
-{"id": 98, "build": "4", "status": "33CC00", "unit": "1单元", "room": "502"}
-{"id": 99, "build": "4", "status": "d2691e", "unit": "1单元", "room": "503"}
-{"id": 100, "build": "4", "status": "d2691e", "unit": "2单元", "room": "501"}
-{"id": 101, "build": "4", "status": "d2691e", "unit": "2单元", "room": "502"}
-{"id": 102, "build": "4", "status": "d2691e", "unit": "2单元", "room": "503"}
-{"id": 103, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "401"}
-{"id": 104, "build": "4", "status": "00FFFF", "unit": "1单元", "room": "402"}
-{"id": 105, "build": "4", "status": "d2691e", "unit": "1单元", "room": "403"}
-{"id": 106, "build": "4", "status": "33CC00", "unit": "2单元", "room": "401"}
-{"id": 107, "build": "4", "status": "33CC00", "unit": "2单元", "room": "402"}
-{"id": 108, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "403"}
-{"id": 109, "build": "4", "status": "d2691e", "unit": "1单元", "room": "301"}
-{"id": 110, "build": "4", "status": "d2691e", "unit": "1单元", "room": "302"}
-{"id": 111, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "303"}
-{"id": 112, "build": "4", "status": "33CC00", "unit": "2单元", "room": "301"}
-{"id": 113, "build": "4", "status": "d2691e", "unit": "2单元", "room": "302"}
-{"id": 114, "build": "4", "status": "d2691e", "unit": "2单元", "room": "303"}
-{"id": 115, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "201"}
-{"id": 116, "build": "4", "status": "d2691e", "unit": "1单元", "room": "202"}
-{"id": 117, "build": "4", "status": "FFCC99", "unit": "1单元", "room": "203"}
-{"id": 118, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "201"}
-{"id": 119, "build": "4", "status": "FFCC99", "unit": "2单元", "room": "202"}
-{"id": 120, "build": "4", "status": "33CC00", "unit": "2单元", "room": "203"}
-{"id": 121, "build": "4", "status": "33CC00", "unit": "1单元", "room": "101"}
-{"id": 122, "build": "4", "status": "33CC00", "unit": "1单元", "room": "102"}
-{"id": 123, "build": "4", "status": "33CC00", "unit": "1单元", "room": "103"}
-{"id": 124, "build": "4", "status": "33CC00", "unit": "2单元", "room": "101"}
+{"id": 1, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1701"}
+{"id": 2, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1601"}
+{"id": 3, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1602"}
+{"id": 4, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1501"}
+{"id": 5, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1502"}
+{"id": 6, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1401"}
+{"id": 7, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1402"}
+{"id": 8, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1301"}
+{"id": 9, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1302"}
+{"id": 10, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1201"}
+{"id": 11, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1202"}
+{"id": 12, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1101"}
+{"id": 13, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1102"}
+{"id": 14, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1001"}
+{"id": 15, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "1002"}
+{"id": 16, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "901"}
+{"id": 17, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "902"}
+{"id": 18, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "801"}
+{"id": 19, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "802"}
+{"id": 20, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "701"}
+{"id": 21, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "702"}
+{"id": 22, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "601"}
+{"id": 23, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "602"}
+{"id": 24, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "501"}
+{"id": 25, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "502"}
+{"id": 26, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "401"}
+{"id": 27, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "402"}
+{"id": 28, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "301"}
+{"id": 29, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "302"}
+{"id": 30, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "201"}
+{"id": 31, "build": "1", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "", "room": "202"}
+{"id": 1, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "2101"}
+{"id": 2, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "2103"}
+{"id": 3, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "2101"}
+{"id": 4, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "2103"}
+{"id": 5, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "2102"}
+{"id": 6, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "2102"}
+{"id": 7, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "2001"}
+{"id": 8, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "2002"}
+{"id": 9, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "2003"}
+{"id": 10, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "2001"}
+{"id": 11, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "2002"}
+{"id": 12, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "2003"}
+{"id": 13, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1901"}
+{"id": 14, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1902"}
+{"id": 15, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1903"}
+{"id": 16, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1901"}
+{"id": 17, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1902"}
+{"id": 18, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1903"}
+{"id": 19, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "1801"}
+{"id": 20, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1802"}
+{"id": 21, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1803"}
+{"id": 22, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1801"}
+{"id": 23, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "1802"}
+{"id": 24, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1803"}
+{"id": 25, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1701"}
+{"id": 26, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "1702"}
+{"id": 27, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1703"}
+{"id": 28, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1701"}
+{"id": 29, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "1702"}
+{"id": 30, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "1703"}
+{"id": 31, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1601"}
+{"id": 32, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1602"}
+{"id": 33, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1603"}
+{"id": 34, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1601"}
+{"id": 35, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "1602"}
+{"id": 36, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1603"}
+{"id": 37, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1501"}
+{"id": 38, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1502"}
+{"id": 39, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "1503"}
+{"id": 40, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1501"}
+{"id": 41, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1502"}
+{"id": 42, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1503"}
+{"id": 43, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1401"}
+{"id": 44, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1402"}
+{"id": 45, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "1403"}
+{"id": 46, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "1401"}
+{"id": 47, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "1402"}
+{"id": 48, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1403"}
+{"id": 49, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1301"}
+{"id": 50, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1302"}
+{"id": 51, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1303"}
+{"id": 52, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1301"}
+{"id": 53, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1302"}
+{"id": 54, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1303"}
+{"id": 55, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1201"}
+{"id": 56, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1202"}
+{"id": 57, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1203"}
+{"id": 58, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1201"}
+{"id": 59, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "1202"}
+{"id": 60, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1203"}
+{"id": 61, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1101"}
+{"id": 62, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "1102"}
+{"id": 63, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1103"}
+{"id": 64, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "1101"}
+{"id": 65, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "1102"}
+{"id": 66, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1103"}
+{"id": 67, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "1001"}
+{"id": 68, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1002"}
+{"id": 69, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "1003"}
+{"id": 70, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1001"}
+{"id": 71, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1002"}
+{"id": 72, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "1003"}
+{"id": 73, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "901"}
+{"id": 74, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "902"}
+{"id": 75, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "903"}
+{"id": 76, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "901"}
+{"id": 77, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "902"}
+{"id": 78, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "903"}
+{"id": 79, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "801"}
+{"id": 80, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "802"}
+{"id": 81, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "803"}
+{"id": 82, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "801"}
+{"id": 83, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "802"}
+{"id": 84, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "803"}
+{"id": 85, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "701"}
+{"id": 86, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "702"}
+{"id": 87, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "703"}
+{"id": 88, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "701"}
+{"id": 89, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "702"}
+{"id": 90, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "703"}
+{"id": 91, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "601"}
+{"id": 92, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "602"}
+{"id": 93, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "603"}
+{"id": 94, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "601"}
+{"id": 95, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "602"}
+{"id": 96, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "603"}
+{"id": 97, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "501"}
+{"id": 98, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "502"}
+{"id": 99, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "503"}
+{"id": 100, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "501"}
+{"id": 101, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "502"}
+{"id": 102, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "503"}
+{"id": 103, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "401"}
+{"id": 104, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "402"}
+{"id": 105, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "403"}
+{"id": 106, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "401"}
+{"id": 107, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "402"}
+{"id": 108, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "403"}
+{"id": 109, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "301"}
+{"id": 110, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "302"}
+{"id": 111, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "303"}
+{"id": 112, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "301"}
+{"id": 113, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "302"}
+{"id": 114, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "2单元", "room": "303"}
+{"id": 115, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "201"}
+{"id": 116, "build": "4", "project": "京房售证字(2020)11号", "status": "d2691e", "unit": "1单元", "room": "202"}
+{"id": 117, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "1单元", "room": "203"}
+{"id": 118, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "201"}
+{"id": 119, "build": "4", "project": "京房售证字(2020)11号", "status": "FFCC99", "unit": "2单元", "room": "202"}
+{"id": 120, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "203"}
+{"id": 121, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "101"}
+{"id": 122, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "102"}
+{"id": 123, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "1单元", "room": "103"}
+{"id": 124, "build": "4", "project": "京房售证字(2020)11号", "status": "33CC00", "unit": "2单元", "room": "101"}
+{"id": 1, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "2301"}
+{"id": 2, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "2201"}
+{"id": 3, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "2101"}
+{"id": 4, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "2001"}
+{"id": 5, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1901"}
+{"id": 6, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1801"}
+{"id": 7, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1701"}
+{"id": 8, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1601"}
+{"id": 9, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1501"}
+{"id": 10, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1401"}
+{"id": 11, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1301"}
+{"id": 12, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1201"}
+{"id": 13, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1101"}
+{"id": 14, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "1001"}
+{"id": 15, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "901"}
+{"id": 16, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "801"}
+{"id": 17, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "701"}
+{"id": 18, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "601"}
+{"id": 19, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "501"}
+{"id": 20, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "401"}
+{"id": 21, "build": "5", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "", "room": "301"}
+{"id": 1, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "3001"}
+{"id": 2, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "3002"}
+{"id": 3, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "3001"}
+{"id": 4, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "3002"}
+{"id": 5, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2901"}
+{"id": 6, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2902"}
+{"id": 7, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2901"}
+{"id": 8, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2902"}
+{"id": 9, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2801"}
+{"id": 10, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "1单元", "room": "2802"}
+{"id": 11, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2801"}
+{"id": 12, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "2802"}
+{"id": 13, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2701"}
+{"id": 14, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2702"}
+{"id": 15, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2701"}
+{"id": 16, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2702"}
+{"id": 17, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "1单元", "room": "2601"}
+{"id": 18, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2602"}
+{"id": 19, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2601"}
+{"id": 20, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "2602"}
+{"id": 21, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2501"}
+{"id": 22, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2502"}
+{"id": 23, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "2501"}
+{"id": 24, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2502"}
+{"id": 25, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2401"}
+{"id": 26, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2402"}
+{"id": 27, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2401"}
+{"id": 28, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2402"}
+{"id": 29, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2301"}
+{"id": 30, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2302"}
+{"id": 31, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2301"}
+{"id": 32, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "2302"}
+{"id": 33, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2201"}
+{"id": 34, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2202"}
+{"id": 35, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "2201"}
+{"id": 36, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2202"}
+{"id": 37, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "1单元", "room": "2101"}
+{"id": 38, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2102"}
+{"id": 39, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "2101"}
+{"id": 40, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2102"}
+{"id": 41, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2001"}
+{"id": 42, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "2002"}
+{"id": 43, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "2001"}
+{"id": 44, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "2002"}
+{"id": 45, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1901"}
+{"id": 46, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1902"}
+{"id": 47, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "1901"}
+{"id": 48, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "1902"}
+{"id": 49, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1801"}
+{"id": 50, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1802"}
+{"id": 51, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1801"}
+{"id": 52, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "1802"}
+{"id": 53, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1701"}
+{"id": 54, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1702"}
+{"id": 55, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1701"}
+{"id": 56, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1702"}
+{"id": 57, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1601"}
+{"id": 58, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "1单元", "room": "1602"}
+{"id": 59, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1601"}
+{"id": 60, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1602"}
+{"id": 61, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1501"}
+{"id": 62, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "1单元", "room": "1502"}
+{"id": 63, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "1501"}
+{"id": 64, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "1502"}
+{"id": 65, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1401"}
+{"id": 66, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1402"}
+{"id": 67, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "1401"}
+{"id": 68, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1402"}
+{"id": 69, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1301"}
+{"id": 70, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1302"}
+{"id": 71, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1301"}
+{"id": 72, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1302"}
+{"id": 73, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1201"}
+{"id": 74, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1202"}
+{"id": 75, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "1201"}
+{"id": 76, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "1202"}
+{"id": 77, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1101"}
+{"id": 78, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1102"}
+{"id": 79, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "1101"}
+{"id": 80, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1102"}
+{"id": 81, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1001"}
+{"id": 82, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "1002"}
+{"id": 83, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "1001"}
+{"id": 84, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "1002"}
+{"id": 85, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "901"}
+{"id": 86, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "1单元", "room": "902"}
+{"id": 87, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "901"}
+{"id": 88, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "902"}
+{"id": 89, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "801"}
+{"id": 90, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "802"}
+{"id": 91, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "801"}
+{"id": 92, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "802"}
+{"id": 93, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "701"}
+{"id": 94, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "702"}
+{"id": 95, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "701"}
+{"id": 96, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "702"}
+{"id": 97, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "1单元", "room": "601"}
+{"id": 98, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "1单元", "room": "602"}
+{"id": 99, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "601"}
+{"id": 100, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "602"}
+{"id": 101, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "501"}
+{"id": 102, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "502"}
+{"id": 103, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "501"}
+{"id": 104, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "502"}
+{"id": 105, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "401"}
+{"id": 106, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "402"}
+{"id": 107, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "401"}
+{"id": 108, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "402"}
+{"id": 109, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "1单元", "room": "301"}
+{"id": 110, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "302"}
+{"id": 111, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "301"}
+{"id": 112, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "302"}
+{"id": 113, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "1单元", "room": "201"}
+{"id": 114, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "1单元", "room": "202"}
+{"id": 115, "build": "6", "project": "京房售证字(2019)166号", "status": "FFCC99", "unit": "2单元", "room": "201"}
+{"id": 116, "build": "6", "project": "京房售证字(2019)166号", "status": "d2691e", "unit": "2单元", "room": "202"}
+{"id": 117, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "1单元", "room": "101"}
+{"id": 118, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "1单元", "room": "102"}
+{"id": 119, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "101"}
+{"id": 120, "build": "6", "project": "京房售证字(2019)166号", "status": "33CC00", "unit": "2单元", "room": "102"}
