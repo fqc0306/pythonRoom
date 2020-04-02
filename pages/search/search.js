@@ -126,7 +126,7 @@ Page({
         wo_title: app.globalData.wo_title,
 
         "index_data.history": wx.getStorageSync(HISTORY_KEY),
-        "index_data.hot": ['东庭嘉园', '青年金色佳苑', '燕西华府家园', '畅茜园馥霞里', '花樊雅苑','未来茂悦嘉园']
+        "index_data.hot": ['青年金色佳苑', '燕西华府家园', '畅茜园馥霞里', '花樊雅苑','未来茂悦嘉园']
       });
     }, 300);
 
