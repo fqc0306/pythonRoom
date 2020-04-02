@@ -46,6 +46,7 @@ Page({
       var buildList = value[1]
 
       that.setData({
+        searchKey: fileName,
         listData: mapData.get(buildList[0])
       })
 
