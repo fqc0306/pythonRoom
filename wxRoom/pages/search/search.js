@@ -131,14 +131,7 @@ Page({
       });
     }, 300);
 
-    wx.getStorage({
-      key: 'search_data',
-      success: function (res) {
-        searchData = res.data
-        console.log("get storage:", res)
-      },
-    }),
-      this.getHotData()
+    this.getHotData()
   },
 
   /**

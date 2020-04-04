@@ -50,29 +50,13 @@ Page({
         listData: mapData.get(buildList[0])
       })
 
-      // this.lineChart = viewUtils.showGraph(mapData.get(buildList[0]))
+      this.lineChart = viewUtils.showGraph(mapData.get(buildList[0]))
       this.pieChart = viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
       console.log('[downloadFile] result：', res)
     }).catch(err => {
       console.log('[downloadFile] 失败：', err)
     })
 
-    wx.cloud.callFunction({
-      name: 'downloadFile',
-      data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/beijing_1584974166.json'
-      }
-    }).then(res => {
-      var value = dataUtils.processFileProjectData(res)
-
-      wx.setStorage({
-        key: 'search_data',
-        data: value,
-      })
-
-    }).catch(err => {
-      console.log('[downloadFile] 失败：', err)
-    })
   },
 
   onLoad: function(options) {
