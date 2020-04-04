@@ -18,7 +18,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.10.3",
 	"appid": "wx339e612e8712710d",
-	"projectname": "zhaoXinFang",
+	"projectname": "wxRoom",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

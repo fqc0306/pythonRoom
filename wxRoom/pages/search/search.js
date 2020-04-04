@@ -1,5 +1,6 @@
 // https://www.cnblogs.com/jiqing9006/p/12191158.html
 const app = getApp();
+var dataUtils = require("../../utils/dataUtils.js")
 var searchData = null; //[{id:1,name:"project_name",url:"**"}]
 var HISTORY_KEY = 'history'
 var HOT_KEY = 'hot'
@@ -13,14 +14,14 @@ Page({
     keywords: '',
   },
   // 清理
-  clearSearchHistory: function() {
+  clearSearchHistory: function () {
     wx.showModal({
       title: '清理历史',
       content: '确定要清理历史？',
       showCancel: true,
       cancelColor: 'skyblue',
       confirmColor: 'skyblue',
-      success: function(res) {
+      success: function (res) {
 
         wx.showToast({
           title: '清理成功',
@@ -29,16 +30,16 @@ Page({
           "index_data.history": []
         });
       },
-      fail: function(res) {
+      fail: function (res) {
         wx.showToast({
           title: '清理失败',
         })
       }, //接口调用失败的回调函数
-      complete: function(res) {}, //接口调用结束的回调函数（调用成功、失败都会执行）
+      complete: function (res) { }, //接口调用结束的回调函数（调用成功、失败都会执行）
     })
   },
   // 监听输入
-  watchSearch: function(event) {
+  watchSearch: function (event) {
     console.log(event.detail.value);
     let keywords = event.detail.value;
     // 设置值
@@ -90,7 +91,7 @@ Page({
     }
   },
 
-  updateHistory: function(keywords) {
+  updateHistory: function (keywords) {
 
     var list = wx.getStorageSync(HISTORY_KEY)
     if (list == null || list == '') {
@@ -111,14 +112,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
   },
 
   /**
    * 展示
    */
-  onShow: function(options) {
+  onShow: function (options) {
     const uid = app.globalData.uid;
     console.log(uid);
     setTimeout(() => {
@@ -126,26 +127,46 @@ Page({
         wo_title: app.globalData.wo_title,
 
         "index_data.history": wx.getStorageSync(HISTORY_KEY),
-        "index_data.hot": ['青年金色佳苑', '燕西华府家园', '畅茜园馥霞里', '花樊雅苑','未来茂悦嘉园']
+        "index_data.hot": ['青年金色佳苑', '燕西华府家园', '畅茜园馥霞里', '花樊雅苑', '未来茂悦嘉园']
       });
     }, 300);
 
     wx.getStorage({
       key: 'search_data',
-      success: function(res) {
+      success: function (res) {
         searchData = res.data
         console.log("get storage:", res)
       },
-    })
+    }),
+      this.getHotData()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function () { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {},
+  onShareAppMessage() { },
+
+  getHotData: function () {
+
+    wx.cloud.callFunction({
+      name: 'dbInfo',
+      data: {
+        file_id: 'all_building'
+      }
+    }).then(res => {
+      var dataObjs = res.result.data.slice(0, 30)
+      var names = dataUtils.processHotData(dataObjs)
+
+      this.setData({
+        "index_data.hot": names
+      });
+    }).catch(err => {
+      console.log('[hot data] 失败：', err)
+    })
+  },
 });

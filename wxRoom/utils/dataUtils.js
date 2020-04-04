@@ -109,8 +109,17 @@ function updateGraphData(data, dataMap, xCoordMap, yTotalMap, yAvrMap) {
   }
 }
 
+function processHotData(dataList) {
+  var result = []
+  for (var i = 0; i < dataList.length; i++) {
+    result.push(dataList[i].name)
+  }
+  return result
+}
+
 module.exports = {
   processFileData: processFileData,
   updateGraphData: updateGraphData,
-  processFileProjectData: processFileProjectData
+  processFileProjectData: processFileProjectData,
+  processHotData: processHotData
 }

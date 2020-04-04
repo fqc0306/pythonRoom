@@ -36,7 +36,7 @@ Page({
       fileName = '青年金色佳苑'
     }
     wx.cloud.callFunction({
-      name: 'downloadFile',
+      name: 'fileInfo',
       data: {
         file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/bj/' + fileName + '.json'
       }
