@@ -52,14 +52,7 @@ def getAllRoom(name, whichBuild, url, whichProject):
 	for i in alldivs:
 		print ("------------------")
 		style = i.get("style").split(";")[1]##房间的售卖状态
-
-		print(style)
 		link = i.find("a")
-		print(link.text + ":" + link.get("href"))
-		href = "http://bjjs.zjw.beijing.gov.cn" + link.get("href")
-
-		soup = getSoupByUrl(href)
-		desc = soup.find_all(id='desc')
 		
 		roomDict = collections.OrderedDict()
 		statusDict = collections.OrderedDict()
@@ -107,6 +100,13 @@ def getAllRoom(name, whichBuild, url, whichProject):
 
 		writeFile(statusDict, name + "_dy.json")
 
+
+		print(link.text + ":" + link.get("href"))
+		href = "http://bjjs.zjw.beijing.gov.cn" + link.get("href")
+
+		soup = getSoupByUrl(href)
+		desc = soup.find_all(id='desc')
+
 		tempDict = collections.OrderedDict()
 		if desc.__len__()/2 > 0:
 			for k in range(desc.__len__()/2):
@@ -135,7 +135,6 @@ def getAllRoom(name, whichBuild, url, whichProject):
 		else:
 			print("length error:" + str(len(desc)) + ",url:" + url)
 
-		print ("------------------")
 
 	print(alldivs.__len__())
 
