@@ -50,11 +50,11 @@ Page({
         listData: mapData.get(buildList[0])
       })
 
-      this.lineChart = viewUtils.showGraph(mapData.get(buildList[0]))
+      this.lineChart = viewUtils.showGraph('line_graph', mapData.get(buildList[0]))
       this.pieChart = viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
-      console.log('[downloadFile] result：', res)
+      console.log('[file info] result：', res)
     }).catch(err => {
-      console.log('[downloadFile] 失败：', err)
+      console.log('[file info] 失败：', err)
     })
 
   },

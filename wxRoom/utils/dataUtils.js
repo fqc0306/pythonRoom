@@ -75,36 +75,21 @@ function processFileProjectData(res) {
 }
 
 
-function updateGraphData(data, dataMap, xCoordMap, yTotalMap, yAvrMap) {
+function updateGraphData(data, xCoordList, yTotalList, yAvrList, buildLimit) {
 
+  var total = []
+  var xLastValue = ""
   for (var i = 0; i < data.length; i++) {
-    var key = data[i].build + "_" + data[i].unit + "_" + parseInt(data[i].room) % 100 //如:1_2单元_1 
-    var value = dataMap.get(key)
-    if (value == null) {
-      var yListValue = []
-      yListValue.push(data[i])
-      dataMap.set(key, yListValue)
-
-      var xCoordValue = []
-      xCoordValue.push(data[i].room)
-      xCoordMap.set(key, xCoordValue)
-
-      var yTotalValue = []
-      yTotalValue.push(data[i].price_total)
-      yTotalMap.set(key, yTotalValue)
-
-    } else {
-      value = dataMap.get(key)
-      value.push(data[i])
-      dataMap.set(key, value)
-
-      var xValue = xCoordMap.get(key)
-      xValue.push(data[i].room)
-      xCoordMap.set(key, xValue)
-
-      var yTotalValue = yTotalMap.get(key)
-      yTotalValue.push(data[i].price_total)
-      yTotalMap.set(key, yTotalValue)
+    if (buildLimit == data[i].build) {
+      yTotalList.push(data[i].price_total)
+      yAvrList.push(data[i].price_all)
+      var key = data[i].build + "_" + data[i].unit //如:1_2单元_1 
+      if (xLastValue == key) {
+        xCoordList.push("")
+      } else {
+        xCoordList.push(key)
+      }
+      xLastValue = key
     }
   }
 }

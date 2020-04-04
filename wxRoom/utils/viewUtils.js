@@ -1,19 +1,16 @@
 var wxCharts = require("./wxcharts.js");
 var dataUtils = require("./dataUtils.js")
 
-function showGraph(data) {
-  var dataMap = new Map()
-  var xCoordMap = new Map() //横坐标-房间号
-  var yTotalMap = new Map() //纵坐标-总价
-  var yAvrMap = new Map() //纵坐标-均价
+function showGraph(id, data) {
+  var dataMap = []
+  var xCoordList = [] //横坐标-房间号
+  var yTotalList = [] //纵坐标-总价
+  var yAvrList = [] //纵坐标-均价
 
-  dataUtils.updateGraphData(data, dataMap, xCoordMap, yTotalMap, yAvrMap)
+  console.log("data:", data)
+  dataUtils.updateGraphData(data, xCoordList, yTotalList, yAvrList, data[0].build)
 
-  // console.log("datamap:", dataMap)
-  // console.log("total:", yTotalMap.values().next().value)
-  // console.log("catogrey:", xCoordMap.values().next().value)
-
-  var windowWidth = 320;
+  var windowWidth = 380;
   try {
     var res = wx.getSystemInfoSync();
     windowWidth = res.windowWidth;
@@ -22,34 +19,31 @@ function showGraph(data) {
   }
 
   var seriesList = []
-  for (let [key, value] of yTotalMap.entries()) {
-    var item = {}
-    item.name = "test" + key
-    item.data = value
-    item.format = function (val, name) {
-      return val + '百万';
-    }
-    console.log(key, value)
-    seriesList.push(item)
+  var item = {}
+  item.name = "房屋总价"
+  item.data = yTotalList
+  item.format = function (val, name) {
+    return val + '百万';
   }
+  seriesList.push(item)
 
+  console.log("series:", seriesList)
   var charts = new wxCharts({ //当月用电折线图配置
-    canvasId: 'line_graph',
+    canvasId: id,
     type: 'line',
-    categories: xCoordMap.values().next().value, //categories X轴
+    categories: xCoordList, //categories X轴
     animation: true,
-    background: '#f5f5f5',
     series: seriesList,
     xAxis: {
-      disableGrid: true
+      disableGrid: false
     },
     yAxis: {
       title: '总价(万)',
       format: function(val) {
-        return val.toFixed(2);
+        return val.toFixed(1);
       },
-      max: 20,
-      min: 0
+      max: 200,
+      min: 150
     },
     width: windowWidth,
     height: 200,

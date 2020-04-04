@@ -105,11 +105,26 @@
   flex-direction: column;
   align-items: center;
 }
-.canvas {
+.canvas_pie {
   display: flex;
   height: 430rpx;
   flex-direction: column;
   align-items: center;
 }
-
-
+.canvas_line {
+  display: flex;
+  height: 800rpx;
+  flex-direction: column;
+  align-items: center;
+}
+.chat_hint {
+  display: flex;
+  height: 80rpx;
+  line-height: 64rpx;
+  font-size: 32rpx;
+  flex-direction: column;
+  align-items: center;
+  color: #313131;
+  text-align: center;
+  margin-top: 30rpx;
+}
