@@ -3,6 +3,7 @@
 var wxCharts = require("../../utils/wxcharts.js");
 var dataUtils = require("../../utils/dataUtils.js")
 var viewUtils = require("../../utils/viewUtils.js")
+// var pullUtils = require("../pull/pull.js")
 const app = getApp()
 
 Page({
@@ -22,7 +23,7 @@ Page({
   },
   bindSearchTap: function() {
     wx.navigateTo({
-      url: '../search/search'
+      url: '../pull/pull'
     })
   },
   //调用云函数
@@ -42,16 +43,17 @@ Page({
       }
     }).then(res => {
       var value = dataUtils.processFileData(res)
-      var mapData = value[0]
-      var buildList = value[1]
+      var allData = value[0]
+      var projectMap = value[1]//下拉框过滤
+      var buildMap = value[2]
 
       that.setData({
         searchKey: fileName,
-        listData: mapData.get(buildList[0])
+        listData: allData,
       })
 
-      this.lineChart = viewUtils.showGraph('line_graph', mapData.get(buildList[0]))
-      this.pieChart = viewUtils.showPieChart('pie_graph', mapData.get(buildList[0]))
+      this.lineChart = viewUtils.showGraph('line_graph', allData)
+      this.pieChart = viewUtils.showPieChart('pie_graph', allData)
       console.log('[file info] result：', res)
     }).catch(err => {
       console.log('[file info] 失败：', err)

@@ -17,6 +17,7 @@
     </view>
   </view>
   <text class="userinfo" wx:if="{{searchKey!=''}}"> 当前楼盘：{{searchKey}} </text>
+  <include src="../pull/pull.wxml"/>
   <view class="chart">
     <canvas class="canvas_pie" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
   </view>

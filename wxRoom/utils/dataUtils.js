@@ -1,11 +1,10 @@
 function processFileData(res) {
   var j = 0
   var lines = res.result.split('\n')
-  var mapData = new Map()
-  var horizonData = []
-  var jsonList = []
-  var buildList = [] //['A-1','A-2']
-  var lastBuild
+  var allData = []
+  var allProjects = new Map()
+  var allBuilds = new Map()
+
   console.log("lines number:", lines.length)
   for (j = 0; j < lines.length; j++) {
 
@@ -17,6 +16,7 @@ function processFileData(res) {
       if (infos != '') {
         var jsonObj = JSON.parse(infos)
 
+        json["project"] = jsonObj.project
         json["build"] = jsonObj.build
         json["unit"] = jsonObj.unit
         json["room"] = jsonObj.room
@@ -28,21 +28,34 @@ function processFileData(res) {
         var totalPrice = parseFloat(jsonObj.square_all) * parseFloat(jsonObj.price_all)
         json["price_total"] = "" + (totalPrice / 10000).toFixed(2)
 
-        horizonData.push(json)
-        jsonList.push(json)
+        allData.push(json)
+
+        var tempList = allProjects.get(json.project)
+        if (tempList == null) {
+          tempList = []
+          tempList.push(json.build)
+        } else if (tempList.indexOf(json.build) < 0) {
+          tempList.push(json.build)
+        }
+        allProjects.set(json.project, tempList)
+        
+        tempList = allBuilds.get(json.build)
+        if (tempList == null) {
+          tempList = []
+          tempList.push(json.unit)
+        } else if (tempList.indexOf(json.unit) < 0) {
+          tempList.push(json.unit)
+        }
+        allBuilds.set(json.build, tempList)
+
       }
     } catch (err) {
       console.error(err)
       return null
     }
 
-    if (j == lines.length - 1 || (lastBuild != "" && lastBuild != jsonObj.build)) {
-      mapData.set(jsonObj.build, jsonList)
-      buildList.push(jsonObj.build)
-      lastBuild = jsonObj.build
-    }
   }
-  return [mapData, buildList]
+  return [allData, allProjects, allBuilds]
 }
 
 function processFileProjectData(res) {
