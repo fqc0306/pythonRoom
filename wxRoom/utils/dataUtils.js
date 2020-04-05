@@ -38,7 +38,7 @@ function processFileData(res) {
           tempList.push(json.build)
         }
         allProjects.set(json.project, tempList)
-        
+
         tempList = allBuilds.get(json.build)
         if (tempList == null) {
           tempList = []
@@ -114,10 +114,25 @@ function processHotData(dataList) {
   }
   return result
 }
+//filters: [{ key: "build", text: "A - 11" },{ key: "project", text:"京房售证字(2020)21号"}]
+//filters: { build: "A - 11", project: "京房售证字(2020)21号" }
+function filtByParams(data, filters) {
+  var result = []
+  for (var i = 0; i < data.length; i++) {
+    if ((typeof(filters.project) == 'undefined' ? true : data[i].project == filters.project)
+      && (typeof (filters.build) == 'undefined' ? true : data[i].build == filters.build)
+        && (typeof (filters.unit) == 'undefined' ? true : data[i].unit == filters.unit)) {
+      result.push(data[i])
+    }
+  }
+  console.log("result:", result)
+  return result
+}
 
 module.exports = {
   processFileData: processFileData,
   updateGraphData: updateGraphData,
   processFileProjectData: processFileProjectData,
-  processHotData: processHotData
+  processHotData: processHotData,
+  filtByParams: filtByParams
 }

@@ -3,8 +3,10 @@
 var wxCharts = require("../../utils/wxcharts.js");
 var dataUtils = require("../../utils/dataUtils.js")
 var viewUtils = require("../../utils/viewUtils.js")
-// var pullUtils = require("../pull/pull.js")
+var pullUtils = require("../pull/pull.js")
 const app = getApp()
+var page
+var allData
 
 Page({
   data: {
@@ -13,21 +15,24 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
     searchKey: '',
-    isShow: false
+    isShow: false,
+
+    tabTxt: [],
+    filterParam: []
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
-  bindSearchTap: function() {
+  bindSearchTap: function () {
     wx.navigateTo({
       url: '../pull/pull'
     })
   },
   //调用云函数
-  getFileData: function() {
+  getFileData: function () {
     let that = this
     var fileName = ''
 
@@ -43,13 +48,16 @@ Page({
       }
     }).then(res => {
       var value = dataUtils.processFileData(res)
-      var allData = value[0]
+      allData = value[0]
       var projectMap = value[1]//下拉框过滤
       var buildMap = value[2]
+      var tabTxt = []
+      viewUtils.updateTabTxt(projectMap, buildMap, tabTxt, null)
 
       that.setData({
         searchKey: fileName,
         listData: allData,
+        tabTxt: tabTxt,
       })
 
       this.lineChart = viewUtils.showGraph('line_graph', allData)
@@ -61,7 +69,8 @@ Page({
 
   },
 
-  onLoad: function(options) {
+  onLoad: function (options) {
+    page = this
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -98,11 +107,11 @@ Page({
   onShow: function (options) {
     this.getFileData()
   },
-  
+
   onShareAppMessage: function () {
   },
 
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -110,11 +119,11 @@ Page({
       hasUserInfo: true
     })
   },
-  touchHandler: function(e) {
+  touchHandler: function (e) {
 
     this.lineChart.showToolTip(e, {
       // background: '#7cb5ec',
-      format: function(item, category) {
+      format: function (item, category) {
         console.log("item:", item)
         console.log("category", category)
         return category + ' ' + item.name + ':' + item.data
@@ -122,15 +131,34 @@ Page({
     });
   },
 
-  touchPieHandler: function(e) {
+  touchPieHandler: function (e) {
 
     this.pieChart.showToolTip(e, {
       // background: '#7cb5ec',
-      format: function(item, category) {
+      format: function (item, category) {
         console.log("item:", item)
         console.log("category", category)
         return category + ' ' + item.name + ':' + item.data
       }
     });
   },
+
+
+  filterTab: function (e) {
+    pullUtils.filterTab(e, this)
+  },
+
+  filterTabChild: function (e) {
+    pullUtils.filterTabChild(e, this, onTabChanged)
+  }
 });
+
+function onTabChanged(filterParams) {
+  var filtData = dataUtils.filtByParams(allData, filterParams)
+
+  page.lineChart = viewUtils.showGraph('line_graph', filtData)
+  page.pieChart = viewUtils.showPieChart('pie_graph', filtData)
+  page.setData({
+    listData: filtData,
+  })
+}

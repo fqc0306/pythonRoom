@@ -22,7 +22,7 @@ function showGraph(id, data) {
   var item = {}
   item.name = "房屋总价"
   item.data = yTotalList
-  item.format = function (val, name) {
+  item.format = function(val, name) {
     return val + '百万';
   }
   seriesList.push(item)
@@ -87,9 +87,66 @@ function showPieChart(id, data) {
   });
   return charts
 }
+// 示例
+// [{
+//   'text': '语种',
+//     'originalText': '语种',
+//       'active': false,
+//         'child': [
+//           { 'id': 1, 'text': '华语' },
+//           { 'id': 2, 'text': '粤语' },
+//           { 'id': 3, 'text': '欧美' }
+//         ],
+//           'type': 0
+// }]
+function updateTabTxt(projectMap, buildMap, tabTxt, selected) {
+  if(tabTxt.length == 0 ){
 
+    var item = {}
+    if (projectMap.entries.length > 1) {
+      item["text"] = "楼盘"
+      item["key"] = "project"
+      item["active"] = false
+      item["type"] = 0
+      var children = []
+      var index = 1
+      for (var [key, val] of projectMap.entries()) {
+        var child = {}
+        child["id"] = index++ ,
+          child["text"] = key
+        children.push(child)
+      }
+      item["child"] = children
+
+    } else {
+      for (var [key, val] of projectMap.entries()) {
+        if (val.length > 1) {
+
+          item["text"] = "楼号"
+          item["key"] = "build"
+          item["active"] = false
+          item["type"] = 0
+          var children = []
+          for (var index = 0; index < val.length; index++) {
+
+            var child = {}
+            child["id"] = index + 1,
+              child["text"] = val[index]
+            children.push(child)
+          }
+          item["child"] = children
+        }
+      }
+    }
+    tabTxt.push(item)
+  } else if (selected!=null) {
+
+  }
+  return tabTxt
+}
 
 module.exports = {
   showGraph: showGraph,
-  showPieChart: showPieChart
+  showPieChart: showPieChart,
+  updateTabTxt: updateTabTxt
 }
