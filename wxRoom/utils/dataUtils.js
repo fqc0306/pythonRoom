@@ -114,7 +114,6 @@ function processHotData(dataList) {
   }
   return result
 }
-//filters: [{ key: "build", text: "A - 11" },{ key: "project", text:"京房售证字(2020)21号"}]
 //filters: { build: "A - 11", project: "京房售证字(2020)21号" }
 function filtByParams(data, filters) {
   var result = []
@@ -125,7 +124,6 @@ function filtByParams(data, filters) {
       result.push(data[i])
     }
   }
-  console.log("result:", result)
   return result
 }
 

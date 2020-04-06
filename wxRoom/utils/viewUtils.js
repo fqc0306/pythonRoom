@@ -22,7 +22,7 @@ function showGraph(id, data) {
   var item = {}
   item.name = "房屋总价"
   item.data = yTotalList
-  item.format = function(val, name) {
+  item.format = function (val, name) {
     return val + '百万';
   }
   seriesList.push(item)
@@ -39,7 +39,7 @@ function showGraph(id, data) {
     },
     yAxis: {
       title: '总价(万)',
-      format: function(val) {
+      format: function (val) {
         return val.toFixed(1);
       },
       max: 200,
@@ -99,48 +99,117 @@ function showPieChart(id, data) {
 //         ],
 //           'type': 0
 // }]
-function updateTabTxt(projectMap, buildMap, tabTxt, selected) {
-  if(tabTxt.length == 0 ){
-
-    var item = {}
-    if (projectMap.entries.length > 1) {
-      item["text"] = "楼盘"
-      item["key"] = "project"
-      item["active"] = false
-      item["type"] = 0
-      var children = []
-      var index = 1
-      for (var [key, val] of projectMap.entries()) {
-        var child = {}
-        child["id"] = index++ ,
-          child["text"] = key
-        children.push(child)
+// selected: { build: "A - 11", project: "京房售证字(2020)21号" } 修改上一级则下级均为空，如build修改，则unit为null
+//project:{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
+//buildMap:{'A-1':['1单元','2单元','3单元'],'A-2':['1单元','2单元']}
+function updateTabTxt(projectMap, buildMap, selected) {
+  console.log("selected", selected)
+  var tabTxt = []
+  var item = {}
+  item["text"] = "楼盘"
+  item["key"] = "project"
+  item["active"] = false
+  item["type"] = 0
+  if (selected.project != null) {//map entries length
+    var children = []
+    var index = 1
+    for (var [key, val] of projectMap.entries()) {
+      var child = {}
+      child["id"] = index++ ,
+        child["text"] = key
+      if (key == selected.project) {
+        item["type"] = child["id"]
       }
-      item["child"] = children
-
-    } else {
-      for (var [key, val] of projectMap.entries()) {
-        if (val.length > 1) {
-
-          item["text"] = "楼号"
-          item["key"] = "build"
-          item["active"] = false
-          item["type"] = 0
-          var children = []
-          for (var index = 0; index < val.length; index++) {
-
-            var child = {}
-            child["id"] = index + 1,
-              child["text"] = val[index]
-            children.push(child)
-          }
-          item["child"] = children
-        }
-      }
+      children.push(child)
     }
-    tabTxt.push(item)
-  } else if (selected!=null) {
+    item["child"] = children
 
+    tabTxt.push(item)
+  } else {
+    var children = []
+    var index = 1
+    for (var [key, val] of projectMap.entries()) {
+      var child = {}
+      child["id"] = index++ ,
+        child["text"] = key
+      children.push(child)
+    }
+    item["child"] = children
+
+    tabTxt.push(item)
+    return tabTxt
+  }
+
+  item = {}
+  item["text"] = "楼号"
+  item["key"] = "build"
+  item["active"] = false
+  item["type"] = 0
+  if (selected.build != null) {
+    //更新楼号的下拉框
+    var val = projectMap.get(selected.project)
+    var children = []
+    for (var index = 0; index < val.length; index++) {
+
+      var child = {}
+      child["id"] = index + 1,
+        child["text"] = val[index]
+      if (key == selected.build) {
+        item["type"] = child["id"]
+      }
+      children.push(child)
+    }
+    item["child"] = children
+
+    tabTxt.push(item)
+  } else { //添加楼号的下拉框
+    var val = projectMap.get(selected.project)
+    var children = []
+    for (var index = 0; index < val.length; index++) {
+      var child = {}
+      child["id"] = index + 1,
+        child["text"] = val[index]
+      children.push(child)
+    }
+    item["child"] = children
+
+    tabTxt.push(item)
+    return tabTxt
+  }
+
+  item = {}
+  item["text"] = "单元"
+  item["key"] = "unit"
+  item["active"] = false
+  item["type"] = 0
+  if (selected.unit != null) {
+    var val = buildMap.get(selected.build)
+    var children = []
+    for (var index = 0; index < val.length; index++) {
+
+      var child = {}
+      child["id"] = index + 1,
+        child["text"] = val[index]
+      if (key == selected.unit) {
+        item["type"] = child["id"]
+      }
+      children.push(child)
+    }
+    item["child"] = children
+
+    tabTxt.push(item)
+  } else {
+    var val = buildMap.get(selected.build)
+    var children = []
+    for (var index = 0; index < val.length; index++) {
+      var child = {}
+      child["id"] = index + 1,
+        child["text"] = val[index]
+      children.push(child)
+    }
+    item["child"] = children
+
+    tabTxt.push(item)
   }
   return tabTxt
 }

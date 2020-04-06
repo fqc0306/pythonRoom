@@ -7,6 +7,9 @@ var pullUtils = require("../pull/pull.js")
 const app = getApp()
 var page
 var allData
+var projectMap
+var buildMap
+// selected: { build: "A - 11", project: "京房售证字(2020)21号" }
 
 Page({
   data: {
@@ -49,10 +52,10 @@ Page({
     }).then(res => {
       var value = dataUtils.processFileData(res)
       allData = value[0]
-      var projectMap = value[1]//下拉框过滤
-      var buildMap = value[2]
-      var tabTxt = []
-      viewUtils.updateTabTxt(projectMap, buildMap, tabTxt, null)
+      projectMap = value[1]//下拉框过滤
+      buildMap = value[2]
+
+      var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, {})
 
       that.setData({
         searchKey: fileName,
@@ -158,7 +161,9 @@ function onTabChanged(filterParams) {
 
   page.lineChart = viewUtils.showGraph('line_graph', filtData)
   page.pieChart = viewUtils.showPieChart('pie_graph', filtData)
+  var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, filterParams)
   page.setData({
     listData: filtData,
+    tabTxt: tabTxt
   })
 }

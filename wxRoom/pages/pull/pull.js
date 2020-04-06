@@ -28,12 +28,24 @@ function filterTabChild(e, that, callback) {
       //不限删除条件
       delete that.data.filterParam[index];
       delete selected[data[index].key]
+      if (data[index].key == "project") {
+        delete selected["build"]
+        delete selected["unit"]
+      } else if (data[index].key == "build") {
+        delete selected["unit"]
+      }
     }
     else {
       data[index].text = e.target.dataset.txt;
       //更改删除条件
       that.data.filterParam[index] = data[index].text;
       selected[data[index].key] = data[index].text
+      if (data[index].key == "project") {
+        delete selected["build"]
+        delete selected["unit"]
+      } else if (data[index].key == "build") {
+        delete selected["unit"]
+      }
     }
   }
 
