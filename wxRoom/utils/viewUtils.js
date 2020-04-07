@@ -107,6 +107,7 @@ function updateTabTxt(projectMap, buildMap, selected) {
   var tabTxt = []
   var item = {}
   item["text"] = "楼盘"
+  item["originalText"] = "楼盘"
   item["key"] = "project"
   item["active"] = false
   item["type"] = 0
@@ -119,6 +120,7 @@ function updateTabTxt(projectMap, buildMap, selected) {
         child["text"] = key
       if (key == selected.project) {
         item["type"] = child["id"]
+        item["text"] = selected.project
       }
       children.push(child)
     }
@@ -142,6 +144,7 @@ function updateTabTxt(projectMap, buildMap, selected) {
 
   item = {}
   item["text"] = "楼号"
+  item["originalText"] = "楼号"
   item["key"] = "build"
   item["active"] = false
   item["type"] = 0
@@ -154,8 +157,9 @@ function updateTabTxt(projectMap, buildMap, selected) {
       var child = {}
       child["id"] = index + 1,
         child["text"] = val[index]
-      if (key == selected.build) {
+      if (val[index] == selected.build) {
         item["type"] = child["id"]
+        item["text"] = selected.build
       }
       children.push(child)
     }
@@ -179,6 +183,7 @@ function updateTabTxt(projectMap, buildMap, selected) {
 
   item = {}
   item["text"] = "单元"
+  item["originalText"] = "单元"
   item["key"] = "unit"
   item["active"] = false
   item["type"] = 0
@@ -190,8 +195,9 @@ function updateTabTxt(projectMap, buildMap, selected) {
       var child = {}
       child["id"] = index + 1,
         child["text"] = val[index]
-      if (key == selected.unit) {
+      if (val[index] == selected.unit) {
         item["type"] = child["id"]
+        item["text"] = selected.unit
       }
       children.push(child)
     }
