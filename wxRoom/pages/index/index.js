@@ -31,7 +31,7 @@ Page({
   },
   bindSearchTap: function () {
     wx.navigateTo({
-      url: '../pull/pull'
+      url: '../search/search'
     })
   },
   //调用云函数

@@ -152,8 +152,8 @@ Page({
         file_id: 'all_building'
       }
     }).then(res => {
-      var dataObjs = res.result.data.slice(0, 30)
-      var names = dataUtils.processHotData(dataObjs)
+      searchData = res.result.data.slice(0, 30)
+      var names = dataUtils.processHotData(searchData)
 
       this.setData({
         "index_data.hot": names
