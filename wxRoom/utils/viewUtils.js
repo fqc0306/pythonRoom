@@ -106,41 +106,49 @@ function updateTabTxt(projectMap, buildMap, selected) {
   console.log("selected", selected)
   var tabTxt = []
   var item = {}
-  item["text"] = "楼盘"
-  item["originalText"] = "楼盘"
-  item["key"] = "project"
-  item["active"] = false
-  item["type"] = 0
-  if (selected.project != null) {//map entries length
-    var children = []
-    var index = 1
-    for (var [key, val] of projectMap.entries()) {
-      var child = {}
-      child["id"] = index++ ,
-        child["text"] = key
-      if (key == selected.project) {
-        item["type"] = child["id"]
-        item["text"] = selected.project
+
+  if (Array.from(projectMap.entries()).length > 1) {
+    item["text"] = "楼盘"
+    item["originalText"] = "楼盘"
+    item["key"] = "project"
+    item["active"] = false
+    item["type"] = 0
+    if (selected.project != null) {//map entries length
+      var children = []
+      var index = 1
+      for (var [key, val] of projectMap.entries()) {
+        var child = {}
+        child["id"] = index++ ,
+          child["text"] = key
+        if (key == selected.project) {
+          item["type"] = child["id"]
+          item["text"] = selected.project
+        }
+        children.push(child)
       }
-      children.push(child)
-    }
-    item["child"] = children
+      item["child"] = children
 
-    tabTxt.push(item)
+      tabTxt.push(item)
+    } else {
+      var children = []
+      var index = 1
+      for (var [key, val] of projectMap.entries()) {
+        var child = {}
+        child["id"] = index++ ,
+          child["text"] = key
+        children.push(child)
+      }
+      item["child"] = children
+
+      tabTxt.push(item)
+      return tabTxt
+    }
   } else {
-    var children = []
-    var index = 1
     for (var [key, val] of projectMap.entries()) {
-      var child = {}
-      child["id"] = index++ ,
-        child["text"] = key
-      children.push(child)
+      selected.project = key
     }
-    item["child"] = children
-
-    tabTxt.push(item)
-    return tabTxt
   }
+    
 
   item = {}
   item["text"] = "楼号"
