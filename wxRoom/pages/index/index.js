@@ -9,6 +9,7 @@ var page
 var allData
 var projectMap
 var buildMap
+var allTypes
 // selected: { build: "A - 11", project: "京房售证字(2020)21号" }
 
 Page({
@@ -58,8 +59,9 @@ Page({
       allData = value[0]
       projectMap = value[1]//下拉框过滤
       buildMap = value[2]
+      allTypes = value[3]
 
-      var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, {})
+      var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, {})
 
       var price = '54000'
       var detail = '共178套 在售:100套 已售:78'
@@ -165,11 +167,12 @@ Page({
 });
 
 function onTabChanged(filterParams) {
+
   var filtData = dataUtils.filtByParams(allData, filterParams)
 
   page.lineChart = viewUtils.showGraph('line_graph', filtData)
   page.pieChart = viewUtils.showPieChart('pie_graph', filtData)
-  var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, filterParams)
+  var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, filterParams)
   page.setData({
     listData: filtData,
     tabTxt: tabTxt

@@ -102,10 +102,33 @@ function showPieChart(id, data) {
 // selected: { build: "A - 11", project: "京房售证字(2020)21号" } 修改上一级则下级均为空，如build修改，则unit为null
 //project:{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
 //buildMap:{'A-1':['1单元','2单元','3单元'],'A-2':['1单元','2单元']}
-function updateTabTxt(projectMap, buildMap, selected) {
+function updateTabTxt(projectMap, buildMap, allTypes, selected) {
   console.log("selected", selected)
   var tabTxt = []
   var item = {}
+
+  item = {}
+  item["text"] = "户型"
+  item["originalText"] = "户型"
+  item["key"] = "type"
+  item["active"] = false
+  item["type"] = 0
+  //更新楼号的下拉框
+  var children = []
+  for (var index = 0; index < allTypes.length; index++) {
+
+    var child = {}
+    child["id"] = index + 1,
+      child["text"] = allTypes[index]
+    if (allTypes[index] == selected.type) {
+      item["type"] = child["id"]
+      item["text"] = selected.type
+    }
+    children.push(child)
+  }
+  item["child"] = children
+
+  tabTxt.push(item)
 
   if (Array.from(projectMap.entries()).length > 1) {
     item["text"] = "楼盘"
@@ -148,7 +171,7 @@ function updateTabTxt(projectMap, buildMap, selected) {
       selected.project = key
     }
   }
-    
+
 
   item = {}
   item["text"] = "楼号"

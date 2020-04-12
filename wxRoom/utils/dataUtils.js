@@ -4,6 +4,7 @@ function processFileData(res) {
   var allData = []
   var allProjects = new Map()
   var allBuilds = new Map()
+  var allTypes = []
 
   console.log("lines number:", lines.length)
   for (j = 0; j < lines.length; j++) {
@@ -29,6 +30,16 @@ function processFileData(res) {
         json["price_total"] = "" + (totalPrice / 10000).toFixed(2)
 
         allData.push(json)
+        var isAdd = true
+        for (var i = 0; i < allTypes.length; i++) {
+          if (json.type == allTypes[i]) {
+            isAdd = false;
+            break;
+          }
+        }
+        if (isAdd) {
+          allTypes.push(json.type);
+        }
 
         var tempList = allProjects.get(json.project)
         if (tempList == null) {
@@ -55,7 +66,7 @@ function processFileData(res) {
     }
 
   }
-  return [allData, allProjects, allBuilds]
+  return [allData, allProjects, allBuilds, allTypes]
 }
 
 function processFileProjectData(res) {
@@ -118,9 +129,10 @@ function processHotData(dataList) {
 function filtByParams(data, filters) {
   var result = []
   for (var i = 0; i < data.length; i++) {
-    if ((typeof(filters.project) == 'undefined' ? true : data[i].project == filters.project)
-      && (typeof (filters.build) == 'undefined' ? true : data[i].build == filters.build)
-        && (typeof (filters.unit) == 'undefined' ? true : data[i].unit == filters.unit)) {
+    if ((typeof (filters.project) == 'undefined' ? true : data[i].project == filters.project) &&
+      (typeof (filters.build) == 'undefined' ? true : data[i].build == filters.build) &&
+      (typeof (filters.unit) == 'undefined' ? true : data[i].unit == filters.unit) &&
+      (typeof (filters.type) == 'undefined' ? true : data[i].type == filters.type)) {
       result.push(data[i])
     }
   }
