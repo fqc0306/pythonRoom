@@ -16,14 +16,19 @@
       <view class="search-btn">搜索</view>
     </view>
   </view>
-  <text class="userinfo" wx:if="{{searchKey!=''}}"> 当前楼盘：{{searchKey}} </text>
-  <include src="../pull/pull.wxml"/>
+  <view class="page-header">
+    <text class="text-bold" wx:if="{{searchKey!=''}}" decode="{{true}}"> {{searchKey}} &emsp;&emsp;&emsp;&emsp;{{price}}元/m²</text>
+    <text class="text" wx:if="{{detail!=''}}"> {{detail}} </text>
+  </view>
+  <view class="divider"/>
+  <include src="../pull/pull.wxml" />
+  <view class="divider"/>
   <view class="chart">
     <canvas class="canvas_pie" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
   </view>
   <text class="chat_hint"> 房源总价分布：{{searchKey}} </text>
   <view class="chart">
-    <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback"  bindtouchstart="touchHandler"></canvas>
+    <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchHandler"></canvas>
   </view>
   <view class="table" wx:if="{{listData.length != 0}}">
     <view class="tr bg-w">

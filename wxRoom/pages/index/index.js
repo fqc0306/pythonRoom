@@ -18,10 +18,13 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
     searchKey: '',
+    price:'',
+    detail:'',
     isShow: false,
 
     tabTxt: [],
-    filterParam: []
+    filterParam: [],
+
   },
   //事件处理函数
   bindViewTap: function () {
@@ -44,6 +47,7 @@ Page({
     } else {
       fileName = '青年金色佳苑'
     }
+
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
@@ -57,10 +61,14 @@ Page({
 
       var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, {})
 
+      var price = '54000'
+      var detail = '共178套 在售:100套 已售:78'
       that.setData({
         searchKey: fileName,
         listData: allData,
         tabTxt: tabTxt,
+        price: price,
+        detail: detail
       })
 
       this.lineChart = viewUtils.showGraph('line_graph', allData)
