@@ -37,9 +37,14 @@ function filterTabChild(e, that, callback) {
     }
     else {
       data[index].text = e.target.dataset.txt;
+      data[index].range = data[index].child[e.target.dataset.id - 1].range//范围筛选
       //更改删除条件
       that.data.filterParam[index] = data[index].text;
-      selected[data[index].key] = data[index].text
+      if (data[index].range != null) {
+        selected[data[index].key] = data[index].range
+      } else {
+        selected[data[index].key] = data[index].text
+      }
       if (data[index].key == "project") {
         delete selected["build"]
         delete selected["unit"]

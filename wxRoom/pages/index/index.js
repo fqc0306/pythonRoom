@@ -10,6 +10,7 @@ var allData
 var projectMap
 var buildMap
 var allTypes
+var rangePrice
 // selected: { build: "A - 11", project: "京房售证字(2020)21号" }
 
 Page({
@@ -19,8 +20,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
     searchKey: '',
-    price:'',
-    detail:'',
+    price: '',
+    detail: '',
     isShow: false,
 
     tabTxt: [],
@@ -60,8 +61,9 @@ Page({
       projectMap = value[1]//下拉框过滤
       buildMap = value[2]
       allTypes = value[3]
+      rangePrice = value[4]
 
-      var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, {})
+      var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, rangePrice, {})
 
       var price = '54000'
       var detail = '共178套 在售:100套 已售:78'
@@ -73,8 +75,13 @@ Page({
         detail: detail
       })
 
-      this.lineChart = viewUtils.showGraph('line_graph', allData)
-      this.pieChart = viewUtils.showPieChart('pie_graph', allData)
+
+      if (allData != null || allData.length > 0) {
+        this.lineChart = viewUtils.showGraph('line_graph', allData)
+        this.pieChart = viewUtils.showPieChart('pie_graph', allData)
+      } else {
+        console.error("no data!")
+      }
       console.log('[file info] result：', res)
     }).catch(err => {
       console.log('[file info] 失败：', err)
@@ -170,9 +177,13 @@ function onTabChanged(filterParams) {
 
   var filtData = dataUtils.filtByParams(allData, filterParams)
 
-  page.lineChart = viewUtils.showGraph('line_graph', filtData)
-  page.pieChart = viewUtils.showPieChart('pie_graph', filtData)
-  var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, filterParams)
+  if (filtData != null && filtData.length > 0) {
+    page.lineChart = viewUtils.showGraph('line_graph', filtData)
+    page.pieChart = viewUtils.showPieChart('pie_graph', filtData)
+  } else {
+    console.error("no data!")
+  }
+  var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, rangePrice, filterParams)
   page.setData({
     listData: filtData,
     tabTxt: tabTxt

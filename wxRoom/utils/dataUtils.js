@@ -2,9 +2,13 @@ function processFileData(res) {
   var j = 0
   var lines = res.result.split('\n')
   var allData = []
-  var allProjects = new Map()
-  var allBuilds = new Map()
-  var allTypes = []
+
+  var allProjects = new Map()//{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
+  var allBuilds = new Map()//{'A-1':['1单元','2单元','3单元'],'A-2':['1单元','2单元']}
+  var allTypes = []//["一室一厅","两室一厅]
+  var rangePrice = []//{max:500, min:200}
+  var maxPrice = 0
+  var minPrice = 0
 
   console.log("lines number:", lines.length)
   for (j = 0; j < lines.length; j++) {
@@ -27,9 +31,18 @@ function processFileData(res) {
         json["price_in"] = parseInt(jsonObj.price_in)
         json["type"] = jsonObj.type
         var totalPrice = parseFloat(jsonObj.square_all) * parseFloat(jsonObj.price_all)
-        json["price_total"] = "" + (totalPrice / 10000).toFixed(2)
+        totalPrice = (totalPrice / 10000).toFixed(2)
+        json["price_total"] = "" + totalPrice
 
         allData.push(json)
+
+        if (totalPrice > maxPrice) {
+          maxPrice = totalPrice
+        }
+        if (minPrice == 0 || totalPrice < minPrice) {
+          minPrice = totalPrice
+        }
+
         var isAdd = true
         for (var i = 0; i < allTypes.length; i++) {
           if (json.type == allTypes[i]) {
@@ -64,9 +77,10 @@ function processFileData(res) {
       console.error(err)
       return null
     }
-
   }
-  return [allData, allProjects, allBuilds, allTypes]
+  rangePrice.max = maxPrice
+  rangePrice.min = minPrice
+  return [allData, allProjects, allBuilds, allTypes, rangePrice]
 }
 
 function processFileProjectData(res) {
@@ -125,14 +139,15 @@ function processHotData(dataList) {
   }
   return result
 }
-//filters: { build: "A - 11", project: "京房售证字(2020)21号" }
+//filters: { build: "A - 11", project: "京房售证字(2020)21号", range:{min:100, max:200} }
 function filtByParams(data, filters) {
   var result = []
   for (var i = 0; i < data.length; i++) {
     if ((typeof (filters.project) == 'undefined' ? true : data[i].project == filters.project) &&
       (typeof (filters.build) == 'undefined' ? true : data[i].build == filters.build) &&
       (typeof (filters.unit) == 'undefined' ? true : data[i].unit == filters.unit) &&
-      (typeof (filters.type) == 'undefined' ? true : data[i].type == filters.type)) {
+      (typeof (filters.type) == 'undefined' ? true : data[i].type == filters.type) &&
+      (typeof (filters.range) == 'undefined' ? true : (data[i].price_total >= filters.range.min && data[i].price_total < filters.range.max))) {
       result.push(data[i])
     }
   }
