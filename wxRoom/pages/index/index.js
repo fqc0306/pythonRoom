@@ -136,7 +136,7 @@ Page({
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      hasUserInfo: e.detail.userInfo == null ? false : true
     })
   },
   touchHandler: function (e) {

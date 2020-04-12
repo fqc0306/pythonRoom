@@ -16,6 +16,19 @@
   color: #aaa;
 }
 
+.user-login {
+  background-color: #c2d1faaa;
+  border-radius: 72rpx;
+  text-align: center;
+  font-size: 34rpx;
+  line-height: 64rpx;
+  font-weight: bold;
+  margin-left: 30rpx;
+  color: #515151;
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+}
+
 .table {
   border: 0px  darkgray;
 }
@@ -140,6 +153,14 @@
 .divider {
   margin-top: 5rpx;
   margin-bottom: 5rpx;
+  height: 1rpx;
+  background-color: #f7f7f7;
+}
+.divider-margin {
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
   height: 1rpx;
   background-color: #f7f7f7;
 }

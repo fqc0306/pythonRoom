@@ -1,12 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo" wx:if="{{isShow}}">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
   <view class="search" bindtap="bindSearchTap">
     <view class="search-container">
       <view class="search-left">
@@ -27,11 +20,21 @@
   <view class="chart">
     <canvas class="canvas_pie" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
   </view>
+  <view class="divider-margin"/>
   <text class="chat_hint"> 房源总价分布：{{searchKey}} </text>
   <view class="chart">
     <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchHandler"></canvas>
   </view>
-  <view class="table" wx:if="{{listData.length != 0}}">
+
+  <view class="divider-margin"/>
+  <view class="userinfo" >
+    <button class="user-login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 查看更多 </button>
+    <block wx:else>
+      <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
+    </block>
+  </view>
+  <view class="table" wx:if="{{listData.length != 0 && hasUserInfo}}">
     <view class="tr bg-w">
       <view class="th">楼栋</view>
       <view class="th">单元</view>
