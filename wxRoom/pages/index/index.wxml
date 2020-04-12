@@ -23,6 +23,7 @@
   <view class="divider"/>
   <include src="../pull/pull.wxml" />
   <view class="divider"/>
+  <text class="chat_hint">房源户型分布</text>
   <view class="chart">
     <canvas class="canvas_pie" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
   </view>

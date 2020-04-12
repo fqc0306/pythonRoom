@@ -121,7 +121,7 @@
   font-size: 32rpx;
   flex-direction: column;
   align-items: center;
-  color: #313131;
+  color: #515151;
   text-align: center;
   margin-top: 30rpx;
 }
