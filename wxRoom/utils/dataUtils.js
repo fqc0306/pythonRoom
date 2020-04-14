@@ -1,16 +1,16 @@
+//处理一个楼盘面积/价格等信息
 function processFileData(res) {
   var j = 0
   var lines = res.result.split('\n')
   var allData = []
 
-  var allProjects = new Map()//{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
-  var allBuilds = new Map()//{'A-1':['1单元','2单元','3单元'],'A-2':['1单元','2单元']}
-  var allTypes = []//["一室一厅","两室一厅]
-  var rangePrice = []//{max:500, min:200}
+  var allProjects = new Map() //{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
+  var allBuilds = new Map() //{'A-1':['1单元','2单元','3单元'],'A-2':['1单元','2单元']}
+  var allTypes = [] //["一室一厅","两室一厅]
+  var rangePrice = [] //{max:500, min:200}
   var maxPrice = 0
   var minPrice = 0
 
-  console.log("lines number:", lines.length)
   for (j = 0; j < lines.length; j++) {
 
     var infos = lines[j]
@@ -82,7 +82,46 @@ function processFileData(res) {
   rangePrice.min = minPrice
   return [allData, allProjects, allBuilds, allTypes, rangePrice]
 }
+//处理一个楼盘售卖状态信息
+function processDYFileData(res) {
+  var j = 0
+  var lines = res.result.split('\n')
+  var allData = []
+  var allStatus = {} //计算其数量{"33CC00":50, "FFCC99":22}
 
+  for (j = 0; j < lines.length; j++) {
+
+    var infos = lines[j]
+    var json = {}
+    var i = 0
+
+    try {
+      if (infos != '') {
+        var jsonObj = JSON.parse(infos)
+
+        json["project"] = jsonObj.project
+        json["build"] = jsonObj.build
+        json["unit"] = jsonObj.unit
+        json["room"] = jsonObj.room
+        json["status"] = jsonObj.status
+
+        allData.push(json)
+
+        var value = allStatus[jsonObj.status]
+        if (value == null) {
+          allStatus[jsonObj.status] = 1
+        } else {
+          allStatus[jsonObj.status] = value + 1
+        }
+      }
+    } catch (err) {
+      console.error(err)
+      return null
+    }
+  }
+  return [allData, allStatus]
+}
+//处理所有楼盘信息数据
 function processFileProjectData(res) {
   var j = 0
   var lines = res.result.split('\n')
@@ -118,7 +157,7 @@ function updateGraphData(data, xCoordList, yTotalList, yAvrList, buildLimit) {
   var total = []
   var xLastValue = ""
   for (var i = 0; i < data.length; i++) {
-    if (buildLimit == data[i].build) {
+    if (buildLimit == null || buildLimit == data[i].build) {
       yTotalList.push(data[i].price_total)
       yAvrList.push(data[i].price_all)
       var key = data[i].build + "_" + data[i].unit //如:1_2单元_1 
@@ -159,5 +198,6 @@ module.exports = {
   updateGraphData: updateGraphData,
   processFileProjectData: processFileProjectData,
   processHotData: processHotData,
-  filtByParams: filtByParams
+  filtByParams: filtByParams,
+  processDYFileData: processDYFileData
 }

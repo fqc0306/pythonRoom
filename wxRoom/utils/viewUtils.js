@@ -1,14 +1,14 @@
 var wxCharts = require("./wxcharts.js");
 var dataUtils = require("./dataUtils.js")
 
-function showGraph(id, data) {
+//data:{[],[],[build:"1",room:"801"...]}
+function showGraph(id, data, rangePrice) {
   var dataMap = []
   var xCoordList = [] //横坐标-房间号
   var yTotalList = [] //纵坐标-总价
   var yAvrList = [] //纵坐标-均价
 
-  console.log("data:", data)
-  dataUtils.updateGraphData(data, xCoordList, yTotalList, yAvrList, data[0].build)
+  dataUtils.updateGraphData(data, xCoordList, yTotalList, yAvrList, null)
 
   var windowWidth = 380;
   try {
@@ -42,8 +42,8 @@ function showGraph(id, data) {
       format: function(val) {
         return val.toFixed(1);
       },
-      max: 200,
-      min: 150
+      max: Math.ceil(rangePrice.max / 50) * 50,
+      min: Math.floor(rangePrice.min / 50) * 50
     },
     width: windowWidth,
     height: 200,

@@ -4,6 +4,15 @@ var wxCharts = require("../../utils/wxcharts.js");
 var dataUtils = require("../../utils/dataUtils.js")
 var viewUtils = require("../../utils/viewUtils.js")
 var pullUtils = require("../pull/pull.js")
+
+var NOT_SALE = "CCCCCC" //不可售
+var ON_SALE = "33CC00" //可售
+var booked = "FFCC99" //已预订
+var signed = "FF0000" //已签约
+"ffff00" //已办理预售项目抵押
+"d2691e" //网上联机备案
+"00FFFF" //资格核验中
+
 const app = getApp()
 var page
 var allData
@@ -58,31 +67,49 @@ Page({
     }).then(res => {
       var value = dataUtils.processFileData(res)
       allData = value[0]
-      projectMap = value[1]//下拉框过滤
+      projectMap = value[1] //下拉框过滤
       buildMap = value[2]
       allTypes = value[3]
-      rangePrice = value[4]
+      rangePrice = value[4] //range:{min:100, max:200}
 
       var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, rangePrice, {})
 
-      var price = '54000'
-      var detail = '共178套 在售:100套 已售:78'
+      var price = Math.floor(rangePrice.min) + '~' + Math.ceil(rangePrice.max)
       that.setData({
         searchKey: fileName,
         listData: allData,
         tabTxt: tabTxt,
         price: price,
-        detail: detail
       })
 
-
       if (allData != null || allData.length > 0) {
-        this.lineChart = viewUtils.showGraph('line_graph', allData)
+        this.lineChart = viewUtils.showGraph('line_graph', allData, rangePrice)
         this.pieChart = viewUtils.showPieChart('pie_graph', allData)
       } else {
         console.error("no data!")
       }
       console.log('[file info] result：', res)
+    }).catch(err => {
+      console.log('[file info] 失败：', err)
+    })
+
+    wx.cloud.callFunction({
+      name: 'fileInfo',
+      data: {
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/bj/' + fileName + '_dy.json'
+      }
+    }).then(res => {
+      var value = dataUtils.processDYFileData(res)
+      var allData = value[0]
+      var allStatus = value[1]
+      console.log("status:", allStatus)
+
+      // var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, rangePrice, {})
+
+      var detail = '共' + allData.length + '套 在售:' + allStatus[ON_SALE] + '套'
+      that.setData({
+        detail: detail
+      })
     }).catch(err => {
       console.log('[file info] 失败：', err)
     })
@@ -128,8 +155,7 @@ Page({
     this.getFileData()
   },
 
-  onShareAppMessage: function () {
-  },
+  onShareAppMessage: function () { },
 
   getUserInfo: function (e) {
     console.log("getUserInfo:", e)
@@ -139,7 +165,7 @@ Page({
       hasUserInfo: e.detail.userInfo == null ? false : true
     })
 
-    if(e.detail.userInfo!=null) {
+    if (e.detail.userInfo != null) {
       wx.cloud.callFunction({
         name: 'writeDbInfo',
         data: {
@@ -189,7 +215,7 @@ function onTabChanged(filterParams) {
   var filtData = dataUtils.filtByParams(allData, filterParams)
 
   if (filtData != null && filtData.length > 0) {
-    page.lineChart = viewUtils.showGraph('line_graph', filtData)
+    page.lineChart = viewUtils.showGraph('line_graph', filtData, rangePrice)
     page.pieChart = viewUtils.showPieChart('pie_graph', filtData)
   } else {
     console.error("no data!")

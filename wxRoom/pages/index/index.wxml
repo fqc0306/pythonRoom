@@ -10,7 +10,7 @@
     </view>
   </view>
   <view class="page-header">
-    <text class="text-bold" wx:if="{{searchKey!=''}}" decode="{{true}}"> {{searchKey}} &emsp;&emsp;&emsp;&emsp;{{price}}元/m²</text>
+    <text class="text-bold" wx:if="{{searchKey!=''}}" decode="{{true}}"> {{searchKey}} &emsp;&emsp;&emsp;总价:{{price}}万/套</text>
     <text class="text" wx:if="{{detail!=''}}"> {{detail}} </text>
   </view>
   <view class="divider"/>
@@ -21,7 +21,7 @@
     <canvas class="canvas_pie" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
   </view>
   <view class="divider-margin"/>
-  <text class="chat_hint"> 房源总价分布：{{searchKey}} </text>
+  <text class="chat_hint"> 房源总价分布 </text>
   <view class="chart">
     <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchHandler"></canvas>
   </view>
