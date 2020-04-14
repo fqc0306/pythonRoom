@@ -132,13 +132,24 @@ Page({
   },
 
   getUserInfo: function (e) {
-    console.log(e)
+    console.log("getUserInfo:", e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: e.detail.userInfo == null ? false : true
     })
+
+    if(e.detail.userInfo!=null) {
+      wx.cloud.callFunction({
+        name: 'writeDbInfo',
+        data: {
+          userInfo: e.detail.userInfo,
+          file_id: 'login_info'
+        }
+      }).then(console.log)
+    }
   },
+
   touchHandler: function (e) {
 
     this.lineChart.showToolTip(e, {

@@ -22,7 +22,7 @@ function showGraph(id, data) {
   var item = {}
   item.name = "房屋总价"
   item.data = yTotalList
-  item.format = function (val, name) {
+  item.format = function(val, name) {
     return val + '百万';
   }
   seriesList.push(item)
@@ -39,7 +39,7 @@ function showGraph(id, data) {
     },
     yAxis: {
       title: '总价(万)',
-      format: function (val) {
+      format: function(val) {
         return val.toFixed(1);
       },
       max: 200,
@@ -120,6 +120,7 @@ function updateTabTxt(projectMap, buildMap, allTypes, rangePrice, selected) {
   var level = min
   var index = 0
   var step = 50 * Math.floor((max - min) / 5 / 60)
+  step = (step == 0 ? 50 : step)
   while (level < max) {
     var child = {}
     var temp = {}
@@ -167,12 +168,12 @@ function updateTabTxt(projectMap, buildMap, allTypes, rangePrice, selected) {
     item["key"] = "project"
     item["active"] = false
     item["type"] = 0
-    if (selected.project != null) {//map entries length
+    if (selected.project != null) { //map entries length
       var children = []
       var index = 1
       for (var [key, val] of projectMap.entries()) {
         var child = {}
-        child["id"] = index++ ,
+        child["id"] = index++,
           child["text"] = key
         if (key == selected.project) {
           item["type"] = child["id"]
@@ -188,7 +189,7 @@ function updateTabTxt(projectMap, buildMap, allTypes, rangePrice, selected) {
       var index = 1
       for (var [key, val] of projectMap.entries()) {
         var child = {}
-        child["id"] = index++ ,
+        child["id"] = index++,
           child["text"] = key
         children.push(child)
       }
