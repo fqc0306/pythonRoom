@@ -111,26 +111,11 @@ def getAllRoom(name, whichBuild, url, whichProject):
 		if desc.__len__()/2 > 0:
 			for k in range(desc.__len__()/2):
 				key = desc[k*2].text.encode('utf-8').replace(' ', '').replace('　', '')
-				if key.find('用途') >= 0:
-					key = '用途'
 				
 				value = desc[k*2+1].text.split(" ")[0].encode('utf-8').replace(' ', '').replace('　', '')
-				tempDict.update({key : unicode(value, "utf-8")})
+				tempDict.update({unicode(key, "utf-8") : unicode(value, "utf-8")})
 
-			square_all = tempDict.get('建筑面积(m2)')
-			if (square_all == None or square_all.__len__() == 0):
-				square_all = tempDict.get('建筑面积')
-
-			square_in = tempDict.get('套内面积(m2)')
-			if (square_in == None or square_in.__len__() == 0):
-				square_in = tempDict.get('套内面积')
-			roomDict.update({'square_all' : square_all})
-			roomDict.update({'square_in' : square_in})
-			roomDict.update({'price_all' : tempDict.get('按建筑面积拟售单价')})
-			roomDict.update({'price_in' : tempDict.get('按套内面积拟售单价')})
-			roomDict.update({'type' : tempDict.get('户型')})
-			roomDict.update({'func' : tempDict.get('用途')})
-
+			roomDict.update({'detail' : tempDict})
 			writeFile(roomDict, name + ".json")
 		else:
 			print("length error:" + str(len(desc)) + ",url:" + url)
@@ -141,10 +126,21 @@ def getAllRoom(name, whichBuild, url, whichProject):
 #楼盘中所有楼栋
 def getProjectInfo(name, url, projectId):
 	soup = getSoupByUrl(url)
+	detailDict = collections.OrderedDict()
+	buildList2D = []
+	buileDict = collections.OrderedDict()
 	rowInfo = []
-	# soup.find(attrs={"class":"cont_titlebg"})
-	projectName = soup.find_all(id="newslist")[0].find_all("td")[1].text #TODO 存在空格
-	print(projectName)
+	index = 0
+	# 获取楼盘地址，开发商等信息
+	tableInfos = soup.find_all(id="newslist")[0].find_all("td")
+	for i in range(tableInfos.__len__()/2):
+		infoKey = tableInfos[2*i]
+		infoValue = tableInfos[2*i+1]
+		detailDict.update({infoKey.text.replace(' ', '').replace('\r', '').replace('\n', '') : infoValue.text.replace(' ', '').replace('\r', '').replace('\n', '')})
+
+	buileDict.update({'info': detailDict})
+
+	#获取楼盘所有楼栋的基本信息
 	if (soup.find_all(id="Span1").__len__() > 0 and soup.find_all(id="Span1")[0].find_all("table").__len__() > 0):
 		infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
 		for info in infos:
@@ -153,12 +149,24 @@ def getProjectInfo(name, url, projectId):
 				print(url)
 				getAllRoom(name, rowInfo[0], url, projectId)
 			print(info.text)
+
 			rowInfo.append(info.text)
 			if rowInfo.__len__() == 6:#每6项是一行
+				rowInfo.pop(rowInfo.__len__() - 1) ##去掉“查看信息”
+				buildList2D.append(rowInfo)
 				rowInfo = []
 		print(rowInfo)
+	buildList2D.pop(0) ##去掉楼盘表的表头
+	buileDict.update({'build_list': buildList2D})
+
+	global indexTotal, timeStr
+	indexTotal = indexTotal + 1
+	buileDict.update({'id' : indexTotal})
+	buileDict.update({'name' :  text})
+	writeFile(buileDict, "beijing_" + timeStr + ".json")
 
 timeStr = str(long(time.time())/(24*60*60))
+indexTotal = 0
 
 #地区内所有楼盘内容
 for page in range(0, 10):
@@ -169,7 +177,6 @@ for page in range(0, 10):
 
 	infos = soup.find_all("form")[1].find_all("table")[6].find_all("td")
 	lastUrl = ""
-	id = 0
 
 	for index in range(0, infos.__len__()):
 		print("index:" + str(page) + "," + str(index))
@@ -182,12 +189,6 @@ for page in range(0, 10):
 				line = text + "," + url + ", " + projectId
 				print(line)
 				getProjectInfo(text, url, projectId)
-
-				buileDict = collections.OrderedDict()
-				id = id + 1
-				buileDict.update({'id' : id})
-				buileDict.update({'name' :  text})
-				writeFile(buileDict, "beijing_" + timeStr + ".json")
 			else :
 				lastUrl = url
 				text = tag.text
