@@ -36,10 +36,11 @@ def getSoupByUrl(url):
 def writeFile(dictObj, fileName):
 
 	jsStr = json.dumps(dictObj, ensure_ascii=False, sort_keys=False)##ensure_ascii=False 保证中文不乱码
-	jsStr = jsStr + '\n'
+	if (type(dictObj) == type([])) :
+		jsStr = jsStr.replace('},', '},\n')
 
-	f = codecs.open(fileName,'ab+','utf-8')
-	f.write(jsStr)
+	file = codecs.open(fileName,'ab+','utf-8')
+	file.write(jsStr)
 
 #whichBuild+房间号 为id: whickBuild:19#商品住宅; name:青年家园; whichProject:
 def getAllRoom(name, whichBuild, url, whichProject):
@@ -48,6 +49,8 @@ def getAllRoom(name, whichBuild, url, whichProject):
 	tables = soup.find_all(id="table_Buileing")
 	alldivs = tables[0].find_all("div")
 	index = 0
+	allRoomDict = []
+	allStatusDict = []
 
 	for i in alldivs:
 		print ("------------------")
@@ -56,6 +59,7 @@ def getAllRoom(name, whichBuild, url, whichProject):
 		
 		roomDict = collections.OrderedDict()
 		statusDict = collections.OrderedDict()
+
 		index = index + 1
 		roomDict.update({'id' : index})
 		roomDict.update({'build' :  whichBuild.split("#")[0]})
@@ -98,8 +102,7 @@ def getAllRoom(name, whichBuild, url, whichProject):
 			statusDict.update({'unit' : ""})
 			statusDict.update({'room' : link.text})
 
-		writeFile(statusDict, name + "_dy.json")
-
+		allStatusDict.append(statusDict)
 
 		print(link.text + ":" + link.get("href"))
 		href = "http://bjjs.zjw.beijing.gov.cn" + link.get("href")
@@ -108,7 +111,7 @@ def getAllRoom(name, whichBuild, url, whichProject):
 		desc = soup.find_all(id='desc')
 
 		tempDict = collections.OrderedDict()
-		if desc.__len__()/2 > 0:
+		if desc != None and desc.__len__()/2 > 0:
 			for k in range(desc.__len__()/2):
 				key = desc[k*2].text.encode('utf-8').replace(' ', '').replace('　', '')
 				
@@ -116,11 +119,13 @@ def getAllRoom(name, whichBuild, url, whichProject):
 				tempDict.update({unicode(key, "utf-8") : unicode(value, "utf-8")})
 
 			roomDict.update({'detail' : tempDict})
-			writeFile(roomDict, name + ".json")
+			allRoomDict.append(roomDict)
 		else:
 			print("length error:" + str(len(desc)) + ",url:" + url)
 
 
+	writeFile(allStatusDict, name + "_dy.json")
+	writeFile(allRoomDict, name + ".json")
 	print(alldivs.__len__())
 
 #楼盘中所有楼栋
