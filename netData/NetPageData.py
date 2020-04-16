@@ -41,7 +41,7 @@ def writeFile(dictObj, fileName):
 	f = codecs.open(fileName,'ab+','utf-8')
 	f.write(jsStr)
 
-#whichBuild+房间号 为id
+#whichBuild+房间号 为id: whickBuild:19#商品住宅; name:青年家园; whichProject:
 def getAllRoom(name, whichBuild, url, whichProject):
 	soup = getSoupByUrl(url)
 
@@ -132,6 +132,12 @@ def getProjectInfo(name, url, projectId):
 	itemInfo = collections.OrderedDict()
 	titleInfo = []
 	index = 0
+
+	global indexTotal, timeStr
+	indexTotal = indexTotal + 1
+	buileDict.update({'_id' : indexTotal})
+	buileDict.update({'name' :  name})
+
 	# 获取楼盘地址，开发商等信息
 	tableInfos = soup.find_all(id="newslist")[0].find_all("td")
 	for i in range(tableInfos.__len__()/2):
@@ -145,12 +151,13 @@ def getProjectInfo(name, url, projectId):
 	if (soup.find_all(id="Span1").__len__() > 0 and soup.find_all(id="Span1")[0].find_all("table").__len__() > 0):
 		infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
 		for info in infos:
-			if info.find("a") != None:
-				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
-				print(url)
-				getAllRoom(name, rowInfo[0], url, projectId)
+
 			infoText = info.text.encode('utf-8').replace('　', '')
 			infoText = unicode(infoText, "utf-8")
+
+			if info.find("a") != None:
+				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
+				getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId)
 			if info.find("strong") != None:	#表格的title 均为粗体, --批准销售套数 等内容
 				titleInfo.append(infoText)
 			else :
@@ -163,10 +170,6 @@ def getProjectInfo(name, url, projectId):
 
 	buileDict.update({'build_list': allItems})
 
-	global indexTotal, timeStr
-	indexTotal = indexTotal + 1
-	buileDict.update({'id' : indexTotal})
-	buileDict.update({'name' :  text})
 	writeFile(buileDict, "beijing_" + timeStr + ".json")
 
 timeStr = str(long(time.time())/(24*60*60))
