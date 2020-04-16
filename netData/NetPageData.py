@@ -127,9 +127,10 @@ def getAllRoom(name, whichBuild, url, whichProject):
 def getProjectInfo(name, url, projectId):
 	soup = getSoupByUrl(url)
 	detailDict = collections.OrderedDict()
-	buildList2D = []
+	allItems = []
 	buileDict = collections.OrderedDict()
-	rowInfo = []
+	itemInfo = collections.OrderedDict()
+	titleInfo = []
 	index = 0
 	# 获取楼盘地址，开发商等信息
 	tableInfos = soup.find_all(id="newslist")[0].find_all("td")
@@ -148,16 +149,19 @@ def getProjectInfo(name, url, projectId):
 				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
 				print(url)
 				getAllRoom(name, rowInfo[0], url, projectId)
-			print(info.text)
+			infoText = info.text.encode('utf-8').replace('　', '')
+			infoText = unicode(infoText, "utf-8")
+			if info.find("strong") != None:	#表格的title 均为粗体, --批准销售套数 等内容
+				titleInfo.append(infoText)
+			else :
+				itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
 
-			rowInfo.append(info.text)
-			if rowInfo.__len__() == 6:#每6项是一行
-				rowInfo.pop(rowInfo.__len__() - 1) ##去掉“查看信息”
-				buildList2D.append(rowInfo)
-				rowInfo = []
-		print(rowInfo)
-	buildList2D.pop(0) ##去掉楼盘表的表头
-	buileDict.update({'build_list': buildList2D})
+			if (itemInfo.__len__() > 0 and itemInfo.__len__() == titleInfo.__len__()) :
+				allItems.append(itemInfo)
+				itemInfo = collections.OrderedDict()
+			index = index + 1
+
+	buileDict.update({'build_list': allItems})
 
 	global indexTotal, timeStr
 	indexTotal = indexTotal + 1
