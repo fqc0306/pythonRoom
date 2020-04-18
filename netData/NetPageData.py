@@ -66,7 +66,6 @@ def getAllRoom(name, whichBuild, url, whichProject, allRoomDict, allStatusDict):
 		index = index + 1
 		roomDict.update({'id' : index})
 		roomDict.update({'build' :  whichBuild.split("#")[0]})
-		roomDict.update({'project' : whichProject})
 
 		number = None
 		try:
