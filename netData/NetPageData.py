@@ -33,16 +33,21 @@ def getSoupByUrl(url):
 	return soup
 
 
-def writeFile(dictObj, fileName):
+def writeFile(dictObj, fileName, isAppend):
 
 	jsStr = json.dumps(dictObj, ensure_ascii=False, sort_keys=False)##ensure_ascii=False 保证中文不乱码
 	if (type(dictObj) == type([])) :
 		jsStr = jsStr.replace('},', '},\n')
+	jsStr = jsStr + '\n'
 
-	file = codecs.open(fileName,'ab+','utf-8')
+	mode = 'ab+'
+	if (not isAppend) :
+		mode = 'wb'
+
+	file = codecs.open(fileName,mode,'utf-8')
 	file.write(jsStr)
 
-#whichBuild+房间号 为id: whickBuild:19#商品住宅; name:青年家园; whichProject:
+#whichBuild+房间号 为id: whickBuild:19#商品住宅; name:青年家园; whichProject:京房售证字(2020)10号
 def getAllRoom(name, whichBuild, url, whichProject):
 	soup = getSoupByUrl(url)
 
@@ -124,8 +129,8 @@ def getAllRoom(name, whichBuild, url, whichProject):
 			print("length error:" + str(len(desc)) + ",url:" + url)
 
 
-	writeFile(allStatusDict, name + "_dy.json")
-	writeFile(allRoomDict, name + ".json")
+	writeFile(allStatusDict, name + "_" + whichProject + "_dy.json", False)
+	writeFile(allRoomDict, name + "_" + whichProject + ".json", False)
 	print(alldivs.__len__())
 
 #楼盘中所有楼栋
@@ -138,11 +143,15 @@ def getProjectInfo(name, url, projectId):
 	titleInfo = []
 	index = 0
 
-	global indexTotal, timeStr
-	indexTotal = indexTotal + 1
+	global indexTotal, startIndex, endIndex, timeStr
 	buileDict.update({'_id' : indexTotal})
-	buileDict.update({'name' :  name})
+	buileDict.update({'name' :  name + "_" + projectId})
+	indexTotal = indexTotal + 1
 
+	if (not (indexTotal >= startIndex and indexTotal <= endIndex)) :
+		return False
+
+	print('enter!!!')
 	# 获取楼盘地址，开发商等信息
 	tableInfos = soup.find_all(id="newslist")[0].find_all("td")
 	for i in range(tableInfos.__len__()/2):
@@ -175,10 +184,17 @@ def getProjectInfo(name, url, projectId):
 
 	buileDict.update({'build_list': allItems})
 
-	writeFile(buileDict, "beijing_" + timeStr + ".json")
+	isAppend = True
+	if(indexTotal == 1) :
+		isAppend = False
+	writeFile(buileDict, "beijing_" + timeStr + ".json", isAppend)
+
+	return True
 
 timeStr = str(long(time.time())/(24*60*60))
 indexTotal = 0
+startIndex = 0
+endIndex = 50
 
 #地区内所有楼盘内容
 for page in range(0, 10):
@@ -191,7 +207,7 @@ for page in range(0, 10):
 	lastUrl = ""
 
 	for index in range(0, infos.__len__()):
-		print("index:" + str(page) + "," + str(index))
+		print("index:" + str(page) + "," + str(index) + ", indexTotal:" + str(indexTotal))
 
 		tag = infos[index].find("a")
 		if tag != None:
@@ -200,7 +216,9 @@ for page in range(0, 10):
 				projectId = tag.text
 				line = text + "," + url + ", " + projectId
 				print(line)
-				getProjectInfo(text, url, projectId)
+				isContinue = getProjectInfo(text, url, projectId)
+				if (not isContinue) :
+					continue
 			else :
 				lastUrl = url
 				text = tag.text
