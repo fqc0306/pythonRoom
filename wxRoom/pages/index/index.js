@@ -16,7 +16,6 @@ var signed = "FF0000" //已签约
 const app = getApp()
 var page
 var allData
-var projectMap
 var buildMap
 var allTypes
 var rangePrice
@@ -56,23 +55,22 @@ Page({
     if (this.data.searchKey != '' && typeof this.data.searchKey != 'undefined') {
       fileName = this.data.searchKey
     } else {
-      fileName = '青年金色佳苑'
+      fileName = '燕西家园_京房售证字(2020)26号'
     }
 
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/bj/' + fileName + '.json'
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + fileName + '.json'
       }
     }).then(res => {
       var value = dataUtils.processFileData(res)
       allData = value[0]
-      projectMap = value[1] //下拉框过滤
-      buildMap = value[2]
-      allTypes = value[3]
-      rangePrice = value[4] //range:{min:100, max:200}
+      buildMap = value[1]//下拉框过滤
+      allTypes = value[2]
+      rangePrice = value[3] //range:{min:100, max:200}
 
-      var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, rangePrice, {})
+      var tabTxt = viewUtils.updateTabTxt(buildMap, allTypes, rangePrice, {})
 
       var price = Math.floor(rangePrice.min) + '~' + Math.ceil(rangePrice.max)
       that.setData({
@@ -96,7 +94,7 @@ Page({
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/bj/' + fileName + '_dy.json'
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + fileName + '_dy.json'
       }
     }).then(res => {
       var value = dataUtils.processDYFileData(res)
@@ -104,7 +102,7 @@ Page({
       var allStatus = value[1]
       console.log("status:", allStatus)
 
-      // var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, rangePrice, {})
+      // var tabTxt = viewUtils.updateTabTxt(buildMap, allTypes, rangePrice, {})
 
       var detail = '共' + allData.length + '套 在售:' + allStatus[ON_SALE] + '套'
       that.setData({
@@ -220,7 +218,7 @@ function onTabChanged(filterParams) {
   } else {
     console.error("no data!")
   }
-  var tabTxt = viewUtils.updateTabTxt(projectMap, buildMap, allTypes, rangePrice, filterParams)
+  var tabTxt = viewUtils.updateTabTxt(buildMap, allTypes, rangePrice, filterParams)
   page.setData({
     listData: filtData,
     tabTxt: tabTxt

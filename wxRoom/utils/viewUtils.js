@@ -102,7 +102,7 @@ function showPieChart(id, data) {
 // selected: { build: "A - 11", project: "京房售证字(2020)21号", type:"一室一厅", range:{min:100, max:200} } 修改上一级则下级均为空，如build修改，则unit为null
 //project:{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
 //buildMap:{'A-1':['1单元','2单元','3单元'],'A-2':['1单元','2单元']}
-function updateTabTxt(projectMap, buildMap, allTypes, rangePrice, selected) {
+function updateTabTxt(buildMap, allTypes, rangePrice, selected) {
   console.log("selected", selected)
   var tabTxt = []
   var item = {}
@@ -162,22 +162,23 @@ function updateTabTxt(projectMap, buildMap, allTypes, rangePrice, selected) {
   item["child"] = children
   tabTxt.push(item)
 
-  if (Array.from(projectMap.entries()).length > 1) {
-    item["text"] = "楼盘"
-    item["originalText"] = "楼盘"
-    item["key"] = "project"
+  if (Array.from(buildMap.entries()).length > 1) {
+    item = {}
+    item["text"] = "楼号"
+    item["originalText"] = "楼号"
+    item["key"] = "build"
     item["active"] = false
     item["type"] = 0
-    if (selected.project != null) { //map entries length
+    if (selected.build != null) { //map entries length
       var children = []
       var index = 1
-      for (var [key, val] of projectMap.entries()) {
+      for (var [key, val] of buildMap.entries()) {
         var child = {}
         child["id"] = index++,
           child["text"] = key
-        if (key == selected.project) {
+        if (key == selected.build) {
           item["type"] = child["id"]
-          item["text"] = selected.project
+          item["text"] = selected.build
         }
         children.push(child)
       }
@@ -187,7 +188,7 @@ function updateTabTxt(projectMap, buildMap, allTypes, rangePrice, selected) {
     } else {
       var children = []
       var index = 1
-      for (var [key, val] of projectMap.entries()) {
+      for (var [key, val] of buildMap.entries()) {
         var child = {}
         child["id"] = index++,
           child["text"] = key
@@ -198,50 +199,6 @@ function updateTabTxt(projectMap, buildMap, allTypes, rangePrice, selected) {
       tabTxt.push(item)
       return tabTxt
     }
-  } else {
-    for (var [key, val] of projectMap.entries()) {
-      selected.project = key
-    }
-  }
-
-
-  item = {}
-  item["text"] = "楼号"
-  item["originalText"] = "楼号"
-  item["key"] = "build"
-  item["active"] = false
-  item["type"] = 0
-  if (selected.build != null) {
-    //更新楼号的下拉框
-    var val = projectMap.get(selected.project)
-    var children = []
-    for (var index = 0; index < val.length; index++) {
-
-      var child = {}
-      child["id"] = index + 1,
-        child["text"] = val[index]
-      if (val[index] == selected.build) {
-        item["type"] = child["id"]
-        item["text"] = selected.build
-      }
-      children.push(child)
-    }
-    item["child"] = children
-
-    tabTxt.push(item)
-  } else { //添加楼号的下拉框
-    var val = projectMap.get(selected.project)
-    var children = []
-    for (var index = 0; index < val.length; index++) {
-      var child = {}
-      child["id"] = index + 1,
-        child["text"] = val[index]
-      children.push(child)
-    }
-    item["child"] = children
-
-    tabTxt.push(item)
-    return tabTxt
   }
 
   item = {}

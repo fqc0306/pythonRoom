@@ -1,7 +1,6 @@
 //处理一个楼盘面积/价格等信息
 function processFileData(res) {
   var j = 0
-  var lines = res.result.split('\n')
   var allData = []
 
   var allProjects = new Map() //{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
@@ -11,26 +10,26 @@ function processFileData(res) {
   var maxPrice = 0
   var minPrice = 0
 
+  var lines = JSON.parse(res.result)
   for (j = 0; j < lines.length; j++) {
 
-    var infos = lines[j]
+    var line = lines[j]
     var json = {}
     var i = 0
 
     try {
-      if (infos != '') {
-        var jsonObj = JSON.parse(infos)
+      if (line != '') {
+        json["build"] = line.build
+        json["unit"] = line.unit
+        json["room"] = line.room
+        json["square_all"] = parseFloat(line.detail['建筑面积']).toFixed(2)
+        json["square_in"] = parseFloat(line.detail['套内面积']).toFixed(2)
+        json["price_all"] = parseInt(line.detail['按建筑面积拟售单价'])
+        json["price_in"] = parseInt(line.detail['按套内面积拟售单价'])
+        json["type"] = line.detail['户型']
+        json["func"] = line.detail['规划设计用途']
 
-        json["project"] = jsonObj.project
-        json["build"] = jsonObj.build
-        json["unit"] = jsonObj.unit
-        json["room"] = jsonObj.room
-        json["square_all"] = parseFloat(jsonObj.square_all).toFixed(2)
-        json["square_in"] = parseFloat(jsonObj.square_in).toFixed(2)
-        json["price_all"] = parseInt(jsonObj.price_all)
-        json["price_in"] = parseInt(jsonObj.price_in)
-        json["type"] = jsonObj.type
-        var totalPrice = parseFloat(jsonObj.square_all) * parseFloat(jsonObj.price_all)
+        var totalPrice = parseFloat(json.square_all) * parseFloat(json.price_all)
         totalPrice = (totalPrice / 10000).toFixed(2)
         json["price_total"] = "" + totalPrice
 
@@ -54,16 +53,7 @@ function processFileData(res) {
           allTypes.push(json.type);
         }
 
-        var tempList = allProjects.get(json.project)
-        if (tempList == null) {
-          tempList = []
-          tempList.push(json.build)
-        } else if (tempList.indexOf(json.build) < 0) {
-          tempList.push(json.build)
-        }
-        allProjects.set(json.project, tempList)
-
-        tempList = allBuilds.get(json.build)
+        var tempList = allBuilds.get(json.build)
         if (tempList == null) {
           tempList = []
           tempList.push(json.unit)
@@ -80,38 +70,36 @@ function processFileData(res) {
   }
   rangePrice.max = maxPrice
   rangePrice.min = minPrice
-  return [allData, allProjects, allBuilds, allTypes, rangePrice]
+  return [allData, allBuilds, allTypes, rangePrice]
 }
+
 //处理一个楼盘售卖状态信息
 function processDYFileData(res) {
   var j = 0
-  var lines = res.result.split('\n')
+  var lines = JSON.parse(res.result)
   var allData = []
   var allStatus = {} //计算其数量{"33CC00":50, "FFCC99":22}
 
   for (j = 0; j < lines.length; j++) {
 
-    var infos = lines[j]
+    var line = lines[j]
     var json = {}
     var i = 0
 
     try {
-      if (infos != '') {
-        var jsonObj = JSON.parse(infos)
-
-        json["project"] = jsonObj.project
-        json["build"] = jsonObj.build
-        json["unit"] = jsonObj.unit
-        json["room"] = jsonObj.room
-        json["status"] = jsonObj.status
+      if (line != '') {
+        json["build"] = line.build
+        json["unit"] = line.unit
+        json["room"] = line.room
+        json["status"] = line.status
 
         allData.push(json)
 
-        var value = allStatus[jsonObj.status]
+        var value = allStatus[json.status]
         if (value == null) {
-          allStatus[jsonObj.status] = 1
+          allStatus[json.status] = 1
         } else {
-          allStatus[jsonObj.status] = value + 1
+          allStatus[json.status] = value + 1
         }
       }
     } catch (err) {
