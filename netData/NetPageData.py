@@ -66,43 +66,34 @@ def getAllRoom(name, whichBuild, url, whichProject, allRoomDict, allStatusDict):
 		index = index + 1
 		roomDict.update({'id' : index})
 		roomDict.update({'build' :  whichBuild.split("#")[0]})
+		roomDict.update({'project' : whichProject})
 
-		number = None
-		try:
-			number = int (link.text) #case1:2单元-801 case2:-034
-		except UnicodeEncodeError as e:
-			print('int error:', e)
-
-		if number == None:
-			if link.text.split("-").__len__() >= 2:
-				roomDict.update({'unit' : link.text.split("-")[0]})
-				roomDict.update({'room' : link.text.split("-")[1]})
-			elif link.text.split("-") == 1:
-				roomDict.update({'unit' : ""})
-				roomDict.update({'room' : link.text.split("-")[0]})
-			else:
-				print("error length, link text:" + link.text)
-		else :
+		#link.text case1:2单元-801 case2:-034 case3:-1103a
+		if link.text.split("-").__len__() >= 2:
+			roomDict.update({'unit' : link.text.split("-")[0]})
+			roomDict.update({'room' : link.text.split("-")[1]})
+			if (link.text.split("-")[0]==''):
+				roomDict.update({'room' : link.text})
+		else:
 			roomDict.update({'unit' : ""})
 			roomDict.update({'room' : link.text})
-
+			print("error length, link text:" + link.text)
 
 		statusDict.update({'id' : index})
 		statusDict.update({'build' :  whichBuild.split("#")[0]})
 		statusDict.update({'project' : whichProject})
 		statusDict.update({'status' : style.split("#")[1]})
-		if number == None:
-			if link.text.split("-").__len__() >= 2:
-				statusDict.update({'unit' : link.text.split("-")[0]})
-				statusDict.update({'room' : link.text.split("-")[1]})
-			elif link.text.split("-") == 1:
-				statusDict.update({'unit' : ""})
-				statusDict.update({'room' : link.text.split("-")[0]})
-			else:
-				print("error length, link text:" + link.text)
-		else :
+
+		#link.text case1:2单元-801 case2:-034 case3:-1103a
+		if link.text.split("-").__len__() >= 2:
+			statusDict.update({'unit' : link.text.split("-")[0]})
+			statusDict.update({'room' : link.text.split("-")[1]})
+			if (link.text.split("-")[0]==''):
+				statusDict.update({'room' : link.text})
+		else:
 			statusDict.update({'unit' : ""})
 			statusDict.update({'room' : link.text})
+			print("error length, link text:" + link.text)
 
 		allStatusDict.append(statusDict)
 
@@ -140,11 +131,12 @@ def getProjectInfo(name, url, projectId):
 	global indexTotal, startIndex, endIndex, timeStr
 	buileDict.update({'_id' : indexTotal})
 	buileDict.update({'name' :  name + "_" + projectId})
-	indexTotal = indexTotal + 1
 
 	if (not (indexTotal >= startIndex and indexTotal <= endIndex)) :
+		indexTotal = indexTotal + 1
 		return False
 
+	indexTotal = indexTotal + 1
 	print('enter!!!')
 	# 获取楼盘地址，开发商等信息
 	tableInfos = soup.find_all(id="newslist")[0].find_all("td")
@@ -195,11 +187,10 @@ def getProjectInfo(name, url, projectId):
 timeStr = str(long(time.time())/(24*60*60))
 indexTotal = 0
 startIndex = 0
-endIndex = 50
+endIndex = 28
 
 #地区内所有楼盘内容
 for page in range(0, 10):
-
 	beijingUrl = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307678&isTrue=&currentPage=" + str(page+1) + "&pageSize=15"
 	print(beijingUrl)
 	soup = getSoupByUrl(beijingUrl)
