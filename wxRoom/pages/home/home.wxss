@@ -93,14 +93,14 @@
 .line-content-bold {
   font-weight: bold;
   color: #515151;
-  font-size: 40rpx;
+  font-size: 36rpx;
   display: flex;
 }
 
 .line-content-red {
   display: flex;
   color: red;
-  font-size: 40rpx;
+  font-size: 38rpx;
   align-items: right;
   justify-content: right;
 }

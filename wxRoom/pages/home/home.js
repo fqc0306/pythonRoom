@@ -69,5 +69,11 @@ Page({
     wx.navigateTo({
       url: "../index/index?keywords=" + e.currentTarget.dataset.keywords.name
     })
+  },
+
+  bindSearchTap: function(){
+    wx.navigateTo({
+      url: "../search/search"
+    })
   }
 })
