@@ -1,0 +1,121 @@
+.search {
+  height: 124rpx;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container {
+  margin-top: 30rpx;
+  height: 64rpx;
+  /* //: 1px solid red; */
+  margin-left: 22rpx;
+  margin-right: 33rpx;
+  width: 695rpx;
+  display: flex;
+}
+
+.search-left {
+  display: flex;
+  background-color: #fff;
+  border-radius: 32rpx;
+}
+
+.search-input {
+  /* //: 1px solid blue; */
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 28rpx;
+  width: 500rpx;
+}
+
+.search-image {
+  width: 34rpx;
+  height: 34rpx;
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+  margin-right: 15rpx;
+}
+
+.search-btn {
+  font-size: 32rpx;
+  line-height: 64rpx;
+  font-weight: bold;
+  color: #313131;
+  text-align: center;
+  margin-left: 30rpx;
+}
+
+.home-content {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-color: #f7f7f7;
+}
+
+.home-item {
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  padding-top: 20rpx;
+  border: 1px solid #f0f0f0;
+  background-color: white;
+  border-radius: 32rpx;
+}
+
+.line-container {
+  display: flex;
+  margin-top: 5rpx;
+}
+
+.line-title {
+  color: #717171;
+  font-size: 32rpx;
+  width: 180rpx;
+  display: block; /*这里设置inline-block或者block；根据使用情况来定（行内元素需要加这个，块级元素和行内块级可以不用）*/
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.line-content {
+  display: flex;
+  font-size: 32rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /*这个数字是设置要显示省略号的行数*/
+  -webkit-box-orient: vertical;
+}
+
+.line-content-bold {
+  font-weight: bold;
+  color: #515151;
+  font-size: 40rpx;
+  display: flex;
+}
+
+.line-content-red {
+  display: flex;
+  color: red;
+  font-size: 40rpx;
+  align-items: right;
+  justify-content: right;
+}
+
+.item-more {
+  font-size: 32rpx;
+  line-height: 84rpx;
+  font-weight: bold;
+  color: #313131;
+  text-align: center;
+}
+
+.divider {
+  margin-top: 10rpx;
+  margin-bottom: 5rpx;
+  height: 1rpx;
+  background-color: #f7f7f7;
+}

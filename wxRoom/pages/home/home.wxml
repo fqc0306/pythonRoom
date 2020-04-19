@@ -1,0 +1,70 @@
+<view class="search">
+  <view class="search-container">
+    <view class="search-left">
+      <image class="search-image" src="/images/search.png" />
+      <input class="search-input" placeholder="请输入完整的楼盘名称" bindinput='watchSearch' />
+    </view>
+    <view class="search-btn" data-keywords="{{keywords}}" bindtap="go_to_search_result">搜索</view>
+  </view>
+</view>
+<view class="home-content">
+  <block wx:if="{{builds != null}}">
+    <block wx:for="{{builds}}" wx:key="id">
+      <view class="home-item" data-keywords="{{item}}" bindtap="go_to_detail">
+        <view class="line-container">
+          <view class="line-content-bold">
+            {{item.info['项目名称']}}
+          </view>
+          <view class="line-content-red">
+            {{item.info['avg_price']}}元/平
+          </view>
+        </view>
+        <view class="line-container">
+          <view class="line-title">
+            销售户数:
+          </view>
+          <view class="line-content">
+            {{item.info['total_room']}}户
+          </view>
+        </view>
+        <view class="line-container">
+          <view class="line-title">
+            开发企业:
+          </view>
+          <view class="line-content">
+            {{item.info['开发企业']}}
+          </view>
+        </view>
+        <view class="line-container">
+          <view class="line-title">
+            许可证编号:
+          </view>
+          <view class="line-content">
+            {{item.info['预售许可证编号']}}
+          </view>
+        </view>
+        <view class="line-container">
+          <view class="line-title">
+            用途&年限:
+          </view>
+          <view class="line-content">
+            {{item.info['土地用途和使用年限']}}
+          </view>
+        </view>
+
+        <view class="line-container">
+          <view class="line-title">
+            楼盘位置:
+          </view>
+          <view class="line-content">
+            {{item.info['坐落位置']}}
+          </view>
+        </view>
+        <view class="divider" />
+        <view class="item-more">
+          更多
+        </view>
+      </view>
+    </block>
+  </block>
+</view>

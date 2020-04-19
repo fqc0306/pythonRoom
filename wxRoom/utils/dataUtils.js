@@ -166,6 +166,32 @@ function processHotData(dataList) {
   }
   return result
 }
+
+function processHomeData(dataList) {
+  var result = []
+
+  for (var i = 0; i < dataList.length; i++) {
+    var item = dataList[i]
+    var totalPrice = 0
+    var totalSqr = 0
+    var totalRooms = 0
+    for (var j = 0; j < item.build_list.length; j++) {
+      var it = item.build_list[j]
+      var tempPrice = parseFloat(it["住宅拟售价格(元/m2)"]) * parseFloat(it["批准销售面积(m2)"])
+      totalPrice = totalPrice + tempPrice
+      totalSqr = totalSqr + parseFloat(it["批准销售面积(m2)"])
+      totalRooms = totalRooms + parseInt(it['批准销售套数'])
+    }
+    var avgPrice = totalPrice / totalSqr
+    avgPrice = avgPrice.toFixed(2)
+    item.info['avg_price'] = avgPrice
+    item.info['total_room'] = totalRooms
+
+    result.push(item)
+  }
+  return result
+}
+
 //filters: { build: "A - 11", project: "京房售证字(2020)21号", range:{min:100, max:200} }
 function filtByParams(data, filters) {
   var result = []
@@ -186,6 +212,7 @@ module.exports = {
   updateGraphData: updateGraphData,
   processFileProjectData: processFileProjectData,
   processHotData: processHotData,
+  processHomeData: processHomeData,
   filtByParams: filtByParams,
   processDYFileData: processDYFileData
 }
