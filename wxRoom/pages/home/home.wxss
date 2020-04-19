@@ -65,6 +65,10 @@
   background-color: white;
   border-radius: 32rpx;
 }
+.line-more-container {
+  display: flex;
+  margin-top: 15rpx;
+}
 
 .line-container {
   display: flex;
@@ -72,15 +76,15 @@
 }
 
 .line-title {
+  width:30%;
   color: #717171;
   font-size: 32rpx;
-  width: 180rpx;
   display: block; /*这里设置inline-block或者block；根据使用情况来定（行内元素需要加这个，块级元素和行内块级可以不用）*/
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 .line-content {
+  width:70%;
   display: flex;
   font-size: 32rpx;
   text-overflow: ellipsis;
@@ -91,6 +95,7 @@
 }
 
 .line-content-bold {
+  width: 70%;
   font-weight: bold;
   color: #515151;
   font-size: 36rpx;
@@ -98,11 +103,11 @@
 }
 
 .line-content-red {
+  width: 70%;
   display: flex;
   color: red;
   font-size: 38rpx;
-  align-items: right;
-  justify-content: right;
+  justify-content: center;
 }
 
 .item-more {
@@ -119,6 +124,7 @@
   height: 1rpx;
   background-color: #f7f7f7;
 }
+
 .th {
   width: 40%;
   justify-content: center;
@@ -127,6 +133,7 @@
   align-items: center;
   font-size: 32rpx;
 }
+
 .td {
   width: 50%;
   justify-content: center;

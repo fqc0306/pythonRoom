@@ -84,7 +84,6 @@ Page({
   },
 
   showMore: function (e) {
-    console.log("showMore:", e)
     showMoreTap = true
     var showMore = this.data.showMore
     showMore[e.currentTarget.dataset._id] = !e.currentTarget.dataset.value

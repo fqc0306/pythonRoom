@@ -21,10 +21,10 @@
         </view>
         <view class="line-container">
           <view class="line-title">
-            销售户数:
+            销售套数:
           </view>
           <view class="line-content">
-            {{item.info['total_room']}}户
+            {{item.info['total_room']}}套
           </view>
         </view>
         <view class="line-container">
@@ -62,13 +62,13 @@
         </view>
 
         <view wx:if="{{showMore[item._id]}}">
-          <view class="line-container">
+          <view class="line-more-container">
             <view class="th">楼栋</view>
             <view class="th">销售套数</view>
             <view class="td">销售单价</view>
           </view>
           <block wx:for="{{item.build_list}}" wx:key="id">
-            <view class="line-container" data-keywords="{{item}}">
+            <view class="line-more-container" data-keywords="{{item}}">
               <view class="th">
                 {{item['销售楼号']}}
               </view>
