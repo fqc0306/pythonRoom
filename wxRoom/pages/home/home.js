@@ -1,6 +1,7 @@
 // pages/home/home.js
 const app = getApp();
 var dataUtils = require("../../utils/dataUtils.js")
+var showMoreTap = false
 
 Page({
 
@@ -8,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    builds: {}
+    builds: {},
+    showMore: {}
   },
 
   /**
@@ -66,14 +68,28 @@ Page({
   },
 
   go_to_detail: function (e) {
+    if (showMoreTap) {
+      showMoreTap = false
+      return
+    }
     wx.navigateTo({
       url: "../index/index?keywords=" + e.currentTarget.dataset.keywords.name
     })
   },
 
-  bindSearchTap: function(){
+  bindSearchTap: function () {
     wx.navigateTo({
       url: "../search/search"
+    })
+  },
+
+  showMore: function (e) {
+    console.log("showMore:", e)
+    showMoreTap = true
+    var showMore = this.data.showMore
+    showMore[e.currentTarget.dataset._id] = !e.currentTarget.dataset.value
+    this.setData({
+      showMore: showMore
     })
   }
 })

@@ -4,7 +4,7 @@
       <image class="search-image" src="/images/search.png" />
       <input class="search-input" placeholder="请输入完整的楼盘名称" />
     </view>
-    <view class="search-btn" data-keywords="{{keywords}}" >搜索</view>
+    <view class="search-btn" data-keywords="{{keywords}}">搜索</view>
   </view>
 </view>
 <view class="home-content">
@@ -60,8 +60,32 @@
             {{item.info['坐落位置']}}
           </view>
         </view>
+
+        <view wx:if="{{showMore[item._id]}}">
+          <view class="line-container">
+            <view class="th">楼栋</view>
+            <view class="th">销售套数</view>
+            <view class="td">销售单价</view>
+          </view>
+          <block wx:for="{{item.build_list}}" wx:key="id">
+            <view class="line-container" data-keywords="{{item}}">
+              <view class="th">
+                {{item['销售楼号']}}
+              </view>
+              <view class="th">
+                {{item['批准销售套数']}}套
+              </view>
+              <view class="td">
+                {{item['住宅拟售价格(元/m2)']}}元/m2
+              </view>
+            </view>
+          </block>
+        </view>
         <view class="divider" />
-        <view class="item-more">
+        <view class="item-more" wx:if="{{showMore[item._id]}}" data-_id="{{item._id}}" data-value="{{true}}" bindtap="showMore">
+          收起
+        </view>
+        <view class="item-more" wx:if="{{!showMore[item._id]}}" data-_id="{{item._id}}" data-value="{{false}}" bindtap="showMore">
           更多
         </view>
       </view>
