@@ -199,6 +199,10 @@ function updateTabTxt(buildMap, allTypes, rangePrice, selected) {
       tabTxt.push(item)
       return tabTxt
     }
+  } else {
+    for (var [key, val] of buildMap.entries()) {
+      selected.build = key
+    }
   }
 
   item = {}

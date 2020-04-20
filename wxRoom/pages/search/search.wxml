@@ -15,7 +15,7 @@
   <view class="history-content">
     <block wx:if="{{index_data.history != false}}">
       <block wx:for="{{index_data.history}}" wx:key="id">
-        <view class="history-item" data-keywords="{{item}}" bindtap="go_to_search_result">{{item}}</view>
+        <view class="history-item" data-keywords="{{item}}" bindtap="go_to_search_result">{{item.name}}</view>
       </block>
     </block>
   </view>
@@ -25,7 +25,7 @@
   <view class="hot-content">
     <block wx:if="{{index_data.hot != false}}">
       <block wx:for="{{index_data.hot}}" wx:key="id">
-        <view class="hot-item" data-keywords="{{item}}" bindtap="go_to_search_result">{{item}}</view>
+        <view class="hot-item" data-keywords="{{item}}" bindtap="go_to_search_result">{{item.name}}</view>
       </block>
     </block>
   </view>

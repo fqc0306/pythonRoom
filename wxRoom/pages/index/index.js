@@ -27,7 +27,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: [],
-    searchKey: '',
+    searchKey: {},
     price: '',
     detail: '',
     isShow: false,
@@ -50,18 +50,17 @@ Page({
   //调用云函数
   getFileData: function () {
     let that = this
-    var fileName = ''
+    var currentItem = {}
 
-    if (this.data.searchKey != '' && typeof this.data.searchKey != 'undefined') {
-      fileName = this.data.searchKey
+    if (this.data.searchKey != null && typeof this.data.searchKey != 'undefined') {
+      currentItem = this.data.searchKey
     } else {
-      fileName = '燕西家园_京房售证字(2020)26号'
+      currentItem = {name:'燕西家园', fileName: '燕西家园_京房售证字(2020)26号'}
     }
-
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + fileName + '.json'
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + currentItem.fileName + '.json'
       }
     }).then(res => {
       var value = dataUtils.processFileData(res)
@@ -74,7 +73,7 @@ Page({
 
       var price = Math.floor(rangePrice.min) + '~' + Math.ceil(rangePrice.max)
       that.setData({
-        searchKey: fileName,
+        searchKey: currentItem,
         listData: allData,
         tabTxt: tabTxt,
         price: price,
@@ -94,7 +93,7 @@ Page({
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + fileName + '_dy.json'
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + currentItem.fileName + '_dy.json'
       }
     }).then(res => {
       var value = dataUtils.processDYFileData(res)
@@ -143,14 +142,18 @@ Page({
       })
     }
 
+    var param = {}
+    param['name'] = options.name
+    param['fileName'] = options.fileName
     this.setData({
-      searchKey: options.keywords
+      searchKey: param
     });
+
+    this.getFileData()
   },
 
   onReady: function () { },
   onShow: function (options) {
-    this.getFileData()
   },
 
   onShareAppMessage: function () { },

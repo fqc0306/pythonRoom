@@ -73,7 +73,8 @@ Page({
       return
     }
     wx.navigateTo({
-      url: "../index/index?keywords=" + e.currentTarget.dataset.keywords.name
+      url: "../index/index?name=" + e.currentTarget.dataset.keywords.name.split('_')[0] + "&fileName=" + e.currentTarget.dataset.keywords.name,
+      
     })
   },
 

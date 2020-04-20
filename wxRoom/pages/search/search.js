@@ -68,7 +68,7 @@ Page({
     var isValidKeyword = false
     for (var i = 0; i < searchData.length; i++) {
       var item = searchData[i]
-      if (item['name'] == keywords) {
+      if (item['name'] == keywords.fileName) {
         isValidKeyword = true
       }
     }
@@ -127,9 +127,14 @@ Page({
         wo_title: app.globalData.wo_title,
 
         "index_data.history": wx.getStorageSync(HISTORY_KEY),
-        "index_data.hot": ['燕西家园', '都会尚苑', '大湖风华嘉园', '悦谷新城家园', '东庭嘉园', '青年金色佳苑', '燕西华府家园', '畅茜园馥霞里', '花樊雅苑', '未来茂悦嘉园']
+        "index_data.hot": [{ name: '燕西家园', fileName: '燕西家园_京房售证字(2020)26号' }, 
+        { name: '都会尚苑', fileName: '都会尚苑_京房售证字(2020)25号' }, 
+        { name: '大湖风华嘉园', fileName: '大湖风华嘉园_京房售证字(2020)24号' }, 
+        { name: '悦谷新城家园', fileName: '悦谷新城家园_京房售证字(2020)23号' }, 
+        { name: '东庭嘉园', fileName: '东庭嘉园_京房售证字(2020)21号' }, 
+        { name: '青年金色佳苑', fileName: '青年金色佳苑_京房售证字(2020)19号' }]
       });
-    }, 300);
+    }, 0);
 
     this.getHotData()
   },
@@ -149,7 +154,7 @@ Page({
     wx.cloud.callFunction({
       name: 'dbInfo',
       data: {
-        file_id: 'all_building'
+        file_id: 'build_infos'
       }
     }).then(res => {
       searchData = res.result.data.slice(0, 30)

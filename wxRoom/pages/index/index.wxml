@@ -10,7 +10,7 @@
     </view>
   </view>
   <view class="page-header">
-    <text class="text-bold" wx:if="{{searchKey!=''}}" decode="{{true}}"> {{searchKey}} &emsp;&emsp;&emsp;总价:{{price}}万/套</text>
+    <text class="text-bold" wx:if="{{searchKey!=null}}" decode="{{true}}"> {{searchKey.name}} &emsp;&emsp;&emsp;总价:{{price}}万/套</text>
     <text class="text" wx:if="{{detail!=''}}"> {{detail}} </text>
   </view>
   <view class="divider"/>
