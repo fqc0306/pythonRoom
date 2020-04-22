@@ -10,24 +10,31 @@
     </view>
   </view>
   <view class="page-header">
-    <text class="text-bold" wx:if="{{searchKey!=null}}" decode="{{true}}"> {{searchKey.name}} &emsp;&emsp;&emsp;总价:{{price}}万/套</text>
+    <view class="line-container">
+      <view class="line-content-bold" wx:if="{{searchKey!=null}}" >
+        {{searchKey.name}} 
+      </view>
+      <view class="line-content-red" wx:if="{{price!=''}}">
+        {{price}}万/套
+      </view>
+    </view>
     <text class="text" wx:if="{{detail!=''}}"> {{detail}} </text>
   </view>
-  <view class="divider"/>
+  <view class="divider" />
   <include src="../pull/pull.wxml" />
-  <view class="divider"/>
+  <view class="divider" />
   <text class="chat_hint">房源户型分布</text>
   <view class="chart">
     <canvas class="canvas_pie" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
   </view>
-  <view class="divider-margin"/>
+  <view class="divider-margin" />
   <text class="chat_hint"> 房源总价分布 </text>
   <view class="chart">
     <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchHandler"></canvas>
   </view>
 
-  <view class="divider-margin"/>
-  <view class="userinfo" >
+  <view class="divider-margin" />
+  <view class="userinfo">
     <button class="user-login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 查看更多 </button>
     <block wx:else>
       <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>

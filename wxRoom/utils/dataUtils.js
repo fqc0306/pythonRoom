@@ -16,29 +16,49 @@ function processFileData(res) {
     var line = lines[j]
     var json = {}
     var i = 0
+    // { "id": 80, "build": "1", "project": "京房售证字(2020)24号", "unit": "5单元", "room": "102", "detail": { "房间号": "5单元-102", "规划设计用途": "住宅", "户型": "三室两厅", "建筑面积": "88.3300", "套内面积": "72.3800", "按建筑面积拟售单价": "38565", "按套内面积拟售单价": "47063.37" } },
+    // { "id": 81, "build": "1", "project": "京房售证字(2020)24号", "unit": "1单元", "room": "", "detail": { "房间号": "1单元--101", "用途": "戊类库房", "建筑面积(m2)": "87.7100", "套内面积(m2)": "71.3000" } },
 
     try {
       if (line != '') {
         json["build"] = line.build
         json["unit"] = line.unit
         json["room"] = line.room
-        json["square_all"] = parseFloat(line.detail['建筑面积']).toFixed(2)
-        json["square_in"] = parseFloat(line.detail['套内面积']).toFixed(2)
+        if (json["room"] == "") {
+          json["room"] = line.detail['房间号'].replace(line.unit + "-", "")
+        }
+        var temp = line.detail['建筑面积']
+        if (temp == null) {
+          temp = line.detail['建筑面积(m2)']
+        }
+        json["square_all"] = parseFloat(temp).toFixed(2)
+
+        var temp = line.detail['套内面积']
+        if (temp == null) {
+          temp = line.detail['套内面积(m2)']
+        }
+        json["square_in"] = parseFloat(temp).toFixed(2)
         json["price_all"] = parseInt(line.detail['按建筑面积拟售单价'])
         json["price_in"] = parseInt(line.detail['按套内面积拟售单价'])
         json["type"] = line.detail['户型']
         json["func"] = line.detail['规划设计用途']
+        if (json["func"] == null) {
+          json["func"] = line.detail['用途']
+        }
 
         var totalPrice = parseFloat(json.square_all) * parseFloat(json.price_all)
-        totalPrice = (totalPrice / 10000).toFixed(2)
-        json["price_total"] = "" + totalPrice
+        totalPrice = parseFloat((totalPrice / 10000).toFixed(2))
 
+        if (totalPrice == null || isNaN(totalPrice)) {
+          totalPrice = 0;
+        }
+        json["price_total"] = "" + totalPrice
         allData.push(json)
 
         if (totalPrice > maxPrice) {
           maxPrice = totalPrice
         }
-        if (minPrice == 0 || totalPrice < minPrice) {
+        if (minPrice == 0 || (totalPrice != 0 && totalPrice < minPrice)) {
           minPrice = totalPrice
         }
 
