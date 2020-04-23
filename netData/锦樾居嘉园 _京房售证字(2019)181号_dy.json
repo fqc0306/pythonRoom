@@ -151,7 +151,7 @@
  {"id": 31, "build": "A-3", "project": "京房售证字(2019)181号", "status": "d2691e", "unit": "2单元", "room": "901"},
  {"id": 32, "build": "A-3", "project": "京房售证字(2019)181号", "status": "33CC00", "unit": "2单元", "room": "902"},
  {"id": 33, "build": "A-3", "project": "京房售证字(2019)181号", "status": "33CC00", "unit": "1单元", "room": "801"},
- {"id": 34, "build": "A-3", "project": "京房售证字(2019)181号", "status": "FFCC99", "unit": "1单元", "room": "802"},
+ {"id": 34, "build": "A-3", "project": "京房售证字(2019)181号", "status": "d2691e", "unit": "1单元", "room": "802"},
  {"id": 35, "build": "A-3", "project": "京房售证字(2019)181号", "status": "33CC00", "unit": "2单元", "room": "801"},
  {"id": 36, "build": "A-3", "project": "京房售证字(2019)181号", "status": "33CC00", "unit": "2单元", "room": "802"},
  {"id": 37, "build": "A-3", "project": "京房售证字(2019)181号", "status": "33CC00", "unit": "1单元", "room": "701"},

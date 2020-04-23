@@ -221,7 +221,7 @@
  {"id": 28, "build": "21", "project": "京房售证字(2020)17号", "status": "33CC00", "unit": "4单元", "room": ""},
  {"id": 29, "build": "21", "project": "京房售证字(2020)17号", "status": "33CC00", "unit": "5单元", "room": ""},
  {"id": 30, "build": "21", "project": "京房售证字(2020)17号", "status": "33CC00", "unit": "5单元", "room": ""},
- {"id": 1, "build": "22", "project": "京房售证字(2020)17号", "status": "33CC00", "unit": "1单元", "room": "201"},
+ {"id": 1, "build": "22", "project": "京房售证字(2020)17号", "status": "00FFFF", "unit": "1单元", "room": "201"},
  {"id": 2, "build": "22", "project": "京房售证字(2020)17号", "status": "33CC00", "unit": "1单元", "room": "202"},
  {"id": 3, "build": "22", "project": "京房售证字(2020)17号", "status": "33CC00", "unit": "2单元", "room": "201"},
  {"id": 4, "build": "22", "project": "京房售证字(2020)17号", "status": "33CC00", "unit": "2单元", "room": "202"},
