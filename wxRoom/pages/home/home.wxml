@@ -56,7 +56,7 @@
           <view class="line-title">
             楼盘位置:
           </view>
-          <view class="line-content">
+          <view class="line-content-multi">
             {{item.info['坐落位置']}}
           </view>
         </view>

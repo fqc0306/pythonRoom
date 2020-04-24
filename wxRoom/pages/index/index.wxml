@@ -54,7 +54,7 @@
     </view>
     <block wx:for="{{listData}}" wx:key="index">
       <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-        <view class="td">{{item.build}}</view>
+        <view class="td">{{item.build.length > 6?item.build.slice(item.build.length-6, item.build.length):item.build}}</view>
         <view class="td">{{item.unit}}</view>
         <view class="td">{{item.room}}</view>
         <view class="td">{{item.square_all}}</view>

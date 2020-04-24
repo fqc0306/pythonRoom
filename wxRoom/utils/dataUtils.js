@@ -40,7 +40,12 @@ function processFileData(res) {
         json["square_in"] = parseFloat(temp).toFixed(2)
         json["price_all"] = parseInt(line.detail['按建筑面积拟售单价'])
         json["price_in"] = parseInt(line.detail['按套内面积拟售单价'])
-        json["type"] = line.detail['户型']
+
+        if (typeof (line.detail['户型']) == 'undefined') {
+          json["type"] = "无" + "(" + line.detail['用途'] + ")"
+        } else {
+          json["type"] = line.detail['户型']
+        }
         json["func"] = line.detail['规划设计用途']
         if (json["func"] == null) {
           json["func"] = line.detail['用途']
@@ -48,7 +53,6 @@ function processFileData(res) {
 
         var totalPrice = parseFloat(json.square_all) * parseFloat(json.price_all)
         totalPrice = parseFloat((totalPrice / 10000).toFixed(2))
-
         if (totalPrice == null || isNaN(totalPrice)) {
           totalPrice = 0;
         }
@@ -58,7 +62,7 @@ function processFileData(res) {
         if (totalPrice > maxPrice) {
           maxPrice = totalPrice
         }
-        if (minPrice == 0 || (totalPrice != 0 && totalPrice < minPrice)) {
+        if (minPrice == 0 || (totalPrice > 0 && totalPrice < minPrice)) {
           minPrice = totalPrice
         }
 
@@ -206,10 +210,12 @@ function processHomeData(dataList) {
     var totalRooms = 0
     for (var j = 0; j < item.build_list.length; j++) {
       var it = item.build_list[j]
-      var tempPrice = parseFloat(it["住宅拟售价格(元/m2)"]) * parseFloat(it["批准销售面积(m2)"])
-      totalPrice = totalPrice + tempPrice
-      totalSqr = totalSqr + parseFloat(it["批准销售面积(m2)"])
-      totalRooms = totalRooms + parseInt(it['批准销售套数'])
+      if (it["住宅拟售价格(元/m2)"].length > 0 && it["批准销售面积(m2)"].length > 0) {
+        var tempPrice = parseFloat(it["住宅拟售价格(元/m2)"]) * parseFloat(it["批准销售面积(m2)"])
+        totalPrice = totalPrice + tempPrice
+        totalSqr = totalSqr + parseFloat(it["批准销售面积(m2)"])
+        totalRooms = totalRooms + parseInt(it['批准销售套数'])
+      }
     }
     var avgPrice = totalPrice / totalSqr
     avgPrice = avgPrice.toFixed(2)

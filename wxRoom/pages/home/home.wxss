@@ -94,6 +94,17 @@
   -webkit-box-orient: vertical;
 }
 
+.line-content-multi {
+  width:70%;
+  display: flex;
+  font-size: 32rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /*这个数字是设置要显示省略号的行数*/
+  -webkit-box-orient: vertical;
+}
+
 .line-content-bold {
   width: 70%;
   font-weight: bold;
