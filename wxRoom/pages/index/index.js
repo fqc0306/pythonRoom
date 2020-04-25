@@ -50,23 +50,19 @@ Page({
     })
   },
   //调用云函数
-  getFileData: function () {
+  getFileData: function (searchKey, isFromOnload) {
     let that = this
-    var currentItem = {}
 
-    if (this.data.searchKey != null && typeof this.data.searchKey != 'undefined') {
-      currentItem = this.data.searchKey
-    }
-    if (lastSearch.fileName == currentItem.fileName) {
-      commonUtils.log("the same file name!", "")
+    if (lastSearch.fileName == searchKey.fileName) {
+      commonUtils.log("the same file name!", lastSearch.fileName)
       return
     }
-    lastSearch = currentItem
+    lastSearch = searchKey
 
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + currentItem.fileName + '.json'
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + searchKey.fileName + '.json'
       }
     }).then(res => {
       var value = dataUtils.processFileData(res)
@@ -79,7 +75,7 @@ Page({
 
       var price = Math.floor(rangePrice.min) + '~' + Math.ceil(rangePrice.max)
       that.setData({
-        searchKey: currentItem,
+        searchKey: searchKey,
         listData: allData,
         tabTxt: tabTxt,
         price: price,
@@ -99,7 +95,7 @@ Page({
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
-        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + currentItem.fileName + '_dy.json'
+        file_id: 'cloud://zhaoxinfang-i5zft.7a68-zhaoxinfang-i5zft-1301400512/BJ/' + searchKey.fileName + '_dy.json'
       }
     }).then(res => {
       var value = dataUtils.processDYFileData(res)
@@ -156,13 +152,18 @@ Page({
       searchKey: param
     });
 
-    this.getFileData()
+    this.getFileData(param, true)
   },
 
   onReady: function () { },
-  onShow: function (options) {
+
+  onShow: function (options) {//search页面跳转时, 参数在data中
     commonUtils.log("onshow:", options)
-    this.getFileData()
+    this.getFileData(this.data.searchKey, false)
+  },
+
+  onUnload: function() {
+    lastSearch = {}
   },
 
   onShareAppMessage: function () { },
