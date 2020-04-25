@@ -1,3 +1,5 @@
+var commonUtils = require("./commonUtils.js")
+
 //处理一个楼盘面积/价格等信息
 function processFileData(res) {
   var j = 0

@@ -3,6 +3,7 @@
 var wxCharts = require("../../utils/wxcharts.js");
 var dataUtils = require("../../utils/dataUtils.js")
 var viewUtils = require("../../utils/viewUtils.js")
+var commonUtils = require("../../utils/commonUtils.js")
 var pullUtils = require("../pull/pull.js")
 
 var NOT_SALE = "CCCCCC" //不可售
@@ -57,7 +58,7 @@ Page({
       currentItem = this.data.searchKey
     }
     if (lastSearch.fileName == currentItem.fileName) {
-      console.log("the same file name!")
+      commonUtils.log("the same file name!", "")
       return
     }
     lastSearch = currentItem
@@ -90,9 +91,9 @@ Page({
       } else {
         console.error("no data!")
       }
-      console.log('[file info] result：', res)
+      commonUtils.log('[file info] result：', res)
     }).catch(err => {
-      console.log('[file info] 失败：', err)
+      commonUtils.error('[file info] 失败：', err)
     })
 
     wx.cloud.callFunction({
@@ -104,7 +105,7 @@ Page({
       var value = dataUtils.processDYFileData(res)
       var allData = value[0]
       var allStatus = value[1]
-      console.log("status:", allStatus)
+      commonUtils.log("status:", allStatus)
 
       // var tabTxt = viewUtils.updateTabTxt(buildMap, allTypes, rangePrice, {})
 
@@ -113,7 +114,7 @@ Page({
         detail: detail
       })
     }).catch(err => {
-      console.log('[file info] 失败：', err)
+      commonUtils.error('[file info] 失败：', err)
     })
 
   },
@@ -147,7 +148,7 @@ Page({
       })
     }
 
-    console.log("onload:", options)
+    commonUtils.log("onload:", options)
     var param = {}
     param['name'] = options.name
     param['fileName'] = options.fileName
@@ -160,14 +161,14 @@ Page({
 
   onReady: function () { },
   onShow: function (options) {
-    console.log("onshow:", options)
+    commonUtils.log("onshow:", options)
     this.getFileData()
   },
 
   onShareAppMessage: function () { },
 
   getUserInfo: function (e) {
-    console.log("getUserInfo:", e)
+    commonUtils.log("getUserInfo:", e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -190,8 +191,8 @@ Page({
     this.lineChart.showToolTip(e, {
       // background: '#7cb5ec',
       format: function (item, category) {
-        console.log("item:", item)
-        console.log("category", category)
+        commonUtils.log("item:", item)
+        commonUtils.log("category", category)
         return category + ' ' + item.name + ':' + item.data
       }
     });
@@ -202,8 +203,8 @@ Page({
     this.pieChart.showToolTip(e, {
       // background: '#7cb5ec',
       format: function (item, category) {
-        console.log("item:", item)
-        console.log("category", category)
+        commonUtils.log("item:", item)
+        commonUtils.log("category", category)
         return category + ' ' + item.name + ':' + item.data
       }
     });

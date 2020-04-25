@@ -1,3 +1,4 @@
+var commonUtils = require("../../utils/commonUtils.js")
 const app = getApp();
 
 Page({
@@ -22,7 +23,6 @@ Page({
 
   // 监听输入
   watchSearch: function(event) {
-    console.log(event.detail.value);
     let keywords = event.detail.value;
     // 设置值
     this.setData({
@@ -36,13 +36,11 @@ Page({
       }
     }
   }) {
-    console.log(keywords);
     if (keywords == '') {
       return tips.showMsg("请输入要搜索的内容");
     }
 
     const uid = app.globalData.uid;
-    console.log(uid);
   },
 
 
@@ -51,7 +49,7 @@ Page({
    */
   onLoad: function(options) {
     // 能获取到参数
-    console.log(options.keywords);
+    commonUtils.log("keywords", options.keywords);
     // 设置值
     this.setData({
       "keywords": options.keywords
@@ -65,7 +63,6 @@ Page({
     // 获取不到参数
     let keywords = this.data.keywords;
     const uid = app.globalData.uid;
-    console.log(uid);
   
   },
 

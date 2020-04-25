@@ -1,5 +1,6 @@
 var wxCharts = require("./wxcharts.js");
 var dataUtils = require("./dataUtils.js")
+var commonUtils = require("./commonUtils.js")
 
 //data:{[],[],[build:"1",room:"801"...]}
 function showGraph(id, data, rangePrice) {
@@ -27,7 +28,7 @@ function showGraph(id, data, rangePrice) {
   }
   seriesList.push(item)
 
-  console.log("series:", seriesList)
+  commonUtils.log("series:", seriesList)
   var charts = new wxCharts({ //当月用电折线图配置
     canvasId: id,
     type: 'line',
@@ -73,7 +74,7 @@ function showPieChart(id, data) {
     item.data = value
     seriesList.push(item)
   }
-  console.log("map:", map)
+  commonUtils.log("map:", map)
   var charts = new wxCharts({
 
     canvasId: id,
@@ -103,7 +104,7 @@ function showPieChart(id, data) {
 //project:{"京房售证字1**":["A-1",'A-2'], "京房售证字2**":["A-11"]}
 //buildMap:{'A-1':['1单元','2单元','3单元'],'A-2':['1单元','2单元']}
 function updateTabTxt(buildMap, allTypes, rangePrice, selected) {
-  console.log("selected", selected)
+  commonUtils.log("selected", selected)
   var tabTxt = []
   var item = {}
 

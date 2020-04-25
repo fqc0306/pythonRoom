@@ -1,6 +1,7 @@
 // pages/home/home.js
 const app = getApp();
 var dataUtils = require("../../utils/dataUtils.js")
+var commonUtils = require("../../utils/commonUtils.js")
 var showMoreTap = false
 
 Page({
@@ -58,12 +59,12 @@ Page({
     }).then(res => {
       var builds = res.result.data.slice(0, 30)
       builds = dataUtils.processHomeData(builds)
-      console.log(builds)
+      commonUtils.log("builds", builds)
       this.setData({
         builds: builds
       });
     }).catch(err => {
-      console.log('[hot data] 失败：', err)
+      commonUtils.error('[hot data] 失败：', err)
     })
   },
 

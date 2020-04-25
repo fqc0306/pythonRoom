@@ -1,3 +1,5 @@
+var commonUtils = require("../../utils/commonUtils.js")
+
 var selected = {}
 function filterTab(e, that) {
   var data = JSON.parse(JSON.stringify(that.data.tabTxt));
@@ -57,7 +59,7 @@ function filterTabChild(e, that, callback) {
   that.setData({
     tabTxt: data
   })
-  console.log(that.data.filterParam);
+  commonUtils.log("filter params", that.data.filterParam);
   callback(selected)
 }
 

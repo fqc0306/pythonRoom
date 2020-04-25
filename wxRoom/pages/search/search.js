@@ -1,6 +1,7 @@
 // https://www.cnblogs.com/jiqing9006/p/12191158.html
 const app = getApp();
 var dataUtils = require("../../utils/dataUtils.js")
+var commonUtils = require("../../utils/commonUtils.js")
 var searchData = null; //[{id:1,name:"project_name",url:"**"}]
 var HISTORY_KEY = 'history'
 var HOT_KEY = 'hot'
@@ -42,7 +43,7 @@ Page({
   },
   // 监听输入
   watchSearch: function (event) {
-    console.log(event.detail.value);
+    commonUtils.log("watch event", event.detail.value);
     let keywords = event.detail.value;
     // 设置值
     this.setData({
@@ -131,7 +132,7 @@ Page({
    */
   onShow: function (options) {
     const uid = app.globalData.uid;
-    console.log(uid);
+    commonUtils.log("uid", uid);
     setTimeout(() => {
       this.setData({
         wo_title: app.globalData.wo_title,
@@ -174,7 +175,7 @@ Page({
         "index_data.hot": names
       });
     }).catch(err => {
-      console.log('[hot data] 失败：', err)
+      commonUtils.error('[hot data] 失败：', err)
     })
   },
 });
