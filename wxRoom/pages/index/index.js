@@ -144,9 +144,12 @@ Page({
       })
     }
 
-    commonUtils.log("onload:", options)
     var param = {}
-    param['name'] = options.name
+    if (options.alias == null) {
+      param['name'] = options.fileName.split("_")[0]
+    } else {
+      param['name'] = options.alias + "," + options.fileName.split("_")[0]
+    }
     param['fileName'] = options.fileName
     this.setData({
       searchKey: param
@@ -158,11 +161,10 @@ Page({
   onReady: function () { },
 
   onShow: function (options) {//search页面跳转时, 参数在data中
-    commonUtils.log("onshow:", options)
     this.getFileData(this.data.searchKey, false)
   },
 
-  onUnload: function() {
+  onUnload: function () {
     lastSearch = {}
   },
 
@@ -218,7 +220,8 @@ Page({
 
   filterTabChild: function (e) {
     pullUtils.filterTabChild(e, this, onTabChanged)
-  }
+  },
+
 });
 
 function onTabChanged(filterParams) {

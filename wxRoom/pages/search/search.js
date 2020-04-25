@@ -85,11 +85,11 @@ Page({
       var prevPage = pages[pages.length - 2];  //上一个页面
 
       if (prevPage.route == "pages/index/index") {
-        //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+        //直接调用上一个页面的setData()方法，把数据存到上一个页面中去,route到onshow
         prevPage.setData({
           searchKey: keywords
         })
-      } else {
+      } else {//route到onload
         wx.navigateTo({
           url: "../index/index?name=" + keywords.name + "&fileName=" + keywords.fileName
         })

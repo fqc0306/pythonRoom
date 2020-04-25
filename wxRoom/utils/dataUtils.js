@@ -229,6 +229,23 @@ function processHomeData(dataList) {
   return result
 }
 
+function processMapData(dataList, maps) {
+  var result = []
+
+  for (var i = 0; i < dataList.length; i++) {
+    var item = dataList[i]
+    for (var j = 0; j < maps.length; j++) {
+      var map = maps[j]
+      if (map.name == item.name) {
+        item.alias = map.alias
+        break
+      }
+    }
+    result.push(item)
+  }
+  return result
+}
+
 //filters: { build: "A - 11", project: "京房售证字(2020)21号", range:{min:100, max:200} }
 function filtByParams(data, filters) {
   var result = []
@@ -251,5 +268,6 @@ module.exports = {
   processHotData: processHotData,
   processHomeData: processHomeData,
   filtByParams: filtByParams,
-  processDYFileData: processDYFileData
+  processDYFileData: processDYFileData,
+  processMapData: processMapData
 }

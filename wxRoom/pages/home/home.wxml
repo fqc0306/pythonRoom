@@ -13,7 +13,7 @@
       <view class="home-item" data-keywords="{{item}}" bindtap="go_to_detail">
         <view class="line-container">
           <view class="line-content-bold">
-            {{item.info['项目名称']}}
+            {{item.alias == null?item.info['项目名称'] : item.alias + "," + item.info['项目名称']}}
           </view>
           <view class="line-content-red">
             {{item.info['avg_price']}}元/平
