@@ -19,6 +19,7 @@ var allData
 var buildMap
 var allTypes
 var rangePrice
+var lastSearch = {}
 // selected: { build: "A - 11", project: "京房售证字(2020)21号" }
 
 Page({
@@ -54,9 +55,13 @@ Page({
 
     if (this.data.searchKey != null && typeof this.data.searchKey != 'undefined') {
       currentItem = this.data.searchKey
-    } else {
-      currentItem = {name:'燕西家园', fileName: '燕西家园_京房售证字(2020)26号'}
     }
+    if (lastSearch.fileName == currentItem.fileName) {
+      console.log("the same file name!")
+      return
+    }
+    lastSearch = currentItem
+
     wx.cloud.callFunction({
       name: 'fileInfo',
       data: {
@@ -142,6 +147,7 @@ Page({
       })
     }
 
+    console.log("onload:", options)
     var param = {}
     param['name'] = options.name
     param['fileName'] = options.fileName
@@ -154,6 +160,8 @@ Page({
 
   onReady: function () { },
   onShow: function (options) {
+    console.log("onshow:", options)
+    this.getFileData()
   },
 
   onShareAppMessage: function () { },

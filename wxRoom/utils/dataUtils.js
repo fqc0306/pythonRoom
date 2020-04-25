@@ -186,9 +186,9 @@ function updateGraphData(data, xCoordList, yTotalList, yAvrList, buildLimit) {
 function processHotData(dataList) {
   var result = []
   for (var i = 0; i < dataList.length; i++) {
-    var temp
+    var temp = {}
     temp.name = dataList[i].name.split('_')[0]
-    temp.fileName = dataList[i].name.split('_')[1]
+    temp.fileName = dataList[i].name
     for (var j = 0; j < result.length; j++) {
       if (result[j].name == temp.name) {
         temp.name = temp.fileName.replace('_京房售证字', '')

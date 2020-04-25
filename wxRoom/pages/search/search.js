@@ -15,6 +15,7 @@ Page({
   },
   // 清理
   clearSearchHistory: function () {
+    var that = this
     wx.showModal({
       title: '清理历史',
       content: '确定要清理历史？',
@@ -26,7 +27,8 @@ Page({
         wx.showToast({
           title: '清理成功',
         })
-        this.setData({
+        wx.setStorageSync(HISTORY_KEY, [])
+        that.setData({
           "index_data.history": []
         });
       },
@@ -70,6 +72,7 @@ Page({
       var item = searchData[i]
       if (item['name'] == keywords.fileName) {
         isValidKeyword = true
+        break
       }
     }
 
@@ -80,13 +83,20 @@ Page({
       var currPage = pages[pages.length - 1];   //当前页面
       var prevPage = pages[pages.length - 2];  //上一个页面
 
-      //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-      prevPage.setData({
-        searchKey: keywords
-      })
+      if (prevPage.route == "pages/index/index") {
+        //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+        prevPage.setData({
+          searchKey: keywords
+        })
+      } else {
+        wx.navigateTo({
+          url: "../index/index?name=" + keywords.name + "&fileName=" + keywords.fileName
+        })
+      }
+
     } else {
       wx.redirectTo({
-        url: "../searchResult/searchResult?keywords=" + keywords
+        url: "../searchResult/searchResult?keywords=" + keywords.name
       });
     }
   },
@@ -127,11 +137,11 @@ Page({
         wo_title: app.globalData.wo_title,
 
         "index_data.history": wx.getStorageSync(HISTORY_KEY),
-        "index_data.hot": [{ name: '燕西家园', fileName: '燕西家园_京房售证字(2020)26号' }, 
-        { name: '都会尚苑', fileName: '都会尚苑_京房售证字(2020)25号' }, 
-        { name: '大湖风华嘉园', fileName: '大湖风华嘉园_京房售证字(2020)24号' }, 
-        { name: '悦谷新城家园', fileName: '悦谷新城家园_京房售证字(2020)23号' }, 
-        { name: '东庭嘉园', fileName: '东庭嘉园_京房售证字(2020)21号' }, 
+        "index_data.hot": [{ name: '燕西家园', fileName: '燕西家园_京房售证字(2020)26号' },
+        { name: '都会尚苑', fileName: '都会尚苑_京房售证字(2020)25号' },
+        { name: '大湖风华嘉园', fileName: '大湖风华嘉园_京房售证字(2020)24号' },
+        { name: '悦谷新城家园', fileName: '悦谷新城家园_京房售证字(2020)23号' },
+        { name: '东庭嘉园', fileName: '东庭嘉园_京房售证字(2020)21号' },
         { name: '青年金色佳苑', fileName: '青年金色佳苑_京房售证字(2020)19号' }]
       });
     }, 0);
