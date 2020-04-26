@@ -118,6 +118,40 @@ def getAllRoom(name, whichBuild, url, whichProject, allRoomDict, allStatusDict):
 
 	print(alldivs.__len__())
 
+def getMoreBuildInfo(name, url, projectId, allStatusDict, allRoomDict, allItems):
+	soup = getSoupByUrl(url)
+
+	itemInfo = collections.OrderedDict()
+	titleInfo = []
+	index = 0
+
+	if (soup.find_all(id="Span1").__len__() > 0 and soup.find_all(id="Span1")[0].find_all("table").__len__() > 0):
+		infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
+		titles = soup.find_all("table")[0].find_all('th', {'scope':'col'})
+
+		for title in titles:
+			titleText = title.text.encode('utf-8').replace('　', '')
+			titleText = unicode(titleText, "utf-8")
+			print(titleText)
+			titleInfo.append(titleText)
+
+		for info in infos:
+			infoText = info.text.encode('utf-8').replace('　', '')
+			infoText = unicode(infoText, "utf-8")
+
+			print(infoText)
+			if info.find("a") != None:
+				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
+				getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
+
+			itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
+
+			if (itemInfo.__len__() > 0 and itemInfo.__len__() == titleInfo.__len__()) :
+				allItems.append(itemInfo)
+				itemInfo = collections.OrderedDict()
+			index = index + 1
+
+
 #楼盘中所有楼栋
 def getProjectInfo(name, url, projectId):
 	soup = getSoupByUrl(url)
@@ -137,7 +171,7 @@ def getProjectInfo(name, url, projectId):
 		return False
 
 	indexTotal = indexTotal + 1
-	print('enter!!!')
+	
 	# 获取楼盘地址，开发商等信息
 	tableInfos = soup.find_all(id="newslist")[0].find_all("td")
 	for i in range(tableInfos.__len__()/2):
@@ -151,26 +185,37 @@ def getProjectInfo(name, url, projectId):
 	allStatusDict = []
 
 	#获取楼盘所有楼栋的基本信息
-	if (soup.find_all(id="Span1").__len__() > 0 and soup.find_all(id="Span1")[0].find_all("table").__len__() > 0):
-		infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
-		for info in infos:
+	
+	if (soup.find_all(id="Span1").__len__() > 0 and soup.find_all('table',{'class':'cont_titlebg2'}) > 0):
+		tables = soup.find_all('table',{'class':'cont_titlebg2'})
 
-			infoText = info.text.encode('utf-8').replace('　', '')
-			infoText = unicode(infoText, "utf-8")
+		moreLink = None
+		for sibling in tables[0].next_siblings:
+			if(sibling.find("a")>0):
+				moreLink = "http://bjjs.zjw.beijing.gov.cn" + sibling.find("a").get("href")#更多楼盘
+				getMoreBuildInfo(name, moreLink, projectId, allStatusDict, allRoomDict, allItems)
+				break
 
-			if info.find("a") != None:
-				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
-				getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
+		if (moreLink == None and tables[0].find_all("table").__len__()>0) :#没有有更多楼栋
+			infos = tables[0].find_all("table")[0].find_all("td")
+			for info in infos:
 
-			if info.find("strong") != None:	#表格的title 均为粗体, --批准销售套数 等内容
-				titleInfo.append(infoText)
-			else :
-				itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
+				infoText = info.text.encode('utf-8').replace('　', '')
+				infoText = unicode(infoText, "utf-8")
 
-			if (itemInfo.__len__() > 0 and itemInfo.__len__() == titleInfo.__len__()) :
-				allItems.append(itemInfo)
-				itemInfo = collections.OrderedDict()
-			index = index + 1
+				if info.find("a") != None:
+					url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
+					getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
+
+				if info.find("strong") != None:	#表格的title 均为粗体, --批准销售套数 等内容
+					titleInfo.append(infoText)
+				else :
+					itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
+
+				if (itemInfo.__len__() > 0 and itemInfo.__len__() == titleInfo.__len__()) :
+					allItems.append(itemInfo)
+					itemInfo = collections.OrderedDict()
+				index = index + 1
 
 	writeFile(allStatusDict, name + "_" + projectId + "_dy.json", False)#写入所有栋楼的所有房间信息
 	writeFile(allRoomDict, name + "_" + projectId + ".json", False)
@@ -187,7 +232,7 @@ def getProjectInfo(name, url, projectId):
 timeStr = str(long(time.time())/(24*60*60))
 indexTotal = 0
 startIndex = 0
-endIndex = 28
+endIndex = 1
 
 #地区内所有楼盘内容
 for page in range(0, 10):
