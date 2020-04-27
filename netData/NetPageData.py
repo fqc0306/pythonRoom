@@ -123,33 +123,51 @@ def getMoreBuildInfo(name, url, projectId, allStatusDict, allRoomDict, allItems)
 
 	itemInfo = collections.OrderedDict()
 	titleInfo = []
-	index = 0
 
 	if (soup.find_all(id="Span1").__len__() > 0 and soup.find_all(id="Span1")[0].find_all("table").__len__() > 0):
-		infos = table = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("td")
-		titles = soup.find_all("table")[0].find_all('th', {'scope':'col'})
 
+		titles = soup.find_all("table")[0].find_all('th', {'scope':'col'})
 		for title in titles:
 			titleText = title.text.encode('utf-8').replace('　', '')
 			titleText = unicode(titleText, "utf-8")
 			print(titleText)
 			titleInfo.append(titleText)
 
+		infos = soup.find_all(id="Span1")[0].find_all("table")[0].find_all("tr")
+		
 		for info in infos:
-			infoText = info.text.encode('utf-8').replace('　', '')
-			infoText = unicode(infoText, "utf-8")
+			tds = info.find_all("td")
+			if (tds == None or tds.__len__() == 0) :
+				continue
+			index = 0
+			lastUrl = None
+			for td in tds:
+				
+				infoText = td.text.encode('utf-8').replace('　', '').replace('\n', '').replace('\t', '').replace('\r', '')
+				infoText = unicode(infoText, "utf-8")
 
-			print(infoText)
-			if info.find("a") != None:
-				url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
-				getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
+				print(infoText)
+				if td.find("a") != None:
+					url = td.find("a").get("href").encode('utf-8').replace('\n', '').replace('\t', '').replace('\r', '')
+					url = unicode(url, "utf-8")
+					url = "http://bjjs.zjw.beijing.gov.cn" + url
 
-			itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
+					text = td.find("a").text.encode('utf-8').replace('　', '').replace('\n', '').replace('\t', '').replace('\r', '')
+					text = unicode(text, "utf-8")
 
-			if (itemInfo.__len__() > 0 and itemInfo.__len__() == titleInfo.__len__()) :
-				allItems.append(itemInfo)
-				itemInfo = collections.OrderedDict()
-			index = index + 1
+					if (text != None and text != '') :
+						itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
+
+					if (lastUrl != url) :
+						lastUrl = url
+						getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
+
+				itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
+				index = index + 1
+
+			allItems.append(itemInfo)
+			itemInfo = collections.OrderedDict()
+			
 
 
 #楼盘中所有楼栋
