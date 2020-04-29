@@ -70,13 +70,13 @@
           <block wx:for="{{item.build_list}}" wx:key="id">
             <view class="line-more-container" data-keywords="{{item}}">
               <view class="th">
-                {{item['销售楼号']}}
+                {{item['销售楼号']==null?item['销售楼名']:item['销售楼号']}}
               </view>
               <view class="th">
                 {{item['批准销售套数']}}套
               </view>
               <view class="td">
-                {{item['住宅拟售价格(元/m2)']}}元/m2
+                {{item['住宅拟售价格(元/m2)']==null?item['预售住宅拟售均价(元/m2)']:item['住宅拟售价格(元/m2)']}}元/m2
               </view>
             </view>
           </block>

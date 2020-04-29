@@ -211,12 +211,21 @@ function processHomeData(dataList) {
     var totalSqr = 0
     var totalRooms = 0
     for (var j = 0; j < item.build_list.length; j++) {
-      var it = item.build_list[j]
-      if (it["住宅拟售价格(元/m2)"].length > 0 && it["批准销售面积(m2)"].length > 0) {
-        var tempPrice = parseFloat(it["住宅拟售价格(元/m2)"]) * parseFloat(it["批准销售面积(m2)"])
-        totalPrice = totalPrice + tempPrice
-        totalSqr = totalSqr + parseFloat(it["批准销售面积(m2)"])
-        totalRooms = totalRooms + parseInt(it['批准销售套数'])
+      try {
+        var it = item.build_list[j]
+        var price = it["住宅拟售价格(元/m2)"]
+        if (typeof (price) == 'undefined') {
+          price = it["预售住宅拟售均价(元/m2)"]
+        }
+
+        if (price.length > 0 && it["批准销售面积(m2)"].length > 0) {
+          var tempPrice = parseFloat(price) * parseFloat(it["批准销售面积(m2)"])
+          totalPrice = totalPrice + tempPrice
+          totalSqr = totalSqr + parseFloat(it["批准销售面积(m2)"])
+          totalRooms = totalRooms + parseInt(it['批准销售套数'])
+        }
+      } catch (err) {
+        commonUtils.error(err)
       }
     }
     var avgPrice = totalPrice / totalSqr
