@@ -89,7 +89,7 @@ Page({
     }
     var alias = ""
     if (e.currentTarget.dataset.keywords.alias != null) {
-      alias = "&alias =" + e.currentTarget.dataset.keywords.alias.join(",")
+      alias = "&alias=" + e.currentTarget.dataset.keywords.alias.join(",")
     }
     wx.navigateTo({
       url: "../index/index?fileName=" + e.currentTarget.dataset.keywords.name + alias,

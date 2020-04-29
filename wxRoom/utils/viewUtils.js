@@ -80,7 +80,7 @@ function showPieChart(id, data) {
     canvasId: id,
 
     type: 'pie',
-
+    animation: false,
     series: seriesList,
     width: 320,
     height: 190,
