@@ -23,7 +23,7 @@ function processFileData(res) {
 
     try {
       if (line != '') {
-        json["build"] = line.build
+        json["build"] = line.build.length > 6 ? '..' + line.build.slice(line.build.length - 6) : line.build
         json["unit"] = line.unit
         json["room"] = line.room
         if (json["room"] == "") {
