@@ -11,29 +11,46 @@
   </view>
   <view class="page-header">
     <view class="line-container">
-      <view class="line-content-bold" wx:if="{{searchKey!=null}}" >
-        {{searchKey.name}} 
+      <view class="line-content-bold" wx:if="{{searchKey!=null}}">
+        {{searchKey.name}}
       </view>
       <view class="line-content-red" wx:if="{{price!=''}}">
         {{price}}万/套
       </view>
     </view>
-    <text class="text" wx:if="{{detail!=''}}"> {{detail}} </text>
+    <text class="text"> {{detail}} </text>
   </view>
   <view class="divider" />
-  <include src="../pull/pull.wxml" />
-  <view class="divider" />
-  <text class="chat_hint">房源户型分布</text>
-  <view class="chart">
-    <canvas class="canvas_pie" canvas-id="pie_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
+  <include wx:if="{{isFinishLoad}}" src="../pull/pull.wxml" />
+  <view wx:if="{{!isFinishLoad}}">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
   </view>
-  <view class="divider-margin" />
-  <text class="chat_hint"> 房源总价分布 </text>
-  <view class="chart">
-    <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchHandler"></canvas>
+  <view wx:if="{{isFinishLoad}}">
+    <view class="divider" />
+    <text class="chat_hint">房源价格分布</text>
+    <view class="chart">
+      <canvas class="canvas_pie" canvas-id="pie_graph_price" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
+    </view>
+  </view>
+  <view wx:if="{{isFinishLoad}}">
+    <view class="divider" />
+    <text class="chat_hint">房源户型分布</text>
+    <view class="chart">
+      <canvas class="canvas_pie" canvas-id="pie_graph_type" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
+    </view>
+  </view>
+  <view wx:if="{{false && isFinishLoad}}">
+    <view class="divider-margin" />
+    <text class="chat_hint"> 房源总价分布 </text>
+    <view class="chart">
+      <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchHandler"></canvas>
+    </view>
   </view>
 
-  <view class="divider-margin" />
   <view class="userinfo">
     <button class="user-login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 查看更多 </button>
     <block wx:else>

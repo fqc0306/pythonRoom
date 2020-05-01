@@ -36,7 +36,7 @@ Page({
 
     tabTxt: [],
     filterParam: [],
-
+    isFinishLoad: false
   },
   //事件处理函数
   bindViewTap: function () {
@@ -79,11 +79,13 @@ Page({
         listData: allData,
         tabTxt: tabTxt,
         price: price,
+        isFinishLoad: true
       })
 
       if (allData != null || allData.length > 0) {
-        this.lineChart = viewUtils.showGraph('line_graph', allData, rangePrice)
-        this.pieChart = viewUtils.showPieChart('pie_graph', allData)
+        // this.lineChart = viewUtils.showGraph('line_graph', allData, rangePrice)
+        this.pieChart = viewUtils.showPieChart('pie_graph_price', allData)
+        this.pieChart = viewUtils.showPieChart('pie_graph_type', allData)
       } else {
         console.error("no data!")
       }
@@ -102,8 +104,6 @@ Page({
       var allData = value[0]
       var allStatus = value[1]
       commonUtils.log("status:", allStatus)
-
-      // var tabTxt = viewUtils.updateTabTxt(buildMap, allTypes, rangePrice, {})
 
       var detail = '共' + allData.length + '套 在售:' + allStatus[ON_SALE] + '套'
       that.setData({
