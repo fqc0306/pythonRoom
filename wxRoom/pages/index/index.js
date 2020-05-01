@@ -84,8 +84,9 @@ Page({
 
       if (allData != null || allData.length > 0) {
         // this.lineChart = viewUtils.showGraph('line_graph', allData, rangePrice)
-        this.pieChart = viewUtils.showPieChart('pie_graph_price', allData)
-        this.pieChart = viewUtils.showPieChart('pie_graph_type', allData)
+        this.pieChartPrice = viewUtils.showPieChart('pie_graph_price', allData)
+        this.pieChartType = viewUtils.showPieChart('pie_graph_type', allData)
+        this.pieChartFunc = viewUtils.showPieChart('pie_graph_func', allData)
       } else {
         console.error("no data!")
       }
@@ -203,7 +204,7 @@ Page({
 
   touchPieHandler: function (e) {
 
-    this.pieChart.showToolTip(e, {
+    this.pieChartType.showToolTip(e, {
       // background: '#7cb5ec',
       format: function (item, category) {
         commonUtils.log("item:", item)
@@ -229,8 +230,10 @@ function onTabChanged(filterParams) {
   var filtData = dataUtils.filtByParams(allData, filterParams)
 
   if (filtData != null && filtData.length > 0) {
-    page.lineChart = viewUtils.showGraph('line_graph', filtData, rangePrice)
-    page.pieChart = viewUtils.showPieChart('pie_graph', filtData)
+    // page.lineChart = viewUtils.showGraph('line_graph', filtData, rangePrice)
+    page.pieChartPrice = viewUtils.showPieChart('pie_graph_price', filtData)
+    page.pieChartType = viewUtils.showPieChart('pie_graph_type', filtData)
+    page.pieChartFunc = viewUtils.showPieChart('pie_graph_func', filtData)
   } else {
     console.error("no data!")
   }

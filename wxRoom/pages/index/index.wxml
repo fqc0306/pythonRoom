@@ -31,21 +31,30 @@
   </view>
   <view wx:if="{{isFinishLoad}}">
     <view class="divider" />
-    <text class="chat_hint">房源价格分布</text>
+    <text class="chat_hint">价格分布</text>
     <view class="chart">
       <canvas class="canvas_pie" canvas-id="pie_graph_price" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
     </view>
   </view>
   <view wx:if="{{isFinishLoad}}">
     <view class="divider" />
-    <text class="chat_hint">房源户型分布</text>
+    <text class="chat_hint">户型分布</text>
     <view class="chart">
       <canvas class="canvas_pie" canvas-id="pie_graph_type" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
     </view>
   </view>
+
+  <view wx:if="{{isFinishLoad}}">
+    <view class="divider" />
+    <text class="chat_hint">规划用途分布</text>
+    <view class="chart">
+      <canvas class="canvas_pie" canvas-id="pie_graph_func" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchPieHandler"></canvas>
+    </view>
+  </view>
+
   <view wx:if="{{false && isFinishLoad}}">
     <view class="divider-margin" />
-    <text class="chat_hint"> 房源总价分布 </text>
+    <text class="chat_hint"> 总价分布 </text>
     <view class="chart">
       <canvas class="canvas_line" canvas-id="line_graph" wx:if="{{listData.length != 0}}" binderror="canvasIdErrorCallback" bindtouchstart="touchHandler"></canvas>
     </view>

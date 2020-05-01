@@ -23,7 +23,7 @@ function showGraph(id, data, rangePrice) {
   var item = {}
   item.name = "房屋总价"
   item.data = yTotalList
-  item.format = function(val, name) {
+  item.format = function (val, name) {
     return val + '百万';
   }
   seriesList.push(item)
@@ -40,7 +40,7 @@ function showGraph(id, data, rangePrice) {
     },
     yAxis: {
       title: '总价(万)',
-      format: function(val) {
+      format: function (val) {
         return val.toFixed(1);
       },
       max: Math.ceil(rangePrice.max / 50) * 50,
@@ -56,25 +56,64 @@ function showGraph(id, data, rangePrice) {
   });
   return charts
 }
-
+function compare(a, b) {
+  return a.price_total - b.price_total
+}
 function showPieChart(id, data) {
-  var map = new Map()
-  for (var i = 0; i < data.length; i++) {
-    var num = map.get(data[i].type)
-    if (num == null) {
-      num = 0
+  var seriesList = []
+  if (id == 'pie_graph_price') {
+    //实时运算当前数据的最大值和最小值,车位等类型除外
+    data.sort(compare)
+    var min = data[0].price_total
+    var max = data[data.length - 1].price_total
+
+    max = Math.ceil(max / 100) * 100
+    min = Math.floor(min / 100) * 100
+    var level = min
+    var index = 0
+    var step = 50 * Math.floor((max - min) / 5 / 60)
+    step = (step == 0 ? 50 : step)
+    console.log("min max2 step:", min, max, step)
+
+    var map = new Map()
+    for (i = 0; i < data.length; i++) {
+      var num = Math.ceil((data[i].price_total - level) / step)
+      var key = (level + step * num) + "~" + (level + step * (num + 1)) + "万"
+      var value = map.get(key)
+      if (value == null) {
+        value = 0
+      }
+      map.set(key, ++value)
     }
-    map.set(data[i].type, num + 1)
+  } else if (id == 'pie_graph_type' || id == 'pie_graph_func') {
+    var map = new Map()
+    for (var i = 0; i < data.length; i++) {
+
+      if (id == 'pie_graph_type') {
+        var num = map.get(data[i].type)
+        if (num == null) {
+          num = 0
+        }
+        map.set(data[i].type, num + 1)
+      } else if (id == 'pie_graph_func') {
+        var num = map.get(data[i].func)
+        if (num == null) {
+          num = 0
+        }
+        map.set(data[i].func, num + 1)
+      }
+    }
+  } else {
+    commonUtils.error("wrong pie chart id:", id)
   }
 
-  var seriesList = []
+  commonUtils.log("map:", map)
   for (let [key, value] of map.entries()) {
     var item = {}
     item.name = key
     item.data = value
     seriesList.push(item)
   }
-  commonUtils.log("map:", map)
   var charts = new wxCharts({
 
     canvasId: id,
@@ -175,7 +214,7 @@ function updateTabTxt(buildMap, allTypes, rangePrice, selected) {
       var index = 1
       for (var [key, val] of buildMap.entries()) {
         var child = {}
-        child["id"] = index++,
+        child["id"] = index++ ,
           child["text"] = key
         if (key == selected.build) {
           item["type"] = child["id"]
@@ -191,7 +230,7 @@ function updateTabTxt(buildMap, allTypes, rangePrice, selected) {
       var index = 1
       for (var [key, val] of buildMap.entries()) {
         var child = {}
-        child["id"] = index++,
+        child["id"] = index++ ,
           child["text"] = key
         children.push(child)
       }
