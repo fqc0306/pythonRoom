@@ -68,6 +68,7 @@
     </block>
   </view>
   <view class="table" wx:if="{{listData.length != 0 && hasUserInfo}}">
+    <button  bindtap="downloadExcelFile"> 点击下载 </button>
     <view class="tr bg-w">
       <view class="th">楼栋</view>
       <view class="th">单元</view>

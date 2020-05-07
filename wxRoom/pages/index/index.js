@@ -223,6 +223,24 @@ Page({
     pullUtils.filterTabChild(e, this, onTabChanged)
   },
 
+
+  downloadExcelFile: function (e) {
+    let manager = wx.getFileSystemManager()
+    var savedFilePath = wx.env.USER_DATA_PATH + '/test.txt'
+    commonUtils.log("path", savedFilePath)
+    manager.writeFile({
+      filePath: savedFilePath,
+      data: "text",
+
+      sucess: function (res) {
+        console.log("writeFile sucess res:", res)
+      },
+      fail: function (err) {
+        console.log("writeFile fail err:", err)
+      }
+    })
+  }
+
 });
 
 function onTabChanged(filterParams) {
