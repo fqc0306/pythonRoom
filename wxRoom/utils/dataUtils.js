@@ -20,7 +20,7 @@ function processFileData(res) {
     var i = 0
     // { "id": 80, "build": "1", "project": "京房售证字(2020)24号", "unit": "5单元", "room": "102", "detail": { "房间号": "5单元-102", "规划设计用途": "住宅", "户型": "三室两厅", "建筑面积": "88.3300", "套内面积": "72.3800", "按建筑面积拟售单价": "38565", "按套内面积拟售单价": "47063.37" } },
     // { "id": 81, "build": "1", "project": "京房售证字(2020)24号", "unit": "1单元", "room": "", "detail": { "房间号": "1单元--101", "用途": "戊类库房", "建筑面积(m2)": "87.7100", "套内面积(m2)": "71.3000" } },
-
+    //{id: 6,build: "2-26",project: "京房售证字(2020)36号",unit: "",room: "101",detail: {房间号: "101",规划设计用途: "住宅、戊类储藏", 户型: "复式房型",住宅建筑面积: "134.29",住宅套内面积: "97.88",戊类储藏建筑面积: "84.45",戊类储藏套内面积: "61.55",住宅按建筑面积拟售单价: "63533.00",住宅按套内面积拟售单价: "87166.39"   }}
     try {
       if (line != '') {
         json["build"] = line.build.length > 6 ? '..' + line.build.slice(line.build.length - 6) : line.build
@@ -33,15 +33,31 @@ function processFileData(res) {
         if (temp == null) {
           temp = line.detail['建筑面积(m2)']
         }
+        if (temp == null) {
+          temp = line.detail['住宅建筑面积']
+        }
         json["square_all"] = parseFloat(temp).toFixed(2)
 
         var temp = line.detail['套内面积']
         if (temp == null) {
           temp = line.detail['套内面积(m2)']
         }
+        if (temp == null) {
+          temp = line.detail['住宅套内面积']
+        }
         json["square_in"] = parseFloat(temp).toFixed(2)
-        json["price_all"] = parseInt(line.detail['按建筑面积拟售单价'])
-        json["price_in"] = parseInt(line.detail['按套内面积拟售单价'])
+
+        var temp = line.detail['按建筑面积拟售单价']
+        if (temp == null) {
+          temp = line.detail['住宅按建筑面积拟售单价']
+        }
+        json["price_all"] = parseInt(temp)
+
+        var temp = line.detail['按套内面积拟售单价']
+        if (temp == null) {
+          temp = line.detail['住宅按套内面积拟售单价']
+        }
+        json["price_in"] = parseInt(temp)
 
         if (typeof (line.detail['户型']) == 'undefined') {
           json["type"] = "无" + "(" + line.detail['用途'] + ")"

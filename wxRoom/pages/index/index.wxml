@@ -86,9 +86,12 @@
         <view class="td">{{item.room}}</view>
         <view class="td">{{item.square_all}}</view>
         <view class="td">{{item.square_in}}</view>
-        <view class="td">{{item.price_all}}</view>
-        <view class="td">{{item.price_in}}</view>
-        <view class="td">{{item.price_total}}</view>
+        <view class="td" wx:if="{{item.price_all==null}}">无</view>
+        <view class="td" wx:else>{{item.price_all}}</view>
+        <view class="td" wx:if="{{item.price_in==null}}">无</view>
+        <view class="td" wx:else>{{item.price_in}}</view>
+        <view class="td" wx:if="{{item.price_total==0}}">无({{item.func}})</view>
+        <view class="td" wx:else>{{item.price_total}}</view>
       </view>
       <view class="tr" wx:else>
         <view class="td">{{item.build}}</view>
@@ -96,9 +99,12 @@
         <view class="td">{{item.room}}</view>
         <view class="td">{{item.square_all}}</view>
         <view class="td">{{item.square_in}}</view>
-        <view class="td">{{item.price_all}}</view>
-        <view class="td">{{item.price_in}}</view>
-        <view class="td">{{item.price_total}}</view>
+        <view class="td" wx:if="{{item.price_all==null}}">无</view>
+        <view class="td" wx:else>{{item.price_all}}</view>
+        <view class="td" wx:if="{{item.price_in==null}}">无</view>
+        <view class="td" wx:else>{{item.price_in}}</view>
+        <view class="td" wx:if="{{item.price_total==0}}">无({{item.func}})</view>
+        <view class="td" wx:else>{{item.price_total}}</view>
       </view>
     </block>
   </view>
