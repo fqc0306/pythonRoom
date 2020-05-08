@@ -225,19 +225,16 @@ Page({
 
 
   downloadExcelFile: function (e) {
-    let manager = wx.getFileSystemManager()
-    var savedFilePath = wx.env.USER_DATA_PATH + '/test.txt'
-    commonUtils.log("path", savedFilePath)
-    manager.writeFile({
-      filePath: savedFilePath,
-      data: "text",
-
-      sucess: function (res) {
-        console.log("writeFile sucess res:", res)
-      },
-      fail: function (err) {
-        console.log("writeFile fail err:", err)
+    wx.cloud.callFunction({
+      name: 'uploadExcel',
+      data: {
+        file_info: page.data.listData,
+        file_name: page.data.searchKey.fileName
       }
+    }).then(res => {
+      commonUtils.log("uploadExcel", res)
+    }).catch(err => {
+      commonUtils.error('[file info] 失败：', err)
     })
   }
 
