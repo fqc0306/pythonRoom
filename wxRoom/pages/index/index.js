@@ -150,6 +150,7 @@ Page({
       param['name'] = options.fileName.split("_")[0]
     } else {
       param['name'] = options.alias + "," + options.fileName.split("_")[0]
+      param['alias'] = options.alias
     }
     param['fileName'] = options.fileName
     this.setData({
@@ -169,7 +170,12 @@ Page({
     lastSearch = {}
   },
 
-  onShareAppMessage: function () { },
+  onShareAppMessage: function () {
+    return {
+      title: this.data.searchKey.alias + ' 总价' + this.data.price +'万/套',
+      path: 'pages/index/index?fileName=' + this.data.searchKey.fileName + "&alias=" + this.data.searchKey.alias
+    }
+  },
 
   getUserInfo: function (e) {
     commonUtils.log("getUserInfo:", e)
