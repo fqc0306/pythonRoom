@@ -63,9 +63,14 @@ function showPieChart(id, data) {
   var seriesList = []
   if (id == 'pie_graph_price') {
     //实时运算当前数据的最大值和最小值,车位等类型除外
-    data.sort(compare)
-    var min = data[0].price_total
-    var max = data[data.length - 1].price_total
+    var copyData = []
+    for (i = 0; i < data.length; i++) {
+      copyData.push(data[i])
+    }
+    
+    copyData.sort(compare)
+    var min = copyData[0].price_total
+    var max = copyData[copyData.length - 1].price_total
 
     max = Math.ceil(max / 100) * 100
     min = Math.floor(min / 100) * 100
