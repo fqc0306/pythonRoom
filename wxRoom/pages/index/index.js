@@ -239,6 +239,32 @@ Page({
       }
     }).then(res => {
       commonUtils.log("uploadExcel", res)
+      
+        wx.cloud.getTempFileURL({
+          fileList: [res.fileID],
+          success: res => {
+            // get temp file URL
+            console.log("文件下载链接", res.fileList[0].tempFileURL)
+
+            wx.downloadFile({
+              // 示例 url，并非真实存在
+              url: res.fileList[0].tempFileURL,
+              success: function (res) {
+                const filePath = res.tempFilePath
+                wx.openDocument({
+                  filePath: filePath,
+                  success: function (res) {
+                    console.log('打开文档成功')
+                  }
+                })
+              }
+            })
+          },
+          fail: err => {
+            // handle error
+          }
+        })
+        
     }).catch(err => {
       commonUtils.error('[file info] 失败：', err)
     })
