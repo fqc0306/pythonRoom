@@ -93,6 +93,9 @@ Page({
       commonUtils.log('[file info] result：', res)
     }).catch(err => {
       commonUtils.error('[file info] 失败：', err)
+      that.setData({
+        isFinishLoad: true
+      })
     })
 
     wx.cloud.callFunction({
