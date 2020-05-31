@@ -1,0 +1,3 @@
+问题：解析错误问题解决 url:http://zjj.sz.gov.cn/ris/bol/szfdc/projectdetail.aspx?id=43953
+BeautifulSoup(html, "html.parser", from_encoding="utf-8")解析出来的数据不对 提前出现“</table></table></div></div></form></body></html>”
+改为 BeautifulSoup(response.text, "lxml") 解析方式 需要安装一系列的依赖
