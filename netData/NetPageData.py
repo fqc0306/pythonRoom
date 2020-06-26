@@ -160,7 +160,8 @@ def getMoreBuildInfo(name, url, projectId, allStatusDict, allRoomDict, allItems)
 
 					if (lastUrl != url) :
 						lastUrl = url
-						getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
+						if(isDetail):
+							getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
 
 				itemInfo.update({titleInfo[index%titleInfo.__len__()] : infoText})
 				index = index + 1
@@ -223,7 +224,8 @@ def getProjectInfo(name, url, projectId):
 
 				if info.find("a") != None:
 					url = "http://bjjs.zjw.beijing.gov.cn" + info.find("a").get("href")
-					getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
+					if(isDetail):
+						getAllRoom(name, itemInfo.get(list(itemInfo.keys())[0]), url, projectId, allRoomDict, allStatusDict)
 
 				if info.find("strong") != None:	#表格的title 均为粗体, --批准销售套数 等内容
 					titleInfo.append(infoText)
@@ -235,8 +237,9 @@ def getProjectInfo(name, url, projectId):
 					itemInfo = collections.OrderedDict()
 				index = index + 1
 
-	writeFile(allStatusDict, name + "_" + projectId + "_dy.json", False)#写入所有栋楼的所有房间信息
-	writeFile(allRoomDict, name + "_" + projectId + ".json", False)
+	if(isDetail):
+		writeFile(allStatusDict, name + "_" + projectId + "_dy.json", False)#写入所有栋楼的所有房间信息
+		writeFile(allRoomDict, name + "_" + projectId + ".json", False)
 
 	buileDict.update({'build_list': allItems})
 
@@ -250,7 +253,9 @@ def getProjectInfo(name, url, projectId):
 timeStr = str(long(time.time())/(24*60*60))
 indexTotal = 0
 startIndex = 0
-endIndex = 1
+endIndex = 75
+global isDetail
+isDetail = True #是否输出详情/简介列表
 
 #地区内所有楼盘内容
 for page in range(0, 10):
